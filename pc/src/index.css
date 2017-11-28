@@ -2,4 +2,24 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  line-height: 22px;
+  color: #333;
+  font-size: 12px;
+}
+.f-cb{
+  zoom: 1;
+}
+
+.f-cb:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden
+}
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
 }

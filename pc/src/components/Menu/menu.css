@@ -1,4 +1,7 @@
 .logo{
-    width: 200px;
-    padding: 25px;
+    width: 120px;
+    height: 120px;
+    margin: 40px 40px 30px 40px;
+    border-radius: 50%;
+    overflow: hidden;
 }

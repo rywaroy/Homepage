@@ -1,0 +1,73 @@
+.content{
+    padding:20px 50px 50px 50px
+}
+.item{
+    width: 100%;
+    min-height: 400px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 16px;
+    transition: all .3s;
+}
+.item:hover{
+    box-shadow: 1px 5px 20px rgba(0,0,0,.2);
+}
+.item-tag{
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 10px;
+}
+.item-inb-title{
+    font-size: 12px;
+    color: #999;
+}
+.item-inb-word{
+    font-size: 12px;
+    color: #555;
+    margin-top: 20px;
+}
+.item-inb-book{
+    text-align: right;
+    font-size: 12px;
+    color: #999;
+    margin-top: 10px;
+}
+.item-title{
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+.item-author{
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 8px;
+}
+.item-forward{
+    font-size: 12px;
+    color: #555;
+    margin-top: 10px;
+}
+.item-music-box{
+    width: 150px;
+    height: 150px;
+    margin: 10px auto;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.header{
+    margin-bottom: 20px;
+}
+.from{
+    float: left;
+    font-size: 12px;
+    line-height: 28px;
+}
+.last{
+    font-size: 14px;
+    line-height: 28px;
+    color: #666;
+}
