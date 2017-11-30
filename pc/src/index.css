@@ -23,3 +23,29 @@ body {
 .fr{
   float: right;
 }
+.single-page{
+  padding: 50px 0;
+}
+.single-page-title{
+  font-size: 30px;
+  line-height: 50px;
+  color: #333;
+}
+.single-page-author{
+  font-size: 14px;
+  color: #999;
+  line-height: 22px;
+  margin-top: 20px;
+}
+.single-page-content{
+  font-size: 16px;
+  line-height: 30px;
+  color: #333;
+  margin-top: 20px;
+}
+.single-page-content p{
+  margin-bottom: 20px;
+}
+.horizontally{
+  margin: 0 auto;
+}
