@@ -10,6 +10,7 @@
     padding: 15px;
     margin-bottom: 16px;
     transition: all .3s;
+    cursor: pointer;
 }
 .item:hover{
     box-shadow: 1px 5px 20px rgba(0,0,0,.2);

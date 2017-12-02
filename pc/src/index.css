@@ -26,6 +26,9 @@ body {
 .single-page{
   padding: 50px 0;
 }
+.single-page img{
+  max-width: 100%;
+}
 .single-page-title{
   font-size: 30px;
   line-height: 50px;

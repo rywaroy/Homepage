@@ -6,7 +6,7 @@ export default class Root extends Component{
     render(){
         return(
             <Switch>
-            <Route exact path="/magazine/one" component={One} />
+            <Route exact path="/magazine/one" component={One}/>
             <Route path="/magazine/one/detail/:type/:id" component={OneDetail}></Route>
             </Switch>
         )
