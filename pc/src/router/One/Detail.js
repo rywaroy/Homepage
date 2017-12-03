@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Row, Col} from 'antd';
+import {Row, Col , Icon} from 'antd';
 
 export default class Detail extends Component {
 
@@ -13,24 +13,45 @@ export default class Detail extends Component {
 		asker:'',
 		askContent:'',
 		answerer:'',
+		replyList:[],
+		typeText:''
 	}
 
 	componentWillMount() {
 		if(this.state.type === '1'){
+			this.setState({
+				typeText:'essay'
+			})
 			this.getStoryInfo()
 		}
 		if(this.state.type === '2'){
+			this.setState({
+				typeText:'serialcontent'
+			})
 			this.getSerialInfo()
 		}
 		if(this.state.type === '3'){
+			this.setState({
+				typeText:'question'
+			})
 			this.getQuestionInfo()
 		}
 		if(this.state.type === '4'){
+			this.setState({
+				typeText:'music'
+			})
 			this.getMusicInfo()
 		}
 		if(this.state.type === '5'){
+			this.setState({
+				typeText:'movie'
+			})
 			this.getMovieInfo()
 		}
+	}
+
+	componentDidMount(){
+		this.getComment()
 	}
 
 	//文章获取详情
@@ -100,6 +121,16 @@ export default class Detail extends Component {
 			})
 	}
 
+	//获取评论
+	getComment(){
+		axios.get(`http://v3.wufazhuce.com:8000/api/comment/praiseandtime/${this.state.typeText}/${this.state.id}/0?channel=wdj&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android`)
+			.then(res => {
+				this.setState({
+					replyList:res.data.data.data
+				})
+			})
+	}
+
 	render() {
 		return (
 			<div className="single-page">
@@ -121,6 +152,32 @@ export default class Detail extends Component {
 
 						<div className="single-page-content"
 						     dangerouslySetInnerHTML={{__html: this.state.content}}></div>
+						<div className="comment-list">
+							{
+								this.state.replyList.map((item,index) => (
+									<div className="comment-list-item" key={index}>
+										<div className="comment-list-top f-cb">
+											<div className="comment-list-avatar fl" style={{backgroundImage:'url('+item.user.web_url+')'}}></div>
+											<div className="comment-list-name fl">{item.user.user_name}</div>
+											<div className="comment-list-time fr">{item.created_at}</div>
+										</div>
+										{
+											item.quote ?
+												<div className="comment-list-reply">{item.touser.user_name}: {item.quote}</div>
+												:
+												null
+										}
+										<div className="comment-list-content">{item.content}</div>
+										<div className="comment-list-bot f-cb">
+											<div className="comment-list-list fr">
+												<Icon type="like" style={{marginRight:'5px'}}/>{item.praisenum}
+											</div>
+										</div>
+									</div>
+								))
+							}
+							
+						</div>
 					</Col>
 					<Col span={2}></Col>
 				</Row>
