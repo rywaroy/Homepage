@@ -1,0 +1,55 @@
+.content{
+    padding: 20px 0;
+}
+.tab{
+    background: #fff;
+}
+.card-container > .ant-tabs-card > .ant-tabs-content {
+    margin-top: -16px;
+}
+
+.card-container > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
+    background: #fff;
+    padding: 16px;
+}
+
+.card-container > .ant-tabs-card > .ant-tabs-bar {
+    border-color: #fff;
+}
+
+.card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+    border-color: transparent;
+    background: transparent;
+}
+
+.card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
+    border-color: #fff;
+    background: #fff;
+}
+.ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-nav-container{
+    height: 42px;
+}
+.ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab{
+    padding: 10px 16px 10px;
+}
+.movie-item{
+    margin-right: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+.movie-title{
+    font-size: 13px;
+    color: #333;
+    line-height: 22px;
+    height: 44px;
+    overflow: hidden;
+}
+.movie-intro{
+    font-size: 12px;
+    line-height: 20px;
+    color: #666;
+    margin-top: 4px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}

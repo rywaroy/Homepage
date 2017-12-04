@@ -12,6 +12,7 @@ export default class One extends Component {
 
 	componentDidMount() {
 		store.one.list.length === 0 && this.getData()
+
 	}
 
 	//获取one一个今日和往期的id
@@ -35,11 +36,11 @@ export default class One extends Component {
 	}
 
 	//筛选日期
-	selectDate(value,a) {
+	selectDate(value, a) {
 		if (store.one.activeId !== value) {
 			store.one.setActiveId(value)
-			for(let item of store.one.data){
-				if(item.id === value){
+			for (let item of store.one.data) {
+				if (item.id === value) {
 					store.one.setdefaultDate(item.date)
 				}
 			}
@@ -58,8 +59,8 @@ export default class One extends Component {
 	}
 
 	//跳转详情
-	link(type,id){
-		if(type !== '0'){
+	link(type, id) {
+		if (type !== '0') {
 			this.props.history.push(`/magazine/one/detail/${type}/${id}`)
 		}
 
@@ -89,10 +90,10 @@ export default class One extends Component {
 		if (store.one.list.length > 0) {
 			return (
 				store.one.list.map((item, index) => {
-					if(Number(item.category) < 6){
+					if (Number(item.category) < 6) {
 						return (
 							<Col className="gutter-row" xl={4} lg={6} md={8} sm={12} key={index}>
-								<div className="item" onClick={() => this.link(item.category,item.item_id)}>
+								<div className="item" onClick={() => this.link(item.category, item.item_id)}>
 									{this.renderTag(item.category, item.tag_list)}
 									{
 										item.category === '0'
@@ -108,14 +109,14 @@ export default class One extends Component {
 											<div>
 												<div className="item-title">{item.title}</div>
 												<div className="item-author">文/{item.author.user_name}</div>
-												<img src={item.img_url} alt="" width={'100%'}className="item-img"/>
+												<img src={item.img_url} alt="" width={'100%'} className="item-img"/>
 												<div className="item-forward">{item.forward}</div>
 											</div>
 									}
 								</div>
 							</Col>
 						)
-					}else{
+					} else {
 						return null
 					}
 
@@ -156,21 +157,28 @@ export default class One extends Component {
 
 	render() {
 		return (
-			<div className="content">
-				<div className="header f-cb">
-					<a href="http://www.wandoujia.com/apps/one.hh.oneclient" target="_blank" className="from">来源</a>
-					<div className="last fr f-cb">
-						<div className="fl">往期内容：</div>
-						{this.renderDateSelect()}
+			<Row>
+				<Col span={2}/>
+				<Col span={20}>
+					<div className="content">
+						<div className="header f-cb">
+							<a href="http://www.wandoujia.com/apps/one.hh.oneclient" target="_blank"
+							   className="from">来源</a>
+							<div className="last fr f-cb">
+								<div className="fl">往期内容：</div>
+								{this.renderDateSelect()}
+							</div>
+						</div>
+						<div>
+							<Row gutter={16} style={{marginBottom: '16px'}}>
+								{this.renderList()}
+							</Row>
+						</div>
 					</div>
+				</Col>
+				<Col span={2}/>
 
-				</div>
-				<div>
-					<Row gutter={16} style={{marginBottom: '16px'}}>
-						{this.renderList()}
-					</Row>
-				</div>
-			</div>
+			</Row>
 		)
 	}
 }

@@ -5,6 +5,7 @@ import Routers from './router'
 import {Layout} from 'antd';
 import Menu from './components/Menu/Menu'
 import {HashRouter as Router} from 'react-router-dom';
+import Loading from './components/Loading/Loading'
 
 const {Header, Footer, Sider, Content} = Layout;
 
@@ -13,6 +14,7 @@ class App extends Component {
 		return (
 			<Router>
 				<Layout style={{minHeight: '100vh'}}>
+					<Loading />
 					<Sider style={{overflow: 'auto', height: '100vh', position: 'fixed', left: 0 , zIndex:5}}>
 						<Menu/>
 					</Sider>

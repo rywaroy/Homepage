@@ -23,6 +23,11 @@ body {
 .fr{
   float: right;
 }
+.text-ovh{
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
 .single-page{
   padding: 50px 0;
 }
@@ -97,4 +102,7 @@ body {
   line-height: 24px;
   color: #999;
   border: 1px solid #999;
+}
+.home-page-content{
+  position: relative;
 }

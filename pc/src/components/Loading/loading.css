@@ -1,0 +1,20 @@
+.loading{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgba(255,255,255,.9);
+    left: 0;
+    top: 0;
+    z-index: 99;
+}
+.dog{
+    width: 180px;
+    height: 180px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -90px;
+    margin-top: -90px;
+    background: url('./dog.gif');
+    background-size: contain;
+}

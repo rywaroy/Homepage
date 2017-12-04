@@ -49,7 +49,7 @@ export default class Sider extends Component {
             <Menu.Item key="one"><Link to='/magazine/one'>ONE · 一个</Link></Menu.Item>
           </SubMenu>
           <SubMenu key="movie" title={<span><Icon type="pie-chart" /><span>电影</span></span>}>
-            <Menu.Item key="time"><Link to='/movie/time'>时光网</Link></Menu.Item>
+            <Menu.Item key="time"><Link to='/movie/time'>Time时光</Link></Menu.Item>
           </SubMenu>
         </Menu>
       </div>
