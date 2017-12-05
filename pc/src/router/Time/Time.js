@@ -16,13 +16,13 @@ export default class Time extends Component {
 						<div className="card-container">
 							<Tabs type="card">
 								<TabPane tab="正在售票" key="1">
-									<Sell />
+									<Sell {...this.props}/>
 								</TabPane>
 								<TabPane tab="正在热映" key="2">
-									<Hot />
+									<Hot {...this.props}/>
 								</TabPane>
 								<TabPane tab="即将上映" key="3">
-									<Soon />
+									<Soon {...this.props}/>
 								</TabPane>
 							</Tabs>
 						</div>

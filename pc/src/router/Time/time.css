@@ -53,3 +53,42 @@
     text-overflow:ellipsis;
     white-space: nowrap;
 }
+.info-title{
+    font-size: 24px;
+    line-height: 30px;
+    color: #333;
+}
+.info-sub-title{
+    font-size: 16px;
+    line-height: 24px;
+    color: #666;
+    margin-top: 20px;
+}
+.info-performer-list{
+    margin-top: 20px;
+}
+.info-performer-item{
+    margin-right: 15px;
+    width: 125px;
+}
+.info-performer-avatar{
+    width: 125px;
+    height:178px;
+    background-size: cover;
+    background-position: center;
+}
+.info-performer-name{
+    font-size: 12px;
+    color: #666;
+    line-height: 18px;
+    word-break: break-all;
+    height:54px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+.info-sub-text{
+    font-size: 14px;
+    line-height: 22px;
+    color: #333;
+    margin-top: 20px;
+}

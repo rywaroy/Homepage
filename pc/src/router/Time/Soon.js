@@ -1,29 +1,30 @@
 import React, {Component} from 'react';
+import {observer} from 'mobx-react'
 import { Card } from 'antd';
 import axios from 'axios'
 import utlis from '../../utlis'
 import store from '../../store'
 import './time.css'
+
+@observer
 export default class Sell extends Component{
 	state = {
 		list:[]
 	}
 
 	componentDidMount() {
-		store.loading.show()
-		this.getList()
+		store.time.soon.length == 0 && this.getList()
 	}
 
 	//获取列表
 	getList(){
+		store.loading.show()
 		axios.get(utlis.path + '/api/time/soon')
 			.then(res => {
+				store.time.setSoon(res.data.attention)
 				setTimeout(() => {
 					store.loading.hide()
 				},1000)
-				this.setState({
-					list:res.data.attention
-				})
 			})
 	}
 
@@ -31,7 +32,7 @@ export default class Sell extends Component{
 		return(
 			<div className="tab f-cb">
 				{
-					this.state.list.map((item,index) => (
+					store.time.soon.map((item,index) => (
 						<Card title={item.title} style={{ width: '250px' }} key={index} className="fl movie-item">
 							<img src={item.image} alt="" width={200} height={300}/>
 							<div className="movie-title">{item.releaseDate}</div>
