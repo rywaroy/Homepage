@@ -58,6 +58,9 @@
     line-height: 30px;
     color: #333;
 }
+.info-content{
+    padding-top: 30px;
+}
 .info-sub-title{
     font-size: 16px;
     line-height: 24px;
@@ -91,4 +94,22 @@
     line-height: 22px;
     color: #333;
     margin-top: 20px;
+    margin-bottom: 20px;
+}
+.info-video-box{
+    float: left;
+    margin-right: 20px;
+}
+.info-video-list{
+    margin-top: 20px;
+}
+.info-video-title{
+    font-size: 14px;
+    line-height: 22px;
+    height: 44px;
+    overflow: hidden;
+    color: #333;
+}
+.info-comment-title{
+    margin-bottom: 30px;
 }
