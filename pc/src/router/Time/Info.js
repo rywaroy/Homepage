@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import {Row, Col} from 'antd';
 import utils from '../../utlis'
+import moment from 'moment'
 import './time.css'
 
 export default class MovieInfo extends Component {
@@ -37,6 +38,12 @@ export default class MovieInfo extends Component {
 		})
 	}
 
+	//跳转预告片外链
+	videoLink(url){
+		let win = window.open('')
+		win.location.href = url
+	}
+
 	//渲染演员信息
 	renderPerformer() {
 		return (
@@ -64,15 +71,25 @@ export default class MovieInfo extends Component {
 	//渲染预告
 	renderTidbits() {
 		return (
-			this.state.tidbits.map((item, index) => (
-				<div className="info-video-box" key={index}>
-					<video src={item.url} controls="controls" className="info-video" width={400} height={200} poster={item.image}>
+			<Row gutter={16}>
+				{this.state.tidbits.map((item, index) => (
 
-					</video>
-					<div className="info-video-title">{item.title}</div>
-				</div>
+					<Col span={6} xl={6} md={8} xs={12} key={index}>
+						<div className="info-video-box" key={index}>
+							{/*<video src={item.url} controls="controls" className="info-video" width={400} height={200} poster={item.image}>*/}
 
-			))
+							{/*</video>*/}
+							<div className="info-video-link" target="_blank" onClick={() => this.videoLink(item.url)}>
+								<img src={item.image} width={'100%'} alt=""/>
+								<div className="info-video-btn"></div>
+							</div>
+
+							<div className="info-video-title">{item.title}</div>
+						</div>
+					</Col>
+
+				))}
+			</Row>
 		)
 	}
 
@@ -87,7 +104,7 @@ export default class MovieInfo extends Component {
 							<div className="comment-list-avatar fl"
 							     style={{backgroundImage: 'url(' + item.headImg + ')'}}></div>
 							<div className="comment-list-name fl">{item.nickname}</div>
-							<div className="comment-list-time fr">{item.commentDate}</div>
+							<div className="comment-list-time fr">{moment(new Date(item.commentDate*1000)).format('YYYY-MM-DD hh:mm:ss')}</div>
 						</div>
 						<div className="comment-list-content">{item.content}</div>
 					</div>
@@ -99,7 +116,7 @@ export default class MovieInfo extends Component {
 							<div className="comment-list-avatar fl"
 							     style={{backgroundImage: 'url(' + item.headImg + ')'}}></div>
 							<div className="comment-list-name fl">{item.nickname}</div>
-							<div className="comment-list-time fr">{item.commentDate}</div>
+							<div className="comment-list-time fr">{moment(new Date(item.commentDate*1000)).format('YYYY-MM-DD hh:mm:ss')}</div>
 						</div>
 						<div className="comment-list-content">{item.content}</div>
 					</div>

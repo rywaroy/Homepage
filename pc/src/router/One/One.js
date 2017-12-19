@@ -12,7 +12,6 @@ export default class One extends Component {
 
 	componentDidMount() {
 		store.one.list.length === 0 && this.getData()
-
 	}
 
 	//获取one一个今日和往期的id
