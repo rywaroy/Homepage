@@ -8,9 +8,10 @@ let options = {
 	}
 };
 router.get('/list', async ctx => {
-	let start = ctx.query.start || 1;
+	let page = ctx.query.page || 1;
 	let limit = ctx.query.limit || 10;
 	let city = ctx.query.city || '杭州'
+	let start = (page - 1) * limit
 	options.url = `https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b&city=${city}&start=${start}&count=${limit}&client=&udid=`
 	let data = await( new Promise ((resolve,reject) => {
 		request(options,function (error, response, body) {
@@ -18,6 +19,22 @@ router.get('/list', async ctx => {
 		})
 	}))
 	ctx.body = data
+})
+
+router.get('/info', async (ctx) => {
+	let id = ctx.query.id;
+	let intro = new Promise((resolve,reject) => {
+		options.url = `http://api.douban.com/v2/movie/subject/${id}?apikey=0b2bdeda43b5688921839c8ecb20399b&city=&client=&udid=`
+		request(options,function (error, response, body) {
+			// console.log(response)
+			resolve(JSON.parse(body))
+
+		})
+	})
+	let data = await(Promise.all([intro]))
+	ctx.body = {
+		intro:data[0],
+	}
 })
 
 module.exports = router;

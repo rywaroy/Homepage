@@ -5,6 +5,7 @@ import OneDetail from './One/Detail'
 import Time from './Time/Time'
 import TimeInfo from './Time/Info'
 import Douban from './Douban/Douban'
+import DoubanInfo from './Douban/Info'
 
 export default class Root extends Component{
     render(){
@@ -15,6 +16,7 @@ export default class Root extends Component{
                 <Route exact path="/movie/time" component={Time}/>
                 <Route exact path="/movie/time/info/:id" component={TimeInfo}></Route>
                 <Route exact path="/movie/douban" component={Douban}></Route>
+                <Route exact path="/movie/douban/info/:id" component={DoubanInfo}></Route>
             </Switch>
         )
     }

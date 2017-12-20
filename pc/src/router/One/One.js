@@ -91,7 +91,7 @@ export default class One extends Component {
 				store.one.list.map((item, index) => {
 					if (Number(item.category) < 6) {
 						return (
-							<Col className="gutter-row" xl={4} lg={6} md={8} sm={12} key={index}>
+							<Col className="gutter-row" xl={4} lg={6} md={6} sm={6} key={index}>
 								<div className="item" onClick={() => this.link(item.category, item.item_id)}>
 									{this.renderTag(item.category, item.tag_list)}
 									{

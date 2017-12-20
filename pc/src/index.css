@@ -5,6 +5,7 @@ body {
   line-height: 22px;
   color: #333;
   font-size: 12px;
+  min-width: 1200px;
 }
 .f-cb{
   zoom: 1;

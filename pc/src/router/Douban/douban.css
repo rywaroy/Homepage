@@ -1,10 +1,46 @@
 .list-item{
     font-size: 12px;
     line-height: 22px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
 .cast{
     color:#333
 }
 .cast-item{
     margin-right: 5px;
+}
+.list-content{
+    height:180px;
+    margin-top: 10px;
+}
+.top{
+    padding-top: 20px;
+}
+.title{
+    font-size: 30px;
+    line-height: 40px;
+}
+.en-title{
+    font-size: 14px;
+    color: #999;
+    line-height: 25px;
+}
+.intro{
+    margin-top: 30px;
+}
+.cell{
+    font-size: 16px;
+    line-height: 24px;
+}
+.info-intro-item{
+    margin-right: 5px;
+}
+.info-p-item{
+    width: 200px;
+    float: left;
+}
+.info-p-img{
+    display: block;
 }
