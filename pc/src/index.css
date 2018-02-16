@@ -29,6 +29,12 @@ body {
   text-overflow:ellipsis;
   white-space: nowrap;
 }
+.bg-cover{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover
+}
+
 .single-page{
   padding: 50px 0;
 }

@@ -14,6 +14,7 @@ const album = require('./routes/album');
 const file = require('./routes/file')
 const time = require('./routes/time')
 const douban = require('./routes/douban')
+const dytt = require('./routes/dytt')
 const fs = require('fs')
 // 对于任何请求，app将调用该异步函数处理请求：
 // app.use(async (ctx, next) => {
@@ -44,6 +45,8 @@ router.use('/api/album',album.routes(),album.allowedMethods());
 router.use('/api/file', file.routes(), file.allowedMethods());
 router.use('/api/time', time.routes(), time.allowedMethods());  //time时光网接口
 router.use('/api/douban', douban.routes(), douban.allowedMethods());
+router.use('/api/dytt', dytt.routes(), dytt.allowedMethods());
+
 router.get('/admin', async (ctx) => {
     var htmlFile = await (new Promise(function(resolve, reject){
         

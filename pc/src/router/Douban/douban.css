@@ -27,11 +27,14 @@
     color: #999;
     line-height: 25px;
 }
+.info{
+    padding-top: 40px;
+}
 .intro{
     margin-top: 30px;
 }
 .cell{
-    font-size: 16px;
+    font-size: 13px;
     line-height: 24px;
 }
 .info-intro-item{
@@ -40,7 +43,29 @@
 .info-p-item{
     width: 200px;
     float: left;
+    margin-right: 20px;
 }
 .info-p-img{
     display: block;
+}
+.info-image{
+    margin-right: 30px;
+    margin-bottom: 30px;
+    width: 300px;
+    height: 200px;
+}
+.subtitle{
+    font-size: 20px;
+    padding: 20px 0;
+    line-height: 34px;
+    color: #333
+}
+.info-summary{
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 26px;
+    color: #666;
+}
+.info-page{
+    padding: 20px 0
 }
