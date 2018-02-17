@@ -19,12 +19,6 @@ router.get('/all', async ctx => {
         let item = await getList(pages[i])
         data = data.concat(item)
     }
-    
-	// let data = await( new Promise ((resolve,reject) => {
-	// 	request(options,function (error, response, body) {
-	// 		resolve(body)
-	// 	})
-	// }))
 	ctx.body = {data:data}
 })
 
@@ -41,7 +35,6 @@ function getPage(page){
                     }else{
                         return false
                     }
-                    // arr.push($(this).val())
                 })
                 resolve(arr)
             }
@@ -53,19 +46,46 @@ function getPage(page){
 function getList(url){
     return new Promise((resolve,reject) => {
         options.url = 'http://www.dytt8.net/html/gndy/dyzz/' + url
-        request(options,function (error, response, body) {
+        request(options,async function (error, response, body) {
 			if(!error && response.statusCode == 200){
                 let covertBody = iconv.decode(body,'gbk');
                 let $ = cheerio.load(covertBody,{decodeEntities: false});
                 let arr = []
-                $('.co_content8 table').each(function(index,el){
+                // $('.co_content8 table').each(function(index,el){
+                //     let obj = {}
+                //     obj.title = $(this).find('tr').eq(1).find('.ulink').text()
+                //     obj.time = $(this).find('tr').eq(2).find('td').eq(1).find('font').text()
+                //     obj.intro = $(this).find('tr').eq(3).find('td').eq(0).text()
+                //     arr.push(obj)
+                // })
+                for(let i = 0; i < $('.co_content8 table').length; i++){
                     let obj = {}
-                    obj.title = $(this).find('tr').eq(1).find('.ulink').text()
-                    obj.time = $(this).find('tr').eq(2).find('td').eq(1).find('font').text()
-                    obj.intro = $(this).find('tr').eq(3).find('td').eq(0).text()
+                    let url
+                    obj.title = $('.co_content8 table').eq(i).find('tr').eq(1).find('.ulink').text()
+                    url = $('.co_content8 table').eq(i).find('tr').eq(1).find('.ulink').attr('href')
+                    obj.time = $('.co_content8 table').eq(i).find('tr').eq(2).find('td').eq(1).find('font').text()
+                    obj.intro = $('.co_content8 table').eq(i).find('tr').eq(3).find('td').eq(0).text()
                     arr.push(obj)
-                })
+                }
                 resolve(arr)
+            }
+		})
+    })
+}
+
+
+//获取每个列表的详情页
+function getInfo(url){
+    return new Promise((resolve,reject) => {
+        options.url = url
+        request(options,function (error, response, body) {
+			if(!error && response.statusCode == 200){
+                let covertBody = iconv.decode(body,'gbk');
+                let $ = cheerio.load(covertBody,{decodeEntities: false});
+                let content = $('#Zoom').html()
+                resolve(content)
+            }else{
+                reject()
             }
 		})
     })

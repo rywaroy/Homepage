@@ -1,0 +1,29 @@
+.dytt{
+    padding: 20px 0;
+}
+.dytt-item{
+    background:#fff;
+    padding:20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.dytt-top{
+    font-size: 15px;
+    line-height: 30px;
+}
+.dytt-name{
+    color: #333;
+}
+.dytt-time{
+    color: #999
+}
+.dytt-content{
+    font-size: 13px;
+    line-height: 26px;
+    color: #666
+}
+.dytt-item:hover{
+    transform: translateX(10px);
+    transition: transform .5s
+}
