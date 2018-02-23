@@ -57,6 +57,9 @@ export default class Sider extends Component {
 						<Menu.Item key="douban"><Link to='/movie/douban'>豆瓣电影</Link></Menu.Item>
 						<Menu.Item key="dytt"><Link to='/movie/dytt'>电影天堂</Link></Menu.Item>
 					</SubMenu>
+					<SubMenu key="tool" title={<span><Icon type="pie-chart"/><span>工具</span></span>}>
+						<Menu.Item key="weather"><Link to='/tool/weather'>中央天气预报</Link></Menu.Item>
+					</SubMenu>
 				</Menu>
 			</div>
 		);

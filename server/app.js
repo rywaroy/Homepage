@@ -1,13 +1,14 @@
 
 const Koa = require('koa');
 const app = new Koa();
-var cors = require('koa-cors');
+const cors = require('koa-cors');
 const router = require('koa-router')();
 const convert = require('koa-convert');
 const json = require('koa-json');
 const bodyparser = require('koa-bodyparser')();
 const session = require('koa-session');
-var staticServer = require('koa-static');
+const staticServer = require('koa-static');
+const fs = require('fs')
 const article = require('./routes/article');
 const admin = require('./routes/admin');
 const album = require('./routes/album');
@@ -15,7 +16,8 @@ const file = require('./routes/file')
 const time = require('./routes/time')
 const douban = require('./routes/douban')
 const dytt = require('./routes/dytt')
-const fs = require('fs')
+const weather = require('./routes/weather')
+
 // 对于任何请求，app将调用该异步函数处理请求：
 // app.use(async (ctx, next) => {
 //     await next();
@@ -46,6 +48,7 @@ router.use('/api/file', file.routes(), file.allowedMethods());
 router.use('/api/time', time.routes(), time.allowedMethods());  //time时光网接口
 router.use('/api/douban', douban.routes(), douban.allowedMethods());
 router.use('/api/dytt', dytt.routes(), dytt.allowedMethods());
+router.use('/api/weather', weather.routes(), weather.allowedMethods());
 
 router.get('/admin', async (ctx) => {
     var htmlFile = await (new Promise(function(resolve, reject){

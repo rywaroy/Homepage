@@ -4,6 +4,11 @@ import {Row, Col} from 'antd';
 import utils from '../../utlis'
 
 export default class A extends Component{
+
+	constructor(props){
+        super(props)
+	}
+	
 	render(){
 		return(
 			<Row>
