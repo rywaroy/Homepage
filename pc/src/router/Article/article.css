@@ -23,3 +23,19 @@
     line-height: 26px;
     color: #666
 }
+.comment-form{
+    width:600px;    
+    padding-top: 30px;
+}
+.comment-form-title{
+    font-size: 16px;
+    line-height: 26px;
+    color: #000;
+    margin-bottom: 10px;
+}
+.comment-form-name{
+    margin-bottom: 10px;
+}
+.comment-form-content{
+    margin-bottom: 10px;
+}

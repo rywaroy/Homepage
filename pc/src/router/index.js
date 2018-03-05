@@ -11,6 +11,7 @@ import DyttInfo from './Dytt/Info'
 import Weather from './Weather/Weather'
 import Article from './Article/Article'
 import ArticleInfo from './Article/Info'
+import Album from './Album/Album'
 
 export default class Root extends Component{
     render(){
@@ -27,6 +28,7 @@ export default class Root extends Component{
                 <Route exact path="/tool/weather" component={Weather}></Route>
                 <Route exact path="/blog/article" component={Article}></Route>
                 <Route exact path="/blog/article/info/:id" component={ArticleInfo}></Route>
+                <Route exact path="/blog/album" component={Album}></Route>
             </Switch>
         )
     }

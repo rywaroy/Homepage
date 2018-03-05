@@ -5,6 +5,7 @@ import doubanStore from './doubanStore'
 import dyttStore from './dyttStore'
 import weatherStore from './weatherStore'
 import ArticleStore from './articleStore'
+import AlbumStore from './albumStore'
 
 const store = {
     one:new OneStore(),
@@ -13,7 +14,8 @@ const store = {
     douban:new doubanStore(),
     dytt:new dyttStore(),
     weather:new weatherStore(),
-    article:new ArticleStore()
+    article:new ArticleStore(),
+    album:new AlbumStore()
 }
 
 export default store
