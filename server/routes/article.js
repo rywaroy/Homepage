@@ -13,7 +13,7 @@ router.get('/list',async(ctx) => {
 
 function getList(page,limit) {
     return new Promise(function (resolve,reject) {
-        db.query('select a.id,a.title,a.intro,a.time,b.title as tag_name , b.color from article as a left join tag as b on a.tagid = b.id limit ' +  (page-1)*limit + ' , ' + limit,function (err,row) {
+        db.query('select a.id,a.title,a.intro,a.time,b.title as tag_name , b.color from article as a left join tag as b on a.tagid = b.id limit ' +  (page-1) * limit + ' , ' + limit,function (err,row) {
             if (err) {
                 reject(err)
             } else {

@@ -1,0 +1,25 @@
+.article{
+    padding: 20px 0;
+}
+.article-item{
+    background:#fff;
+    padding:20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.article-top{
+    font-size: 15px;
+    line-height: 30px;
+}
+.article-name{
+    color: #333;
+}
+.article-time{
+    color: #999
+}
+.article-content{
+    font-size: 13px;
+    line-height: 26px;
+    color: #666
+}

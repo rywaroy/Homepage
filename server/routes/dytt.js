@@ -25,6 +25,7 @@ router.get('/all', async ctx => {
 //获取电影天堂最新资源列表页码、链接
 function getPage(page){
     return new Promise((resolve,reject) => {
+        options.url = 'http://www.dytt8.net/html/gndy/dyzz/index.html'
         request(options,function (error, response, body) {
 			if(!error && response.statusCode == 200){
                 let $ = cheerio.load(body,{decodeEntities: false});
@@ -63,9 +64,11 @@ function getList(url){
                     let url
                     obj.title = $('.co_content8 table').eq(i).find('tr').eq(1).find('.ulink').text()
                     url = $('.co_content8 table').eq(i).find('tr').eq(1).find('.ulink').attr('href')
+                    obj.content = await getInfo(url)
                     obj.time = $('.co_content8 table').eq(i).find('tr').eq(2).find('td').eq(1).find('font').text()
                     obj.intro = $('.co_content8 table').eq(i).find('tr').eq(3).find('td').eq(0).text()
                     arr.push(obj)
+
                 }
                 resolve(arr)
             }
@@ -77,7 +80,7 @@ function getList(url){
 //获取每个列表的详情页
 function getInfo(url){
     return new Promise((resolve,reject) => {
-        options.url = url
+        options.url = 'http://www.dytt8.net' + url
         request(options,function (error, response, body) {
 			if(!error && response.statusCode == 200){
                 let covertBody = iconv.decode(body,'gbk');

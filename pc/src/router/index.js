@@ -9,6 +9,8 @@ import DoubanInfo from './Douban/Info'
 import Dytt from './Dytt/Dytt'
 import DyttInfo from './Dytt/Info'
 import Weather from './Weather/Weather'
+import Article from './Article/Article'
+import ArticleInfo from './Article/Info'
 
 export default class Root extends Component{
     render(){
@@ -23,6 +25,8 @@ export default class Root extends Component{
                 <Route exact path="/movie/dytt" component={Dytt}></Route>
                 <Route exact path="/movie/dytt/info" component={DyttInfo}></Route>
                 <Route exact path="/tool/weather" component={Weather}></Route>
+                <Route exact path="/blog/article" component={Article}></Route>
+                <Route exact path="/blog/article/info/:id" component={ArticleInfo}></Route>
             </Switch>
         )
     }
