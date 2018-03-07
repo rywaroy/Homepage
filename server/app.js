@@ -36,20 +36,20 @@ router.use('/api/douban', douban.routes(), douban.allowedMethods());
 router.use('/api/dytt', dytt.routes(), dytt.allowedMethods());
 router.use('/api/weather', weather.routes(), weather.allowedMethods());
 
-// router.get('/admin', async (ctx) => {
-//     var htmlFile = await (new Promise(function(resolve, reject){
+router.get('/admin', async (ctx) => {
+    var htmlFile = await (new Promise(function(resolve, reject){
         
-//         fs.readFile('./admin/index.html', (err, data) => {
-//             if (err){
-//                 reject(err);
-//             }else{
-//                 resolve(data);
-//             }
-//         });
-//     }))
-//     ctx.type = 'html';
-//     ctx.body = htmlFile;
-// });
+        fs.readFile('./admin/index.html', (err, data) => {
+            if (err){
+                reject(err);
+            }else{
+                resolve(data);
+            }
+        });
+    }))
+    ctx.type = 'html';
+    ctx.body = htmlFile;
+});
 // router.get('/', async (ctx) => {
 //     var htmlFile = await (new Promise(function(resolve, reject){
 //         let deviceAgent = ctx.headers['user-agent'].toLowerCase();
