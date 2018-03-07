@@ -1,4 +1,3 @@
-
 const Koa = require('koa');
 const app = new Koa();
 const cors = require('koa-cors');
@@ -27,22 +26,23 @@ app.use(convert(json()));
 app.use(require('./middlewares/returnData'));
 
 
+
+
 router.use('/api/article', article.routes(), article.allowedMethods());
-router.use('/api/admin',admin.routes(),admin.allowedMethods());
-router.use('/api/album',album.routes(),album.allowedMethods());
+router.use('/api/admin', admin.routes(), admin.allowedMethods());
+router.use('/api/album', album.routes(), album.allowedMethods());
 router.use('/api/file', file.routes(), file.allowedMethods());
-router.use('/api/time', time.routes(), time.allowedMethods());  //time时光网接口
+router.use('/api/time', time.routes(), time.allowedMethods()); //time时光网接口
 router.use('/api/douban', douban.routes(), douban.allowedMethods());
 router.use('/api/dytt', dytt.routes(), dytt.allowedMethods());
 router.use('/api/weather', weather.routes(), weather.allowedMethods());
 
 router.get('/admin', async (ctx) => {
-    var htmlFile = await (new Promise(function(resolve, reject){
-        
+    var htmlFile = await (new Promise(function (resolve, reject) {
         fs.readFile('./admin/index.html', (err, data) => {
-            if (err){
+            if (err) {
                 reject(err);
-            }else{
+            } else {
                 resolve(data);
             }
         });
@@ -50,26 +50,50 @@ router.get('/admin', async (ctx) => {
     ctx.type = 'html';
     ctx.body = htmlFile;
 });
-// router.get('/', async (ctx) => {
-//     var htmlFile = await (new Promise(function(resolve, reject){
-//         let deviceAgent = ctx.headers['user-agent'].toLowerCase();
-//         let agentID = deviceAgent.match(/(iphone|ipod|ipad|android)/);
-//         if(agentID){
-//             fs.readFile('./views/index.html', (err, data) => {
-//                 if (err){
-//                     reject(err);
-//                 }else{
-//                     resolve(data);
-//                 }
-//             });
-//         }else{
-//             console.log('指到pc网页')
-//         }
-        
-//     }))
-//     ctx.type = 'html';
-//     ctx.body = htmlFile;
-// });
+
+router.get('/', async (ctx) => {
+        let htmlFile = await (new Promise(function (resolve, reject) {
+            // let deviceAgent = ctx.headers['user-agent'].toLowerCase();
+            // let agentID = deviceAgent.match(/(iphone|ipod|ipad|android)/);
+            // if (agentID) {
+                
+            // } else {
+            //     console.log('指到pc网页')
+            // }
+            fs.readFile('./pc/index.html', (err, data) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(data);
+                }
+            });
+        }))
+        ctx.type = 'html';
+        ctx.body = htmlFile;
+});
+
+router.get('*', async (ctx) => {
+    if (ctx.response.status == 404) {
+        let htmlFile = await (new Promise(function (resolve, reject) {
+            // let deviceAgent = ctx.headers['user-agent'].toLowerCase();
+            // let agentID = deviceAgent.match(/(iphone|ipod|ipad|android)/);
+            // if (agentID) {
+                
+            // } else {
+            //     console.log('指到pc网页')
+            // }
+            fs.readFile('./pc/index.html', (err, data) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(data);
+                }
+            });
+        }))
+        ctx.type = 'html';
+        ctx.body = htmlFile;
+    }
+});
 
 app.use(router.routes(), router.allowedMethods());
 
