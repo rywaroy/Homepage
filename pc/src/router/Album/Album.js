@@ -27,7 +27,7 @@ export default class Album extends Component{
 
     //跳转到相册详情页
     linkInfo(id){
-        // this.props.history.push(`/blog/album/info/${id}`)
+        this.props.history.push(`/blog/album/group/${id}`)
     }
     
 	render(){

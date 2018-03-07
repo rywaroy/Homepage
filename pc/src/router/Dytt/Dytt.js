@@ -17,21 +17,19 @@ export default class Dytt extends Component{
     }
 
     componentDidMount(){
-        // this.getInfo()
+        store.dytt.data.length === 0 && this.getInfo()
     }
     
     //获取数据
     getInfo(){
+		store.loading.show()
         axios.get(utils.path + '/api/dytt/all',{
 			params:{
 				page:1,
 			}
 		}).then(res => {
-			// let data = res.data
-			// this.setState({
-			// 	commentList:data.comments,
-			// 	commentTotal:data.total
-			// })
+			store.dytt.setData(res.data.data)
+			store.loading.hide()
 		})
 	}
 	
@@ -49,7 +47,7 @@ export default class Dytt extends Component{
 					<div className="dytt">
 						{
 							store.dytt.data.map((item,index) => (
-								<div className="dytt-item" key={index} onClick={() => {this.linkInfo(item.info)}}>
+								<div className="dytt-item" key={index} onClick={() => {this.linkInfo(item.content)}}>
 									<div className="dytt-top f-cb">
 										<div className="dytt-name fl">{item.title}</div>
 										<div className="dytt-time fr">{item.time}</div>

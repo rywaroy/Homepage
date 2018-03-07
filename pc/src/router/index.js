@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route,Switch} from 'react-router-dom';
+import {Route, Switch, IndexRoute} from 'react-router-dom';
 import One from './One/One'
 import OneDetail from './One/Detail'
 import Time from './Time/Time'
@@ -12,6 +12,7 @@ import Weather from './Weather/Weather'
 import Article from './Article/Article'
 import ArticleInfo from './Article/Info'
 import Album from './Album/Album'
+import Group from './Album/Group'
 
 export default class Root extends Component{
     render(){
@@ -29,6 +30,8 @@ export default class Root extends Component{
                 <Route exact path="/blog/article" component={Article}></Route>
                 <Route exact path="/blog/article/info/:id" component={ArticleInfo}></Route>
                 <Route exact path="/blog/album" component={Album}></Route>
+                <Route exact path="/blog/album/group/:id" component={Group}></Route>
+                <Route component={Article}/>
             </Switch>
         )
     }

@@ -1,6 +1,7 @@
 const router = require('koa-router')();
 const db = require('../database');
 const login = require('../middlewares/isLogin')
+const xss = require("xss");
 //获取文章列表
 router.get('/list',async(ctx) => {
     let page = ctx.query.page || '1'
@@ -136,7 +137,7 @@ function updateArticle(title,intro,content,tagId,id){
 router.post('/comment',async (ctx) =>{
 	let id = ctx.request.body.id;
 	let name = ctx.request.body.name || '匿名';
-	let content = ctx.request.body.content;
+	let content = xss(ctx.request.body.content);
 	let time = new Date()
 	try {
 		await addComment(name,content,id,time)
