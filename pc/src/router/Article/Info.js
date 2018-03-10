@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Row, Col, Input, Button, message} from 'antd';
-import utils from '../../utlis'
+import utils from '../../utils'
 import moment from 'moment'
 import './article.css'
 const { TextArea } = Input;
@@ -21,12 +21,6 @@ export default class Info extends Component{
     componentDidMount(){
         this.getInfo()
         this.getComment()
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log(nextProps)
-        console.log(nextState)
-        return true
     }
 
     //获取详情

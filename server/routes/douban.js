@@ -15,25 +15,22 @@ router.get('/list', async ctx => {
 	options.url = `https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b&city=${city}&start=${start}&count=${limit}&client=&udid=`
 	let data = await( new Promise ((resolve,reject) => {
 		request(options,function (error, response, body) {
-			resolve(body)
+			resolve(JSON.parse(body))
 		})
 	}))
-	ctx.body = data
+	ctx.success('0000','获取成功',data)
 })
 
 router.get('/info', async (ctx) => {
 	let id = ctx.query.id;
-	let intro = new Promise((resolve,reject) => {
+	let data = await( new Promise((resolve,reject) => {
 		options.url = `http://api.douban.com/v2/movie/subject/${id}?apikey=0b2bdeda43b5688921839c8ecb20399b&city=&client=&udid=`
 		request(options,function (error, response, body) {
 			// console.log(response)
 			resolve(JSON.parse(body))
 		})
-	})
-	let data = await(Promise.all([intro]))
-	ctx.body = {
-		intro:data[0],
-	}
+	}))
+	ctx.success('0000','获取成功',data)
 })
 
 router.get('/image', async (ctx) => {
@@ -49,7 +46,7 @@ router.get('/image', async (ctx) => {
 			resolve(JSON.parse(body))
 		})
 	}))
-	ctx.body = data
+	ctx.success('0000','获取成功',data)
 })
 
 router.get('/comment', async (ctx) => {
@@ -64,7 +61,7 @@ router.get('/comment', async (ctx) => {
 			resolve(JSON.parse(body))
 		})
 	}))
-	ctx.body = data
+	ctx.success('0000','获取成功',data)
 })
 
 

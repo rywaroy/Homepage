@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import axios from 'axios'
 import {Row, Col , Pagination , Icon} from 'antd';
-import utils from '../../utlis'
+import utils from '../../utils'
 import './douban.css'
 
 export default class Info extends Component{
@@ -30,28 +29,28 @@ export default class Info extends Component{
 
 	//获取详情
 	getInfo(){
-		axios.get(utils.path + '/api/douban/info',{
+		utils.axios.get('douban/info',{
 			params:{
 				id:this.props.match.params.id,
 			}
 		}).then(res => {
 			this.setState({
 				isLoad:true,
-				intro:res.data.intro
+				intro:res.data.data
 			})
 		})
 	}
 
 	//获取图片
 	getImage(){
-		axios.get(utils.path + '/api/douban/image',{
+		utils.axios.get('douban/image',{
 			params:{
 				id:this.props.match.params.id,
 				page:this.state.imagePage,
 				limit:this.state.imageLimit
 			}
 		}).then(res => {
-			let data = res.data
+			let data = res.data.data
 			this.setState({
 				imageList:data.photos,
 				imageTotal:data.total
@@ -68,14 +67,14 @@ export default class Info extends Component{
 
 	//获取评论
 	getComment(){
-		axios.get(utils.path + '/api/douban/comment',{
+		utils.axios.get('douban/comment',{
 			params:{
 				id:this.props.match.params.id,
 				page:this.state.commentPage,
 				limit:this.state.commentLimit
 			}
 		}).then(res => {
-			let data = res.data
+			let data = res.data.data
 			this.setState({
 				commentList:data.comments,
 				commentTotal:data.total

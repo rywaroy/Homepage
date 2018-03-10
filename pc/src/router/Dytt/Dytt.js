@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import axios from 'axios'
 import {Row, Col} from 'antd';
 import {observer} from 'mobx-react'
 import store from '../../store'
-import utils from '../../utlis'
+import utils from '../../utils'
 import './dytt.css'
 
 @observer
@@ -23,7 +22,7 @@ export default class Dytt extends Component{
     //获取数据
     getInfo(){
 		store.loading.show()
-        axios.get(utils.path + '/api/dytt/all',{
+        utils.axios.get('dytt/all',{
 			params:{
 				page:1,
 			}

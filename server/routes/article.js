@@ -14,7 +14,7 @@ router.get('/list',async(ctx) => {
 
 function getList(page,limit) {
     return new Promise(function (resolve,reject) {
-        db.query('select a.id,a.title,a.intro,a.time,b.title as tag_name , b.color from article as a left join tag as b on a.tagid = b.id limit ' +  (page-1) * limit + ' , ' + limit,function (err,row) {
+        db.query('select a.id,a.title,a.intro,a.time,b.title as tag_name , b.color from article as a left join tag as b on a.tagid = b.id where a.state = 1 limit ' +  (page-1) * limit + ' , ' + limit,function (err,row) {
             if (err) {
                 reject(err)
             } else {
@@ -57,6 +57,30 @@ function getInfo(id) {
     })
 }
 
+//删除文章
+router.post('/delete',login.isLogin,async(ctx) => {
+	let id = ctx.request.body.id
+	try {
+		await deleteArticle(id)
+		ctx.success('0000','删除成功')
+	}catch(err){
+		ctx.error('0011','删除失败')
+	}
+	
+})
+function deleteArticle(id){
+	return new Promise(function (resolve,reject) {
+		db.query('update article set state = 0 where id = ?',[id],function (err,rows) {
+			if(err){
+				reject(err)
+			}else{
+				resolve()
+			}
+		})
+	})
+		
+}
+
 //添加文章
 router.post('/add',login.isLogin,async(ctx) => {
 	let title = ctx.request.body.title;
@@ -85,8 +109,8 @@ function addArticle(title,intro,content,time,tagId) {
 		})
 	})
 }
-//获取文章标签
 
+//获取文章标签
 router.get('/tag',async(ctx) => {
 	let list = await getTag()
 	ctx.success('0000','获取成功',list)
@@ -99,6 +123,30 @@ function getTag() {
 				reject(err)
 			}else{
 				resolve(rows)
+			}
+		})
+	})
+}
+
+// 添加文章标签
+router.post('/tag', async(ctx) => {
+	let title = ctx.request.body.title;
+	let color = ctx.request.body.color;
+
+	try {
+		await addTag(title,color)
+		ctx.success('0000','添加成功')
+	}catch (err){
+		ctx.error('0011','添加失败')
+	}
+})
+function addTag(title,color) {
+	return new Promise(function (resolve,reject) {
+		db.query('insert into tag (title,color) values(?,?)',[title,color],function (err,rows) {
+			if (rows.insertId) {
+				resolve()
+			} else {
+				reject(err)
 			}
 		})
 	})

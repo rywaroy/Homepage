@@ -78,15 +78,15 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    axios.post(plus.path + '/article/delete/article', {
-                        id: _this.tableData[index]._id,
+                    axios.post(plus.path + '/api/article/delete', {
+                        id: _this.tableData[index].id,
                         token: window.localStorage.getItem('token')
                     }).then(function (res) {
-                        if (res.data.state == 1) {
+                        if (res.data.status == '0000') {
                             _this.$message('删除成功');
                             _this.ajaxlist()
                         } else {
-                            if (res.data.state == '401') {
+                            if (res.data.status == '401') {
                                 _this.$router.push({path: '/adminlogin'})
                             } else {
                                 console.log(res.data.msg)

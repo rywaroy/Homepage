@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Row, Col} from 'antd';
-import utils from '../../utlis'
+import utils from '../../utils'
 import Masonry from 'masonry-layout'
 import './album.css'
 

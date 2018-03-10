@@ -19,7 +19,7 @@ router.get('/all', async ctx => {
         let item = await getList(pages[i])
         data = data.concat(item)
     }
-	ctx.body = {data:data}
+    ctx.success('0000','获取成功',data)
 })
 
 //获取电影天堂最新资源列表页码、链接

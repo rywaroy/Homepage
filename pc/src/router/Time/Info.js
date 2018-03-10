@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import axios from 'axios'
 import {Row, Col} from 'antd';
-import utils from '../../utlis'
+import utils from '../../utils'
 import moment from 'moment'
 import './time.css'
 
@@ -22,18 +21,19 @@ export default class MovieInfo extends Component {
 
 	//获取影片详情
 	getInfo() {
-		axios.get(utils.path + '/api/time/info', {
+		utils.axios.get('time/info', {
 			params: {
 				id: this.props.match.params.id
 			}
 		}).then(res => {
+			let data = res.data.data
 			this.setState({
 				load: true,
-				info: res.data.info,
-				performer: res.data.performer,
-				comment: res.data.comment,
-				tidbits: res.data.tidbits,
-				photo: res.data.photo
+				info: data.info,
+				performer: data.performer,
+				comment: data.comment,
+				tidbits: data.tidbits,
+				photo: data.photo
 			})
 		})
 	}

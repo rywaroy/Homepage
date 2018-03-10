@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Row, Col, Pagination} from 'antd';
-import utils from '../../utlis'
+import utils from '../../utils'
 import store from '../../store'
 import {observer} from 'mobx-react'
 import moment from 'moment'

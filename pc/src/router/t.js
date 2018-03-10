@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import {Row, Col} from 'antd';
-import utils from '../../utlis'
+import utils from '../../utils'
 
 export default class A extends Component{
 

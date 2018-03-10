@@ -161,7 +161,7 @@
         <option value="$PROJECT_DIR$/src/router/index.js" />
         <option value="$PROJECT_DIR$/src/router/One/Detail.js" />
         <option value="$PROJECT_DIR$/../server/app.js" />
-        <option value="$PROJECT_DIR$/src/utlis/index.js" />
+        <option value="$PROJECT_DIR$/src/utils/index.js" />
         <option value="$PROJECT_DIR$/src/router/Time/time.css" />
         <option value="$PROJECT_DIR$/src/router/Time/Time.js" />
         <option value="$PROJECT_DIR$/src/index.css" />
@@ -638,7 +638,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utlis/index.js">
+    <entry file="file://$PROJECT_DIR$/src/utils/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
           <caret line="1" column="17" lean-forward="false" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />

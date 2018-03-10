@@ -12,29 +12,29 @@ router.get('/sell',async (ctx) => {
     let data = await( new Promise ((resolve,reject) => {
 	    options.url = 'https://api-m.mtime.cn/PageSubArea/HotPlayMovies.api?locationId=974'
         request(options,function(error, response, body){
-            resolve(body)
+            resolve(JSON.parse(body))
         })
     }))
-    ctx.body = data
+    ctx.success('0000','获取成功',data)
 })
 
 router.get('/hot',async (ctx) => {
     let data = await( new Promise ((resolve,reject) => {
 	    options.url = 'https://api-m.mtime.cn/Showtime/LocationMovies.api?locationId=974'
         request(options,function(error, response, body){
-            resolve(body)
+            resolve(JSON.parse(body))
         })
     }))
-    ctx.body = data
+    ctx.success('0000','获取成功',data)
 })
 router.get('/soon',async (ctx) => {
 	options.url = 'https://api-m.mtime.cn/Movie/MovieComingNew.api?locationId=974'
     let data = await( new Promise ((resolve,reject) => {
         request(options,function(error, response, body){
-            resolve(body)
+            resolve(JSON.parse(body))
         })
     }))
-    ctx.body = data
+    ctx.success('0000','获取成功',data)
 })
 router.get('/info', async (ctx) => {
     let id = ctx.query.id
@@ -69,12 +69,13 @@ router.get('/info', async (ctx) => {
 	    })
     })
     let data = await(Promise.all([info,performer,comment,tidbits,photo]))
-	ctx.body = {
+    
+    ctx.success('0000','获取成功',{
 		info:data[0],
 		performer:data[1],
 		comment:data[2],
 		tidbits:data[3],
 		photo:data[4]
-    }
+    })
 })
 module.exports = router;

@@ -5,12 +5,13 @@ import {Link} from 'react-router-dom';
 const SubMenu = Menu.SubMenu;
 let open = 'magazine';
 let active;
-let hashArray = window.location.hash.split('/');
+let hashArray = window.location.pathname.split('/');
+console.log(hashArray)
 if (hashArray.length >= 3) {
 	open = hashArray[1]
 	active = hashArray[2]
 }
-if (hashArray.length === 1) {
+if (hashArray.length === 2) {
 	open = 'blog'
 	active = 'article'
 }
@@ -64,7 +65,7 @@ export default class Sider extends Component {
 						<Menu.Item key="weather"><Link to='/tool/weather'>中央天气预报</Link></Menu.Item>
 					</SubMenu>
 					<SubMenu key="blog" title={<span><Icon type="book"/><span>博客</span></span>}>
-						<Menu.Item key="article"><Link to='/blog/article'>唠嗑</Link></Menu.Item>
+						<Menu.Item key="article"><Link to='/blog/article'>日志</Link></Menu.Item>
 						<Menu.Item key="album"><Link to='/blog/album'>相册</Link></Menu.Item>
 					</SubMenu>
 				</Menu>

@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {Row, Col , Card , Pagination , Input} from 'antd';
-import axios from 'axios'
 import {observer} from 'mobx-react'
 import store from '../../store'
-import utils from '../../utlis'
+import utils from '../../utils'
 import './douban.css'
 
 const Search = Input.Search;
@@ -17,7 +16,7 @@ export default class Douban extends Component{
 
 	getList(){
 		store.loading.show()
-		axios.get(utils.path + '/api/douban/list',{
+		utils.axios.get('douban/list',{
 			params:{
 				city:store.douban.city,
 				page:store.douban.page,
@@ -27,8 +26,8 @@ export default class Douban extends Component{
 			document.documentElement.scrollTop = document.body.scrollTop = 64
 			setTimeout(() => {
 				store.loading.hide()
-				store.douban.setList(res.data.subjects)
-				store.douban.setTotal(res.data.total)
+				store.douban.setList(res.data.data.subjects)
+				store.douban.setTotal(res.data.data.total)
 			},1000)
 		})
 	}

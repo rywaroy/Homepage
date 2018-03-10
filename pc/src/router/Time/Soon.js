@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {observer} from 'mobx-react'
 import { Card } from 'antd';
-import axios from 'axios'
-import utlis from '../../utlis'
+import utils from '../../utils'
 import store from '../../store'
 import './time.css'
 
@@ -19,9 +18,9 @@ export default class Sell extends Component{
 	//获取列表
 	getList(){
 		store.loading.show()
-		axios.get(utlis.path + '/api/time/soon')
+		utils.axios.get('time/soon')
 			.then(res => {
-				store.time.setSoon(res.data.attention)
+				store.time.setSoon(res.data.data.attention)
 				setTimeout(() => {
 					store.loading.hide()
 				},1000)

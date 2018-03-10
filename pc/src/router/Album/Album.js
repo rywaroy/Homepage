@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import {Row, Col} from 'antd';
-import utils from '../../utlis'
+import utils from '../../utils'
 import {observer} from 'mobx-react'
 import store from '../../store'
 import './album.css'

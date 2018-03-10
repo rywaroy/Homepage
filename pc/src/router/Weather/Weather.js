@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import axios from 'axios'
 import {Row, Col, Select} from 'antd';
-import utils from '../../utlis'
+import utils from '../../utils'
 import store from '../../store'
 import {observer} from 'mobx-react'
 import moment from 'moment'
@@ -20,10 +19,10 @@ export default class Weather extends Component{
     }
 
     getInfo(){
-        axios.get(utils.path + '/api/weather/all?city=' + store.weather.value)
+        utils.axios.get('weather/all?city=' + store.weather.value)
             .then(res => {
-                store.weather.setFuture(res.data.weather[0].future)
-                store.weather.setNow(res.data.weather[0].now)
+                store.weather.setFuture(res.data.data.weather[0].future)
+                store.weather.setNow(res.data.data.weather[0].now)
             })
     }
 

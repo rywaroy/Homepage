@@ -8,6 +8,7 @@ import ArticleInfo from '@/components/ArticleInfo.vue'
 import Album from '@/components/Album.vue'
 import AddAlbum from '@/components/AddAlbum.vue'
 import AlbumGroup from '@/components/AlbumGroup.vue'
+import Taglist from '@/components/Taglist.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -52,6 +53,11 @@ export default new Router({
           name:'albumgroup',
           component:AlbumGroup
         },
+        {
+          path:'taglist',
+          name:'taglist',
+          component:Taglist
+        }
       ]
     }
   ]
