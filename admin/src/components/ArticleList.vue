@@ -18,7 +18,7 @@
                     label="创建时间">
             </el-table-column>
             <el-table-column
-                    prop="tag"
+                    prop="tag_name"
                     label="标签">
             </el-table-column>
             <el-table-column label="操作">

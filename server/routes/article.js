@@ -14,7 +14,7 @@ router.get('/list',async(ctx) => {
 
 function getList(page,limit) {
     return new Promise(function (resolve,reject) {
-        db.query('select a.id,a.title,a.intro,a.time,b.title as tag_name , b.color from article as a left join tag as b on a.tagid = b.id where a.state = 1 limit ' +  (page-1) * limit + ' , ' + limit,function (err,row) {
+        db.query('select a.id,a.title,a.intro,a.time,a.top,b.title as tag_name , b.color from article as a left join tag as b on a.tagid = b.id where a.state = 1 order by a.top desc limit ' +  (page-1) * limit + ' , ' + limit,function (err,row) {
             if (err) {
                 reject(err)
             } else {
@@ -118,7 +118,7 @@ router.get('/tag',async(ctx) => {
 
 function getTag() {
 	return new Promise(function (resolve,reject) {
-		db.query('select * from tag',function (err,rows) {
+		db.query('select * from tag where state = 1',function (err,rows) {
 			if(err){
 				reject(err)
 			}else{
@@ -152,8 +152,56 @@ function addTag(title,color) {
 	})
 }
 
+//删除文章标签
+router.post('/tag/delete',login.isLogin,async(ctx) => {
+	let id = ctx.request.body.id
+	try {
+		await deleteTag(id)
+		ctx.success('0000','删除成功')
+	}catch(err){
+		ctx.error('0011','删除失败')
+	}
+	
+})
+function deleteTag(id){
+	return new Promise(function (resolve,reject) {
+		db.query('update tag set state = 0 where id = ?',[id],function (err,rows) {
+			if(err){
+				reject(err)
+			}else{
+				resolve()
+			}
+		})
+	})
+		
+}
+
+//设置文章置顶
+router.post('/top',login.isLogin, async(ctx) => {
+	let id = ctx.request.body.id
+	let top = ctx.request.body.top || 1
+	try {
+		await setTop(top,id)
+		ctx.success('0000','设置成功')
+	}catch(err){
+		ctx.error('0011','设置失败')
+	}
+})
+function setTop(top,id){
+	return new Promise(function (resolve,reject) {
+		db.query('update article set top = ? where id = ?',[top,id],function (err,rows) {
+			if(err){
+				reject(err)
+			}else{
+				resolve()
+			}
+		})
+	})
+		
+}
+
 //更新文章
-router.post('/update', async(ctx) =>{
+router.post('/update',login.isLogin, async(ctx) =>{
 	let id = ctx.request.body.id;
 	let title = ctx.request.body.title;
 	let intro = ctx.request.body.intro;
@@ -181,7 +229,7 @@ function updateArticle(title,intro,content,tagId,id){
 	})
 		
 }
-
+//添加文章评论
 router.post('/comment',async (ctx) =>{
 	let id = ctx.request.body.id;
 	let name = ctx.request.body.name || '匿名';
@@ -206,7 +254,7 @@ function addComment(name,content,aid,time){
 		})
 	})
 }
-
+//获取文章评论
 router.get('/comment',async (ctx) => {
 	let id = ctx.query.id;
 	try{

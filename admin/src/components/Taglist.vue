@@ -1,6 +1,6 @@
 <template>
   <div class="tag">
-    <div class="tag-item" v-for="(item,index) in tagList" :key="index" :style="{backgroundColor:item.color}">{{item.title}}</div>
+    <div class="tag-item" v-for="(item,index) in tagList" :key="index" :style="{backgroundColor:item.color}" @click="clickTag(item.id)">{{item.title}}</div>
     <div class="tag-item" style="background-color:#ccc" @click="showAdd = true">添加</div>
 
     <el-dialog title="添加文章标签" :visible.sync="showAdd">
@@ -78,6 +78,22 @@ export default {
             this.showAdd = false
             this.getTag()
         }
+      })
+    },
+    clickTag(id){
+      this.$alert('确认删除该标签', '删除', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.deleteTag(id)
+          }
+        });
+    },
+    deleteTag(id){
+      axios.post(plus.path + '/api/article/tag/delete',{
+        id:id,
+        token:window.localStorage.getItem('token')
+      }).then(res => {
+        this.getTag()
       })
     }
   }
