@@ -25,6 +25,7 @@
                 <template scope="scope">
                     <el-button type="text" @click="deletes(scope.$index)" size="small">删除</el-button>
                     <el-button type="text" @click="check(scope.$index)" size="small">查看</el-button>
+                    <el-button type="text" @click="setTop(scope.$index)" size="small">{{tableData[scope.$index].top == 0 ? '置顶' : '取消置顶'}}</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -115,6 +116,16 @@
             },
             add(){
                 this.$router.push({path: '/home/article'})
+            },
+            setTop(index){
+                axios.post(plus.path + '/api/article/top',{
+                    id: this.tableData[index].id,
+                    top:this.tableData[index].top == 0 ? 1 : 0,
+                    token: window.localStorage.getItem('token')
+                }).then(res => {
+                    this.ajaxlist()
+                })
+                    
             }
         }
     }

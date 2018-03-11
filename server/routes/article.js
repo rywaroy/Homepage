@@ -179,7 +179,7 @@ function deleteTag(id){
 //设置文章置顶
 router.post('/top',login.isLogin, async(ctx) => {
 	let id = ctx.request.body.id
-	let top = ctx.request.body.top || 1
+	let top = ctx.request.body.top
 	try {
 		await setTop(top,id)
 		ctx.success('0000','设置成功')

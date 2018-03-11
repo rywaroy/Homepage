@@ -18,6 +18,16 @@
 .article-time{
     color: #999
 }
+.article-tag{
+    padding: 0 5px;
+    height: 24px;
+    font-size: 14px;
+    line-height: 24px;
+    color: #fff;
+    border-radius:4px;
+    margin-right: 8px;
+    margin-top: 3px; 
+}
 .article-content{
     font-size: 13px;
     line-height: 26px;
