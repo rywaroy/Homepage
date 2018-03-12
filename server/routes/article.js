@@ -25,7 +25,7 @@ function getList(page,limit) {
 }
 function getListCount() {
 	return new Promise(function (resolve,reject) {
-		db.query('select count(*) from article', function (err, row) {
+		db.query('select count(*) from article where state = 1', function (err, row) {
 			if (err) {
 				reject(err)
 			} else {
@@ -232,16 +232,33 @@ function updateArticle(title,intro,content,tagId,id){
 //添加文章评论
 router.post('/comment',async (ctx) =>{
 	let id = ctx.request.body.id;
-	let name = ctx.request.body.name || '匿名';
+	let name = xss(ctx.request.body.name) || '匿名';
 	let content = xss(ctx.request.body.content);
 	let time = new Date()
-	try {
-		await addComment(name,content,id,time)
-		ctx.success('0000','添加成功')
-	}catch (err){
-		ctx.error('0011','添加失败')
+	if(DataLength(name) > 12 || DataLength(content) > 1000){
+		console.log(DataLength(name))
+		ctx.error('0011','字数超过限制')
+	}else{
+		try {
+			await addComment(name,content,id,time)
+			ctx.success('0000','添加成功')
+		}catch (err){
+			ctx.error('0011','添加失败')
+		}
 	}
+	
 })
+
+function DataLength(fData){
+	let intLength = 0
+	for (let i = 0; i < fData.length; i++){
+		if ((fData.charCodeAt(i) < 0) || (fData.charCodeAt(i) > 255))
+			intLength = intLength + 2
+		else
+			intLength = intLength + 1
+	}
+	return intLength
+}
 
 function addComment(name,content,aid,time){
 	return new Promise(function(resolve,reject){
