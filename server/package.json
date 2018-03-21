@@ -18,6 +18,7 @@
   "homepage": "https://github.com/rywaroy/blog2#readme",
   "dependencies": {
     "ee-first": "^1.1.1",
+    "eventproxy": "^1.0.0",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-convert": "^1.2.0",

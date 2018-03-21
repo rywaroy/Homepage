@@ -4,18 +4,23 @@ import {Row, Col , Icon} from 'antd';
 
 export default class Detail extends Component {
 
-	state = {
-		type:this.props.match.params.type,
-		id:this.props.match.params.id,
-		title: '',
-		author: '',
-		content: '',
-		asker:'',
-		askContent:'',
-		answerer:'',
-		replyList:[],
-		typeText:''
+	constructor(props){
+		super(props)
+		this.state = {
+			type:this.props.match.params.type,
+			id:this.props.match.params.id,
+			title: '',
+			author: '',
+			content: '',
+			asker:'',
+			askContent:'',
+			answerer:'',
+			replyList:[],
+			typeText:''
+		}
 	}
+
+	
 
 	componentWillMount() {
 		if(this.state.type === '1'){

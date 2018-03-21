@@ -63,7 +63,7 @@ export default class Weather extends Component{
                             ))}
                         </Select>
                     </div>
-                    {
+                    { 
                         store.weather.now ? 
                             <div className="weather-now f-cb">
                                 温度:{store.weather.now.temperature}℃<br />
@@ -91,7 +91,7 @@ export default class Weather extends Component{
                                         <div className={'weather-icon icon' + this.getWeatherCode(item.code1)}></div>
                                         <div className={'weather-icon icon' + this.getWeatherCode(item.code2)}></div>
                                         <div className="weather-week-intro">{item.text} {item.wind}</div>
-                                        <div className="weather-week-cen">{item.high}℃ / {item.low}℃</div>
+                                        <div className="weather-week-cen">{item.low}℃ / {item.high}℃</div>
                                     </div>
                                 ))
                             }
