@@ -6,6 +6,7 @@ import dyttStore from './dyttStore'
 import weatherStore from './weatherStore'
 import ArticleStore from './articleStore'
 import AlbumStore from './albumStore'
+import BaseStore from './baseStore'
 
 const store = {
     one:new OneStore(),
@@ -15,7 +16,8 @@ const store = {
     dytt:new dyttStore(),
     weather:new weatherStore(),
     article:new ArticleStore(),
-    album:new AlbumStore()
+    album:new AlbumStore(),
+    base:new BaseStore()
 }
 
 export default store

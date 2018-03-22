@@ -11,7 +11,7 @@ export default class Sell extends Component{
 		list:[]
 	}
 	componentDidMount() {
-		store.time.sell.length == 0 && this.getList()
+		store.time.sell.length === 0 && this.getList()
 	}
 
 	//获取列表

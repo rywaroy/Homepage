@@ -9,6 +9,7 @@ import Album from '@/components/Album.vue'
 import AddAlbum from '@/components/AddAlbum.vue'
 import AlbumGroup from '@/components/AlbumGroup.vue'
 import Taglist from '@/components/Taglist.vue'
+import Base from '@/components/Base.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -57,6 +58,11 @@ export default new Router({
           path:'taglist',
           name:'taglist',
           component:Taglist
+        },
+        {
+          path:'base',
+          name:'base',
+          component:Base
         }
       ]
     }

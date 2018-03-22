@@ -16,6 +16,7 @@ const time = require('./routes/time')
 const douban = require('./routes/douban')
 const dytt = require('./routes/dytt')
 const weather = require('./routes/weather')
+const base = require('./routes/base')
 
 //中间件
 app.use(staticServer(__dirname + '/static'));
@@ -36,6 +37,7 @@ router.use('/api/time', time.routes(), time.allowedMethods()); //time时光网�
 router.use('/api/douban', douban.routes(), douban.allowedMethods());
 router.use('/api/dytt', dytt.routes(), dytt.allowedMethods());
 router.use('/api/weather', weather.routes(), weather.allowedMethods());
+router.use('/api/base', base.routes(), base.allowedMethods());
 
 router.get('/admin', async (ctx) => {
     var htmlFile = await (new Promise(function (resolve, reject) {

@@ -12,7 +12,7 @@ export default class Sell extends Component{
 	}
 
 	componentDidMount() {
-		store.time.hot.length == 0 && this.getList()
+		store.time.hot.length === 0 && this.getList()
 	}
 
 	//获取列表

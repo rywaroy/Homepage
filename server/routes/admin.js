@@ -7,7 +7,7 @@ router.post('/login',async(ctx) => {
     let password = ctx.request.body.password
     let data = await findAdmin(account,password)
 
-    if(data.length == 1){
+    if(data.length === 1){
         // ctx.session.uid =  data[0].id
         // ctx.session.account = data[0].account
         let token = await setToken(account,password)

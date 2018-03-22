@@ -6,10 +6,27 @@ import {Layout} from 'antd';
 import Menu from './components/Menu/Menu'
 import {BrowserRouter as Router} from 'react-router-dom';
 import Loading from './components/Loading/Loading'
+import store from './store'
+import utils from './utils'
+import {observer} from 'mobx-react'
 
 const {Header, Footer, Sider, Content} = Layout;
 
+@observer
 class App extends Component {
+
+	componentDidMount(){
+		this.getBlogContent()
+	}
+
+	//获取博客信息
+	getBlogContent(){
+		utils.axios.get('base/content')
+			.then(res => {
+				store.base.setContent(res.data.data)
+			})
+	}
+
 	render() {
 		return (
 			<Router>
@@ -20,7 +37,7 @@ class App extends Component {
 					</Sider>
 					<Layout style={{marginLeft: 200}}>
 						<Header>
-							<div className="header">这里该写点什么？</div>
+							<div className="header">{store.base.content.word}</div>
 						</Header>
 						<Content>
 							<Routers />

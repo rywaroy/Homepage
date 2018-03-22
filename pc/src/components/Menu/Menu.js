@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Menu, Icon} from 'antd';
 import './menu.css'
 import {Link} from 'react-router-dom';
+
 const SubMenu = Menu.SubMenu;
 let open = 'magazine';
 let active;
@@ -16,11 +17,16 @@ if (hashArray.length === 2) {
 	active = 'article'
 }
 export default class Sider extends Component {
-	state = {
-		collapsed: false,
-		openKeys: [open],
-		active: active,
+
+	constructor(props){
+		super(props)
+		this.state = {
+			collapsed: false,
+			openKeys: [open],
+			active: active,
+		}
 	}
+	
 	toggleCollapsed = () => {
 		this.setState({
 			collapsed: !this.state.collapsed,
