@@ -3,8 +3,8 @@ import qs from "qs";
 import { message } from 'antd';
 
 const Axios = axios.create({
-  baseURL: "http://localhost:3001/api/",
-  // baseURL:'http://97.64.44.53/api/',
+  // baseURL: "http://localhost:3001/api/",
+  baseURL:'http://www.3zsd.cn:3000/api/',
   timeout: 10000,
   responseType: "json",
 //   withCredentials: true, // 是否允许带cookie这些
@@ -35,7 +35,7 @@ Axios.interceptors.request.use(
 //返回状态判断(添加响应拦截器)
 Axios.interceptors.response.use(
   res => {
-    if (res.data.status != '0000') {
+    if (res.data.status !== '0000') {
         message.error(res.data.msg);
         return Promise.reject(res.data.Msg);
     }

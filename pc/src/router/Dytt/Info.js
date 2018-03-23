@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import axios from 'axios'
 import {Row, Col} from 'antd';
 import {observer} from 'mobx-react'
 import store from '../../store'
-import utils from '../../utils'
 
 @observer
 export default class DyttInfo extends Component{

@@ -7,7 +7,6 @@ const SubMenu = Menu.SubMenu;
 let open = 'magazine';
 let active;
 let hashArray = window.location.pathname.split('/');
-console.log(hashArray)
 if (hashArray.length >= 3) {
 	open = hashArray[1]
 	active = hashArray[2]

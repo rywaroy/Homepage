@@ -3,16 +3,11 @@ import {Row, Col, Select} from 'antd';
 import utils from '../../utils'
 import store from '../../store'
 import {observer} from 'mobx-react'
-import moment from 'moment'
 import './weather.css'
 const Option = Select.Option;
 
 @observer
 export default class Weather extends Component{
-
-    constructor(props){
-        super(props)
-    }
 
     componentDidMount(){
         store.weather.future.length === 0 && this.getInfo()

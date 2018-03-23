@@ -10,10 +10,6 @@ const Option = Select.Option;
 @observer
 export default class One extends Component {
 
-	constructor(props){
-        super(props)
-    }
-
 	componentDidMount() {
 		store.one.list.length === 0 && this.getData()
 	}

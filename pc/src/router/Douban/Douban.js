@@ -11,7 +11,7 @@ const Search = Input.Search;
 export default class Douban extends Component{
 
 	componentDidMount() {
-		store.douban.list.length == 0 &&this.getList()
+		store.douban.list.length === 0 &&this.getList()
 	}
 
 	getList(){

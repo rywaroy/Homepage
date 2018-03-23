@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import axios from 'axios'
 import {Row, Col} from 'antd';
 import utils from '../../utils'
 import {observer} from 'mobx-react'
@@ -8,10 +7,6 @@ import './album.css'
 
 @observer
 export default class Album extends Component{
-
-	constructor(props){
-        super(props)
-	}
     
     componentDidMount(){
         store.album.list.length === 0 && this.getList()

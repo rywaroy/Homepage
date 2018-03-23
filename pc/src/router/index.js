@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, Switch, IndexRoute} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import One from './One/One'
 import OneDetail from './One/Detail'
 import Time from './Time/Time'

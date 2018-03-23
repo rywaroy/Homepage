@@ -9,10 +9,6 @@ import './article.css'
 @observer
 export default class Article extends Component{
 
-	constructor(props){
-        super(props)
-    }
-
     componentDidMount(){
         store.article.list.length === 0 && this.getList()
     }
