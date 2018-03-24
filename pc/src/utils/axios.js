@@ -42,7 +42,13 @@ Axios.interceptors.response.use(
     return res;
   },
   error => {
-
+    if(error.message.indexOf('timeout') > -1){
+      message.error('请求超时,请检查网络');
+    }
+    if(error.message.indexOf('Network Error') > -1){
+      message.error('当前无网络,请检查网络');
+    }
+    return Promise.reject(error.message);
   }
 );
 

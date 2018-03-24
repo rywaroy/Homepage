@@ -20,6 +20,7 @@ router.get('/all', async ctx => {
     for (let i = 0; i < pages.length; i++) {
         let item = await getList(pages[i])
         data = data.concat(item)
+
     }
     ctx.success('0000', '获取成功', data)
 })
@@ -72,8 +73,7 @@ function getList(url) {
 
                     await (new Promise((resolve, reject) => {
                         ep.after(`dytt${i}`, 5, function (dytts) {
-                            console.log(dytts)
-                            arr.push(dytts)
+                            arr = arr.concat(dytts)
                             resolve()
                         });
                         for (let j = i; j < i + 5; j++) {

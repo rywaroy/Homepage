@@ -13,6 +13,7 @@ import Article from './Article/Article'
 import ArticleInfo from './Article/Info'
 import Album from './Album/Album'
 import Group from './Album/Group'
+import App from './App/App'
 
 export default class Root extends Component{
     render(){
@@ -31,6 +32,7 @@ export default class Root extends Component{
                 <Route exact path="/blog/article/info/:id" component={ArticleInfo}></Route>
                 <Route exact path="/blog/album" component={Album}></Route>
                 <Route exact path="/blog/album/group/:id" component={Group}></Route>
+                <Route exact path="/blog/app" component={App}></Route>
                 <Route component={Article}/>
             </Switch>
         )

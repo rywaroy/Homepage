@@ -68,13 +68,19 @@ export default class Article extends Component{
 								</div>
 							))
                         }
-                        <div className="article-page">
-                            <Pagination 
-                                current={store.article.page}
-                                total={store.article.total}
-                                pageSize={store.article.limit}
-                                onChange={this._onChange.bind(this)}/>
-                        </div>
+                        {
+                            store.article.total / store.article.limit <= 1 ?
+                                null
+                                :
+                                <div className="article-page">
+                                    <Pagination 
+                                        current={store.article.page}
+                                        total={store.article.total}
+                                        pageSize={store.article.limit}
+                                        onChange={this._onChange.bind(this)}/>
+                                </div>
+                        }
+                        
                         
 					</div>
 				</Col>

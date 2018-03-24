@@ -13,7 +13,12 @@ router.get('/all', async ctx => {
 	options.url = `http://tj.nineton.cn/Heart/index/all?city=${city}&language=zh-chs&unit=c&aqi=city&alarm=1&key=78928e706123c1a8f1766f062bc8676b`
 	let data = await( new Promise ((resolve,reject) => {
 		request(options,function (error, response, body) {
-			resolve(JSON.parse(body))
+			if (!error && response.statusCode == 200){
+				resolve(JSON.parse(body))
+			}else{
+				reject()
+			}
+			
 		})
 	}))
 	ctx.success('0000','获取成功',data)
