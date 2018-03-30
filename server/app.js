@@ -99,5 +99,5 @@ router.get('*', async (ctx) => {
 
 app.use(router.routes(), router.allowedMethods());
 
-app.listen(3001);
+app.listen(80);
 console.log('app started at port 3001...');

@@ -7,7 +7,7 @@ router.get('/list',async(ctx) => {
     let page = ctx.query.page || '1'
     let limit = ctx.query.limit || '10'
     let data = await getList(page,limit)
-    let count = await getListCount()
+	let count = await getListCount()
     ctx.success('0000','获取成功',{list:data,total:count})
     // ctx.body = data;
 })
@@ -235,12 +235,12 @@ router.post('/comment',async (ctx) =>{
 	let name = xss(ctx.request.body.name) || '匿名';
 	let content = xss(ctx.request.body.content);
 	let time = new Date()
+	let ip = ctx.request.ip.substring(0,6) + '**'
 	if(DataLength(name) > 12 || DataLength(content) > 1000){
-		console.log(DataLength(name))
 		ctx.error('0011','字数超过限制')
 	}else{
 		try {
-			await addComment(name,content,id,time)
+			await addComment(`${name} (${ip})`,content,id,time)
 			ctx.success('0000','添加成功')
 		}catch (err){
 			ctx.error('0011','添加失败')

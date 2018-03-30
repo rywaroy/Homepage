@@ -4,7 +4,7 @@ import { message } from 'antd';
 
 const Axios = axios.create({
   // baseURL: "http://localhost:3001/api/",
-  baseURL:'http://www.3zsd.cn:3000/api/',
+  baseURL:'http://www.3zsd.com/api/',
   timeout: 10000,
   responseType: "json",
 //   withCredentials: true, // 是否允许带cookie这些
