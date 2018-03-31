@@ -33,6 +33,13 @@
     line-height: 26px;
     color: #666
 }
+.article-watch{
+    padding-left: 25px;
+    background: url('../../assets/watch.png') no-repeat left center;
+    font-size: 14px;
+    line-height: 24px;
+    color: #333;
+}
 .comment-form{
     width:600px;    
     padding-top: 30px;

@@ -65,6 +65,9 @@ export default class Article extends Component{
                                         }
 									</div>
 									<div className="article-content">{item.intro}</div>
+                                    <div className="article-bot f-cb">
+                                        <div className="article-watch fr">{item.watch}</div>
+                                    </div>
 								</div>
 							))
                         }
