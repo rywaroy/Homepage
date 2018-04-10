@@ -9,6 +9,7 @@ const session = require('koa-session');
 const staticServer = require('koa-static');
 const fs = require('fs')
 const article = require('./routes/article');
+const learn = require('./routes/learn')
 const admin = require('./routes/admin');
 const album = require('./routes/album');
 const file = require('./routes/file')
@@ -30,6 +31,7 @@ app.use(require('./middlewares/returnData'));
 
 
 router.use('/api/article', article.routes(), article.allowedMethods());
+router.use('/api/learn', learn.routes(), learn.allowedMethods());
 router.use('/api/admin', admin.routes(), admin.allowedMethods());
 router.use('/api/album', album.routes(), album.allowedMethods());
 router.use('/api/file', file.routes(), file.allowedMethods());
