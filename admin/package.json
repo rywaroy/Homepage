@@ -11,11 +11,17 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "css-loader": "^0.28.11",
     "element-ui": "^1.4.4",
+    "marked": "^0.3.19",
+    "node-sass": "^4.8.3",
     "qs": "^6.5.1",
+    "scss-loader": "^0.0.1",
+    "style-loader": "^0.20.3",
     "vue": "^2.4.2",
     "vue-quill-editor": "^2.3.2",
-    "vue-router": "^2.7.0"
+    "vue-router": "^2.7.0",
+    "vue-scroll": "^2.1.7"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
