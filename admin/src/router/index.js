@@ -11,6 +11,7 @@ import AlbumGroup from '@/components/AlbumGroup.vue'
 import Taglist from '@/components/Taglist.vue'
 import Base from '@/components/Base.vue'
 import LearnInfo from '@/components/LearnInfo.vue'
+import LearnList from '@/components/LearnList.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -64,6 +65,11 @@ export default new Router({
           path:'base',
           name:'base',
           component:Base
+        },
+        {
+          path:'learnlist',
+          name:'learnlist',
+          component:LearnList
         },
         {
           path:'learninfo',

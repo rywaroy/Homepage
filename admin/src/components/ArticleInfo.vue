@@ -181,7 +181,7 @@ export default {
                 tagId: _this.tagId,
                 token: window.localStorage.getItem('token')
             }).then(function(res) {
-                if (res.data.state == 1) {
+                if (res.data.status == '0000') {
                     _this.$message('发表成功');
                     _this.getinfo();
                 }

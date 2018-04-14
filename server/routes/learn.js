@@ -7,7 +7,7 @@ router.get('/list',async(ctx) => {
     let page = ctx.query.page || '1'
     let limit = ctx.query.limit || '10'
     let data = await (new Promise((resolve,reject) => {
-        db.query('select title,intro,time,tag from learn where state = 1 limit ' +  (page-1) * limit + ' , ' + limit,function (err,row) {
+        db.query('select id,title,intro,time,tag from learn where state = 1 limit ' +  (page-1) * limit + ' , ' + limit,function (err,row) {
             if (err) {
                 reject(err)
             } else {
@@ -71,13 +71,14 @@ router.post('/delete',login.isLogin,async(ctx) => {
 router.post('/add',login.isLogin,async(ctx) => {
 	let title = ctx.request.body.title;
 	let intro = ctx.request.body.intro;
-	let content = ctx.request.body.content;
+    let html = ctx.request.body.html;
+    let md = ctx.request.body.md;
 	let time = new Date();
 	let tag = ctx.request.body.tag;
-
+    console.log(html)
 	try {
 		await (new Promise((resolve,reject) => {
-            db.query('insert into learn (title,intro,content,time,tag) values(?,?,?,?,?)',[title,intro,content,time,tag],function (err,rows) {
+            db.query('insert into learn (title,intro,html,md,time,tag) values(?,?,?,?,?,?)',[title,intro,html,md,time,tag],function (err,rows) {
                 if (rows.insertId) {
                     resolve()
                 } else {
@@ -97,13 +98,13 @@ router.post('/update',login.isLogin, async(ctx) =>{
 	let id = ctx.request.body.id;
 	let title = ctx.request.body.title;
 	let intro = ctx.request.body.intro;
-	let content = ctx.request.body.content;
+    let html = ctx.request.body.html;
+    let md = ctx.request.body.md;
 	let tag = ctx.request.body.tag;
 	try {
 		await (new Promise((resolve,reject) => {
-            db.query('update learn set title = ?,intro = ?,content = ?,tag = ? where id = ?',[title,intro,content,tag,id],function (err,rows) {
+            db.query('update learn set title = ?,intro = ?,html = ?,md = ?,tag = ? where id = ?',[title,intro,html,md,tag,id],function (err,rows) {
                 if(err){
-                    console.log(err)
                     reject(err)
                 }else{
                     resolve()
