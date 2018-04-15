@@ -75,7 +75,6 @@ router.post('/add',login.isLogin,async(ctx) => {
     let md = ctx.request.body.md;
 	let time = new Date();
 	let tag = ctx.request.body.tag;
-    console.log(html)
 	try {
 		await (new Promise((resolve,reject) => {
             db.query('insert into learn (title,intro,html,md,time,tag) values(?,?,?,?,?,?)',[title,intro,html,md,time,tag],function (err,rows) {

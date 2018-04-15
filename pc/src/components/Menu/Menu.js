@@ -13,7 +13,7 @@ if (hashArray.length >= 3) {
 }
 if (hashArray.length === 2) {
 	open = 'blog'
-	active = 'article'
+	active = 'learn'
 }
 export default class Sider extends Component {
 
@@ -70,6 +70,7 @@ export default class Sider extends Component {
 						<Menu.Item key="weather"><Link to='/tool/weather'>中央天气预报</Link></Menu.Item>
 					</SubMenu>
 					<SubMenu key="blog" title={<span><Icon type="book"/><span>博客</span></span>}>
+						<Menu.Item key="learn"><Link to='/blog/learn'>学习</Link></Menu.Item>
 						<Menu.Item key="article"><Link to='/blog/article'>日志</Link></Menu.Item>
 						<Menu.Item key="album"><Link to='/blog/album'>相册</Link></Menu.Item>
 						<Menu.Item key="app"><Link to='/blog/app'>APP下载</Link></Menu.Item>

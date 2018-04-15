@@ -1,0 +1,59 @@
+.learn{
+    padding: 20px 0;
+}
+.learn-item{
+    background:#fff;
+    padding:20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.learn-top{
+    font-size: 15px;
+    line-height: 30px;
+}
+.learn-name{
+    color: #333;
+}
+.learn-time{
+    color: #999
+}
+.learn-tag{
+    padding: 0 5px;
+    height: 24px;
+    font-size: 14px;
+    line-height: 24px;
+    color: #fff;
+    border-radius:4px;
+    margin-right: 8px;
+    margin-top: 3px; 
+    background: blue;
+}
+.learn-content{
+    font-size: 13px;
+    line-height: 26px;
+    color: #666
+}
+.learn-watch{
+    padding-left: 25px;
+    background: url('../../assets/watch.png') no-repeat left center;
+    font-size: 14px;
+    line-height: 24px;
+    color: #333;
+}
+.comment-form{
+    width:600px;    
+    padding-top: 30px;
+}
+.comment-form-title{
+    font-size: 16px;
+    line-height: 26px;
+    color: #000;
+    margin-bottom: 10px;
+}
+.comment-form-name{
+    margin-bottom: 10px;
+}
+.comment-form-content{
+    margin-bottom: 10px;
+}

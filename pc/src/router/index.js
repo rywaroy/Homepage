@@ -11,6 +11,8 @@ import DyttInfo from './Dytt/Info'
 import Weather from './Weather/Weather'
 import Article from './Article/Article'
 import ArticleInfo from './Article/Info'
+import Learn from './Learn/Learn'
+import LearnInfo from './Learn/Info'
 import Album from './Album/Album'
 import Group from './Album/Group'
 import App from './App/App'
@@ -30,10 +32,12 @@ export default class Root extends Component{
                 <Route exact path="/tool/weather" component={Weather}></Route>
                 <Route exact path="/blog/article" component={Article}></Route>
                 <Route exact path="/blog/article/info/:id" component={ArticleInfo}></Route>
+                <Route exact path="/blog/learn" component={Learn}></Route>
+                <Route exact path="/blog/learn/info/:id" component={LearnInfo}></Route>
                 <Route exact path="/blog/album" component={Album}></Route>
                 <Route exact path="/blog/album/group/:id" component={Group}></Route>
                 <Route exact path="/blog/app" component={App}></Route>
-                <Route component={Article}/>
+                <Route component={Learn}/>
             </Switch>
         )
     }

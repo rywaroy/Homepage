@@ -5,6 +5,7 @@ import doubanStore from './doubanStore'
 import dyttStore from './dyttStore'
 import weatherStore from './weatherStore'
 import ArticleStore from './articleStore'
+import LearnStore from './learnStore'
 import AlbumStore from './albumStore'
 import BaseStore from './baseStore'
 
@@ -16,6 +17,7 @@ const store = {
     dytt:new dyttStore(),
     weather:new weatherStore(),
     article:new ArticleStore(),
+    learn:new LearnStore(),
     album:new AlbumStore(),
     base:new BaseStore()
 }
