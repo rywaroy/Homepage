@@ -66,7 +66,7 @@ export default {
                     //_this.item = res.data.data;
                     this.intro = res.data.data.intro;
                     this.title = res.data.data.title;
-                    this.msg.htmlValue = res.data.data.html;
+                    // this.msg.htmlValue = res.data.data.html;
                     this.msg.mdValue = res.data.data.md;
                     this.tag = res.data.data.tag;
                 }

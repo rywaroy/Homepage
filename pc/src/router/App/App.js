@@ -1,13 +1,7 @@
 import React, {Component} from 'react';
-import axios from 'axios'
 import {Row, Col} from 'antd';
-import utils from '../../utils'
 
 export default class Download extends Component{
-
-	constructor(props){
-        super(props)
-	}
 	
 	render(){
 		return(

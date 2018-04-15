@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {Row, Col, message} from 'antd';
+import {Row, Col} from 'antd';
 import utils from '../../utils'
-import moment from 'moment'
 import './learn.css'
-
+import './markdown.css'
 export default class Info extends Component{
 
 	constructor(props){
@@ -40,7 +39,7 @@ export default class Info extends Component{
 				<Col span={20}>
                     <div className="single-page">
                         <div className="single-page-title">{this.state.title}</div>
-                        <div className="single-page-content" dangerouslySetInnerHTML={{__html: this.state.html}}></div>
+                        <div className="single-page-content" dangerouslySetInnerHTML={{__html: this.state.content}}></div>
                     </div>
 				</Col>
 				<Col span={2}/>
