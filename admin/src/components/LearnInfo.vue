@@ -11,6 +11,7 @@
             :navStatusP="true"
             :icoStatusP="true"  
             @childevent="childEventHandler"
+            v-if="showMD"
                 ></markdown>
         </div>
         <el-button @click="publish()" class="fl">发表</el-button>
@@ -32,7 +33,8 @@ export default {
             title:'',
             intro:'',
             id:'',
-            tag:''
+            tag:'',
+            showMD:false
         }
     },
     components: {
@@ -49,6 +51,7 @@ export default {
             this.intro = ''
             this.id = ''
             this.tag = ''
+            this.showMD = true
         }
     },
     methods:{
@@ -69,6 +72,7 @@ export default {
                     // this.msg.htmlValue = res.data.data.html;
                     this.msg.mdValue = res.data.data.md;
                     this.tag = res.data.data.tag;
+                    this.showMD = true
                 }
             })
         },
