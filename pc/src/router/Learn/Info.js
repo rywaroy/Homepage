@@ -39,7 +39,7 @@ export default class Info extends Component{
 				<Col span={20}>
                     <div className="single-page">
                         <div className="single-page-title">{this.state.title}</div>
-                        <div className="single-page-content" dangerouslySetInnerHTML={{__html: this.state.content}}></div>
+                        <div className="single-page-content markdown-body" dangerouslySetInnerHTML={{__html: this.state.content}}></div>
                     </div>
 				</Col>
 				<Col span={2}/>
