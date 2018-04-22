@@ -8,7 +8,7 @@
 
 # production
 /build
-
+/upload
 # misc
 .DS_Store
 .env.local
@@ -20,3 +20,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 database.js
+qiniu.js

@@ -1,5 +1,6 @@
 const router = require('koa-router')();
 const multer = require('koa-multer');
+const uploadQiniu = require('../config/qiniu')
 
 const storage = multer.diskStorage({  
     //文件保存路径  
@@ -17,7 +18,9 @@ const storage = multer.diskStorage({
 
 
   router.post('/photos', upload.single('photos'), async (ctx, next) => { 
-    ctx.success('1','上传成功',{filename: 'http://' + ctx.request.host + '/upload/' +ctx.req.file.filename}) 
+    uploadQiniu(ctx.req.file.filename)
+    // ctx.success('1','上传成功',{filename: 'http://' + ctx.request.host + '/upload/' +ctx.req.file.filename}) 
+    ctx.success('1','上传成功',{filename: 'http://p7kx9r1er.bkt.clouddn.com/' +ctx.req.file.filename}) 
   })  
 
 //   router.post('/photos', upload.single('photos',9), async (ctx, next) => {
