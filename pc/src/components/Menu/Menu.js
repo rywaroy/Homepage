@@ -60,6 +60,7 @@ export default class Sider extends Component {
 				>
 					<SubMenu key="magazine" title={<span><Icon type="pie-chart"/><span>杂志</span></span>}>
 						<Menu.Item key="one"><Link to='/magazine/one'>ONE · 一个</Link></Menu.Item>
+						<Menu.Item key="huaban"><Link to='/magazine/huaban'>花瓣相册</Link></Menu.Item>
 					</SubMenu>
 					<SubMenu key="movie" title={<span><Icon type="hdd"/><span>电影</span></span>}>
 						<Menu.Item key="time"><Link to='/movie/time'>Time时光</Link></Menu.Item>

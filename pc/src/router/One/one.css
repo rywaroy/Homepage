@@ -1,7 +1,8 @@
-.content{
-    padding:20px 50px 50px 50px
+.content {
+    padding: 20px 50px 50px 50px
 }
-.item{
+
+.item {
     width: 100%;
     display: block;
     min-height: 400px;
@@ -12,48 +13,57 @@
     transition: all .3s;
     cursor: pointer;
 }
-.item:hover{
-    box-shadow: 1px 5px 20px rgba(0,0,0,.2);
+
+.item:hover {
+    box-shadow: 1px 5px 20px rgba(0, 0, 0, .2);
 }
-.item-tag{
+
+.item-tag {
     text-align: center;
     font-size: 12px;
     color: #999;
     margin-bottom: 10px;
 }
-.item-inb-title{
+
+.item-inb-title {
     margin-top: 10px;
     font-size: 12px;
     color: #999;
 }
-.item-inb-word{
+
+.item-inb-word {
     font-size: 12px;
     color: #555;
     margin-top: 20px;
 }
-.item-inb-book{
+
+.item-inb-book {
     text-align: right;
     font-size: 12px;
     color: #999;
     margin-top: 10px;
 }
-.item-title{
+
+.item-title {
     font-size: 18px;
     color: #333;
     margin-bottom: 10px;
     word-break: break-all;
 }
-.item-author{
+
+.item-author {
     font-size: 12px;
     color: #999;
     margin-bottom: 8px;
 }
-.item-forward{
+
+.item-forward {
     font-size: 12px;
     color: #555;
     margin-top: 10px;
 }
-.item-music-box{
+
+.item-music-box {
     width: 150px;
     height: 150px;
     margin: 10px auto;
@@ -62,20 +72,24 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
-.header{
+
+.header {
     margin-bottom: 20px;
 }
-.from{
+
+.from {
     float: left;
     font-size: 12px;
     line-height: 28px;
 }
-.last{
+
+.last {
     font-size: 14px;
     line-height: 28px;
     color: #666;
 }
-.item-img{
+
+.item-img {
     display: block;
     max-height: 180px;
 }

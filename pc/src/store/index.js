@@ -8,6 +8,7 @@ import ArticleStore from './articleStore'
 import LearnStore from './learnStore'
 import AlbumStore from './albumStore'
 import BaseStore from './baseStore'
+import HuabanStore from './huabanStore'
 
 const store = {
     one:new OneStore(),
@@ -19,7 +20,8 @@ const store = {
     article:new ArticleStore(),
     learn:new LearnStore(),
     album:new AlbumStore(),
-    base:new BaseStore()
+    base:new BaseStore(),
+    huaban:new HuabanStore(),
 }
 
 export default store

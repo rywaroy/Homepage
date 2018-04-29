@@ -1,71 +1,87 @@
-.list-item{
+.list-item {
     font-size: 12px;
     line-height: 22px;
     margin-right: 10px;
     margin-bottom: 10px;
     cursor: pointer;
 }
-.cast{
-    color:#333
+
+.cast {
+    color: #333
 }
-.cast-item{
+
+.cast-item {
     margin-right: 5px;
 }
-.list-content{
-    height:180px;
+
+.list-content {
+    height: 180px;
     margin-top: 10px;
 }
-.top{
+
+.top {
     padding-top: 20px;
 }
-.title{
+
+.title {
     font-size: 30px;
     line-height: 40px;
 }
-.en-title{
+
+.en-title {
     font-size: 14px;
     color: #999;
     line-height: 25px;
 }
-.info{
+
+.info {
     padding-top: 40px;
 }
-.intro{
+
+.intro {
     margin-top: 30px;
 }
-.cell{
+
+.cell {
     font-size: 13px;
     line-height: 24px;
 }
-.info-intro-item{
+
+.info-intro-item {
     margin-right: 5px;
 }
-.info-p-item{
+
+.info-p-item {
     width: 200px;
     float: left;
     margin-right: 20px;
 }
-.info-p-img{
+
+.info-p-img {
     display: block;
 }
-.info-image{
+
+.info-image {
     margin-right: 30px;
     margin-bottom: 30px;
     width: 300px;
     height: 200px;
 }
-.subtitle{
+
+.subtitle {
     font-size: 20px;
     padding: 20px 0;
     line-height: 34px;
     color: #333
 }
-.info-summary{
+
+.info-summary {
     margin-top: 20px;
     font-size: 14px;
     line-height: 26px;
     color: #666;
 }
-.info-page{
+
+.info-page {
     padding: 20px 0
 }

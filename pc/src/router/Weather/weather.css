@@ -1,16 +1,19 @@
-.weather{
+.weather {
     padding: 20px 0;
 }
-.weather-citys{
+
+.weather-citys {
     margin-bottom: 20px;
 }
-.weather-now{
+
+.weather-now {
     font-size: 16px;
     line-height: 30px;
     color: #666;
     margin-bottom: 20px;
 }
-.weather-week-item{
+
+.weather-week-item {
     width: 120px;
     border: 1px solid #fff;
     height: 200px;
@@ -20,73 +23,96 @@
     margin-bottom: 5px;
     padding-top: 10px;
 }
-.weather-icon{
+
+.weather-icon {
     width: 30px;
     height: 30px;
     background-image: url('../../assets/white30.png');
     margin: 0 auto;
 }
-.weather-week-date{
+
+.weather-week-date {
     font-size: 15px;
     line-height: 24px;
     text-align: center;
 }
-.weather-week-day{
+
+.weather-week-day {
     font-size: 14px;
     line-height: 24px;
     text-align: center;
     margin-top: 4px;
 }
-.weather-week-intro{
+
+.weather-week-intro {
     text-align: center;
     font-size: 12px;
     line-height: 24px;
     margin-top: 5px;
 }
-.weather-week-cen{
+
+.weather-week-cen {
     text-align: center;
     font-size: 12px;
     line-height: 24px;
 }
+
 /* 晴 */
-.weather-icon.icon1{
+
+.weather-icon.icon1 {
     background-position: 0 0;
 }
-.weather-week-item.lv1{
-    background: -webkit-gradient(linear,0% 0,0% 100%,from(#0e7fdf),to(#69b8f0));
+
+.weather-week-item.lv1 {
+    background: -webkit-gradient(linear, 0% 0, 0% 100%, from(#0e7fdf), to(#69b8f0));
 }
+
 /* 多云 */
-.weather-icon.icon2{
+
+.weather-icon.icon2 {
     background-position: -80px 0;
 }
-.weather-week-item.lv2{
-    background: -webkit-gradient(linear,0% 0,0% 100%,from(#50b2fb),to(#a6d4f6));
+
+.weather-week-item.lv2 {
+    background: -webkit-gradient(linear, 0% 0, 0% 100%, from(#50b2fb), to(#a6d4f6));
 }
+
 /* 阴 */
-.weather-icon.icon3{
+
+.weather-icon.icon3 {
     background-position: -160px 0;
 }
-.weather-week-item.lv3{
-    background: -webkit-gradient(linear,0% 0,0% 100%,from(#50b2fb),to(#a6d4f6));
+
+.weather-week-item.lv3 {
+    background: -webkit-gradient(linear, 0% 0, 0% 100%, from(#50b2fb), to(#a6d4f6));
 }
+
 /* 雨 */
-.weather-icon.icon4{
+
+.weather-icon.icon4 {
     background-position: 0 -80px;
 }
-.weather-week-item.lv4{
-    background: -webkit-gradient(linear,0% 0,0% 100%,from(#88a9ca),to(#bcd3e3));
+
+.weather-week-item.lv4 {
+    background: -webkit-gradient(linear, 0% 0, 0% 100%, from(#88a9ca), to(#bcd3e3));
 }
+
 /* 雪 */
-.weather-icon.icon5{
+
+.weather-icon.icon5 {
     background-position: -560px -80px;
 }
-.weather-week-item.lv5{
-    background: -webkit-gradient(linear,0% 0,0% 100%,from(#88a9ca),to(#bcd3e3));
+
+.weather-week-item.lv5 {
+    background: -webkit-gradient(linear, 0% 0, 0% 100%, from(#88a9ca), to(#bcd3e3));
 }
+
 /* 其他 */
-.weather-icon.icon6{
+
+.weather-icon.icon6 {
     background-position: -9999px -9999px;
 }
-.weather-week-item.lv6{
-    background: -webkit-gradient(linear,0% 0,0% 100%,from(#88a9ca),to(#bcd3e3));
+
+.weather-week-item.lv6 {
+    background: -webkit-gradient(linear, 0% 0, 0% 100%, from(#88a9ca), to(#bcd3e3));
 }

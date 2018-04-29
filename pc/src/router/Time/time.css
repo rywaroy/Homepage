@@ -1,111 +1,129 @@
-.content{
+.content {
     padding: 20px 0;
 }
-.tab{
+
+.tab {
     background: #fff;
 }
-.card-container > .ant-tabs-card > .ant-tabs-content {
+
+.card-container>.ant-tabs-card>.ant-tabs-content {
     margin-top: -16px;
 }
 
-.card-container > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
+.card-container>.ant-tabs-card>.ant-tabs-content>.ant-tabs-tabpane {
     background: #fff;
     padding: 16px;
 }
 
-.card-container > .ant-tabs-card > .ant-tabs-bar {
+.card-container>.ant-tabs-card>.ant-tabs-bar {
     border-color: #fff;
 }
 
-.card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+.card-container>.ant-tabs-card>.ant-tabs-bar .ant-tabs-tab {
     border-color: transparent;
     background: transparent;
 }
 
-.card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
+.card-container>.ant-tabs-card>.ant-tabs-bar .ant-tabs-tab-active {
     border-color: #fff;
     background: #fff;
 }
-.ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-nav-container{
+
+.ant-tabs.ant-tabs-card>.ant-tabs-bar .ant-tabs-nav-container {
     height: 42px;
 }
-.ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab{
+
+.ant-tabs.ant-tabs-card>.ant-tabs-bar .ant-tabs-tab {
     padding: 10px 16px 10px;
 }
-.movie-item{
+
+.movie-item {
     margin-right: 20px;
     margin-bottom: 20px;
     cursor: pointer;
 }
-.movie-title{
+
+.movie-title {
     font-size: 13px;
     color: #333;
     line-height: 22px;
     height: 44px;
     overflow: hidden;
 }
-.movie-intro{
+
+.movie-intro {
     font-size: 12px;
     line-height: 20px;
     color: #666;
     margin-top: 4px;
     overflow: hidden;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
     white-space: nowrap;
 }
-.info-title{
+
+.info-title {
     font-size: 24px;
     line-height: 30px;
     color: #333;
 }
-.info-content{
+
+.info-content {
     padding-top: 30px;
 }
-.info-sub-title{
+
+.info-sub-title {
     font-size: 16px;
     line-height: 24px;
     color: #666;
     margin-top: 20px;
 }
-.info-performer-list{
+
+.info-performer-list {
     margin-top: 20px;
 }
-.info-performer-item{
+
+.info-performer-item {
     margin-right: 15px;
     width: 125px;
 }
-.info-performer-avatar{
+
+.info-performer-avatar {
     width: 125px;
-    height:178px;
+    height: 178px;
     background-size: cover;
     background-position: center;
 }
-.info-performer-name{
+
+.info-performer-name {
     font-size: 12px;
     color: #666;
     line-height: 18px;
     word-break: break-all;
-    height:54px;
+    height: 54px;
     margin-top: 5px;
     overflow: hidden;
 }
-.info-sub-text{
+
+.info-sub-text {
     font-size: 14px;
     line-height: 22px;
     color: #333;
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.info-video-box{
+
+.info-video-box {
     float: left;
-    width:100%
+    width: 100%
 }
-.info-video-link{
+
+.info-video-link {
     display: block;
-    width:100%;
+    width: 100%;
     position: relative;
 }
-.info-video-btn{
+
+.info-video-btn {
     width: 48px;
     height: 48px;
     position: absolute;
@@ -116,16 +134,19 @@
     background: url("../../assets/video_btn.png") no-repeat;
     background-size: contain;
 }
-.info-video-list{
+
+.info-video-list {
     margin-top: 20px;
 }
-.info-video-title{
+
+.info-video-title {
     font-size: 14px;
     line-height: 22px;
     height: 44px;
     overflow: hidden;
     color: #333;
 }
-.info-comment-title{
+
+.info-comment-title {
     margin-bottom: 30px;
 }

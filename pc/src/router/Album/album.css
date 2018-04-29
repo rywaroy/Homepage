@@ -1,25 +1,30 @@
-.album{
+.album {
     padding: 30px 0
 }
-.album-item{
+
+.album-item {
     float: left;
     margin-right: 10px;
     margin-bottom: 20px;
     cursor: pointer
 }
-.album-item:nth-child(3n){
+
+.album-item:nth-child(3n) {
     margin-right: 0;
 }
-.album-item-img{
+
+.album-item-img {
     width: 200px;
     height: 200px;
 }
-.album-item-title{
+
+.album-item-title {
     font-size: 20px;
     line-height: 40px;
     text-align: center;
     color: #000
 }
-.group-item{
+
+.group-item {
     width: 300px;
 }
