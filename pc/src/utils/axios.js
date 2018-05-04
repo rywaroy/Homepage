@@ -1,6 +1,7 @@
 import axios from "axios";
 import qs from "qs";
 import { message } from 'antd';
+import store from '../store'
 
 const Axios = axios.create({
   // baseURL: "http://localhost:3001/api/",
@@ -44,9 +45,11 @@ Axios.interceptors.response.use(
   error => {
     if(error.message.indexOf('timeout') > -1){
       message.error('请求超时,请检查网络');
+      store.loading.hide()
     }
     if(error.message.indexOf('Network Error') > -1){
       message.error('当前无网络,请检查网络');
+      store.loading.hide()
     }
     return Promise.reject(error.message);
   }
