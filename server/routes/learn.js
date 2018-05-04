@@ -7,7 +7,7 @@ router.get('/list',async(ctx) => {
     let page = ctx.query.page || '1'
     let limit = ctx.query.limit || '10'
     let data = await (new Promise((resolve,reject) => {
-        db.query('select id,title,intro,time,tag from learn where state = 1 limit ' +  (page-1) * limit + ' , ' + limit,function (err,row) {
+        db.query('select id,title,intro,time,tag from learn where state = 1 order by id desc limit ' +  (page - 1) * limit + ' , ' + limit,function (err,row) {
             if (err) {
                 reject(err)
             } else {
