@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import {Row, Col , Tabs} from 'antd';
-import Sell from './Sell'
-import Hot from './Hot'
-import Soon from './Soon'
+import React, { Component } from 'react';
+import { Row, Col, Tabs } from 'antd';
+import Sell from './Sell';
+import Hot from './Hot';
+import Soon from './Soon';
+
 const TabPane = Tabs.TabPane;
 
 export default class Time extends Component {
-
 	render() {
 		return (
 			<div className="content">
@@ -16,13 +16,13 @@ export default class Time extends Component {
 						<div className="card-container">
 							<Tabs type="card">
 								<TabPane tab="正在售票" key="1">
-									<Sell {...this.props}/>
+									<Sell {...this.props} />
 								</TabPane>
 								<TabPane tab="正在热映" key="2">
-									<Hot {...this.props}/>
+									<Hot {...this.props} />
 								</TabPane>
 								<TabPane tab="即将上映" key="3">
-									<Soon {...this.props}/>
+									<Soon {...this.props} />
 								</TabPane>
 							</Tabs>
 						</div>
@@ -30,6 +30,6 @@ export default class Time extends Component {
 					<Col span={2}></Col>
 				</Row>
 			</div>
-		)
+		);
 	}
 }

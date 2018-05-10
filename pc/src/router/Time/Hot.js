@@ -1,43 +1,39 @@
-import React, {Component} from 'react';
-import {observer} from 'mobx-react'
+import React, { Component } from 'react';
+import { observer } from 'mobx-react';
 import { Card } from 'antd';
-import utils from '../../utils'
-import store from '../../store'
-import './time.css'
+import utils from '../../utils';
+import store from '../../store';
+import './time.css';
 
 @observer
-export default class Sell extends Component{
-	state = {
-		list:[]
-	}
-
+export default class Sell extends Component {
 	componentDidMount() {
-		store.time.hot.length === 0 && this.getList()
+		store.time.hot.length === 0 && this.getList();
 	}
 
-	//获取列表
-	getList(){
-		store.loading.show()
+	// 获取列表
+	getList() {
+		store.loading.show();
 		utils.axios.get('time/hot')
 			.then(res => {
-				store.time.setHot(res.data.data.ms)
+				store.time.setHot(res.data.data.ms);
 				setTimeout(() => {
-					store.loading.hide()
-				},1000)
-			})
+					store.loading.hide();
+				}, 1000);
+			});
 	}
 
-	//链接到详细
-	linkMovieInfo(id){
-		this.props.history.push(`/movie/time/info/${id}`)
+	// 链接到详细
+	linkMovieInfo(id) {
+		this.props.history.push(`/movie/time/info/${id}`);
 	}
 
-	render(){
-		return(
+	render() {
+		return (
 			<div className="tab f-cb">
 				{
-					store.time.hot.map((item,index) => (
-						<Card title={item.tCn} style={{ width: '250px' }} key={index} className="fl movie-item" onClick={() => this.linkMovieInfo(item.id)}>
+					store.time.hot.map((item, index) => (
+						<Card title={item.tCn} style={{width: '250px'}} key={index} className="fl movie-item" onClick={() => this.linkMovieInfo(item.id)}>
 							<img src={item.img} alt="" width={200} height={300}/>
 							<div className="movie-title">{item.commonSpecial}</div>
 							<div className="movie-intro">主演：{item.aN1} {item.aN2}</div>
@@ -49,6 +45,6 @@ export default class Sell extends Component{
 				}
 
 			</div>
-		)
+		);
 	}
 }
