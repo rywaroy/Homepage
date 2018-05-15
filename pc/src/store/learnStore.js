@@ -1,18 +1,21 @@
-import {observable , action , useStrict} from 'mobx'
+import {observable, action, useStrict} from 'mobx'
+
 useStrict(true)
 export default class LearnStore {
-    @observable list = []
-    @observable page = 1
-    @observable limit = 10
-    @observable total = 0
+	@observable list = []
+	@observable page = 1
+	@observable limit = 10
+	@observable total = 0
 
-    @action setList (array){
-        this.list = array
-    }
-    @action setPage (page){
-        this.page = page
-    }
-    @action setTotal (data){
-        this.total = data
-    }
+	@action setList(array) {
+		this.list = array
+	}
+
+	@action setPage(page) {
+		this.page = page
+	}
+
+	@action setTotal(data) {
+		this.total = data
+	}
 }

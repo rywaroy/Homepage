@@ -1,11 +1,14 @@
-import {observable , action , useStrict} from 'mobx'
+import {observable, action, useStrict} from 'mobx'
+
 useStrict(true)
 export default class LoadingStore {
 	@observable active = false;
-	@action show (){
+
+	@action show() {
 		this.active = true
 	}
-	@action hide (){
+
+	@action hide() {
 		this.active = false
 	}
 }

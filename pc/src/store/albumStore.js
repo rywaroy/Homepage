@@ -1,8 +1,10 @@
-import {observable , action , useStrict} from 'mobx'
+import {observable, action, useStrict} from 'mobx'
+
 useStrict(true)
 export default class AlbumStore {
-    @observable list = []
-    @action setList (array){
-        this.list = array
-    }
+	@observable list = []
+
+	@action setList(array) {
+		this.list = array
+	}
 }
