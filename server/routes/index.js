@@ -23,7 +23,7 @@ router.use('/api/base', base.routes(), base.allowedMethods());
 
 router.get('/admin', async (ctx) => {
   var htmlFile = await (new Promise(function (resolve, reject) {
-      fs.readFile('./admin/index.html', (err, data) => {
+      fs.readFile('../admin/index.html', (err, data) => {
           if (err) {
               reject(err);
           } else {
@@ -37,7 +37,7 @@ router.get('/admin', async (ctx) => {
 
 router.get('/', async (ctx) => {
       let htmlFile = await (new Promise(function (resolve, reject) {
-          fs.readFile('./pc/index.html', (err, data) => {
+          fs.readFile('../pc/index.html', (err, data) => {
               if (err) {
                   reject(err);
               } else {
@@ -52,7 +52,7 @@ router.get('/', async (ctx) => {
 router.get('*', async (ctx) => {
   if (ctx.response.status == 404) {
       let htmlFile = await (new Promise(function (resolve, reject) {
-          fs.readFile('./pc/index.html', (err, data) => {
+          fs.readFile('../pc/index.html', (err, data) => {
               if (err) {
                   reject(err);
               } else {
