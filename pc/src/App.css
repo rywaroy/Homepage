@@ -30,3 +30,44 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.ant-layout-header {
+  position: relative;
+}
+
+.header-mobile {
+  position: absolute;
+  right: 50px;
+  top: 24px;
+  padding-left: 20px;
+  font-size: 14px;
+  line-height: 16px;
+  color: #fff;
+  cursor: pointer;
+  background: url('./assets/phone.png') no-repeat left center;
+}
+
+.header-mobile:hover .header-mobile-box {
+  display: block;
+}
+
+.header-mobile-box {
+  display: none;
+  position: absolute;
+  right: 0px;
+  top: 30px;
+  width: 220px;
+  height: 220px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #fff;
+  z-index: 2;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, .1);
+}
+
+.header-mobile-code {
+  width: 200px;
+  height: 200px;
+  background: url('./assets/code.png') no-repeat;
+  background-size: 200px 200px;
+}
