@@ -11,17 +11,17 @@ import BaseStore from './baseStore'
 import HuabanStore from './huabanStore'
 
 const store = {
-    one:new OneStore(),
-    loading:new LoadingStore(),
-    time:new timeStore(),
-    douban:new doubanStore(),
-    dytt:new dyttStore(),
-    weather:new weatherStore(),
-    article:new ArticleStore(),
-    learn:new LearnStore(),
-    album:new AlbumStore(),
-    base:new BaseStore(),
-    huaban:new HuabanStore(),
+	one: new OneStore(),
+	loading: new LoadingStore(),
+	time: new timeStore(),
+	douban: new doubanStore(),
+	dytt: new dyttStore(),
+	weather: new weatherStore(),
+	article: new ArticleStore(),
+	learn: new LearnStore(),
+	album: new AlbumStore(),
+	base: new BaseStore(),
+	huaban: new HuabanStore(),
 }
 
 export default store

@@ -14,8 +14,6 @@ let isLogin = exports.isLogin = async function (ctx, next) {
 	}else{
 		ctx.error('0014','登录失效')
 	}
-
-  
 } 
 
 function checkToken(token){
