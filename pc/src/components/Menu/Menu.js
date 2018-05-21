@@ -17,7 +17,7 @@ if (hashArray.length === 2) {
 }
 export default class Sider extends Component {
 
-	constructor(props){
+	constructor(props) {
 		super(props)
 		this.state = {
 			collapsed: false,
@@ -25,7 +25,7 @@ export default class Sider extends Component {
 			active: active,
 		}
 	}
-	
+
 	toggleCollapsed = () => {
 		this.setState({
 			collapsed: !this.state.collapsed,
@@ -67,7 +67,7 @@ export default class Sider extends Component {
 						<Menu.Item key="douban"><Link to='/movie/douban'>豆瓣电影</Link></Menu.Item>
 						<Menu.Item key="dytt"><Link to='/movie/dytt'>电影天堂</Link></Menu.Item>
 					</SubMenu>
-					<SubMenu key="tool" title={<span><Icon type="appstore-o" /><span>工具</span></span>}>
+					<SubMenu key="tool" title={<span><Icon type="appstore-o"/><span>工具</span></span>}>
 						<Menu.Item key="weather"><Link to='/tool/weather'>中央天气预报</Link></Menu.Item>
 					</SubMenu>
 					<SubMenu key="blog" title={<span><Icon type="book"/><span>博客</span></span>}>
