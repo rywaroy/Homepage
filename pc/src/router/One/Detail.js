@@ -159,7 +159,7 @@ export default class Detail extends Component {
 								this.state.replyList.map((item, index) => (
 									<div className="comment-list-item" key={index}>
 										<div className="comment-list-top f-cb">
-											<div className="comment-list-avatar fl" style={{backgroundImage: 'url(' + item.user.web_url + ')'}}></div>
+											<div className="comment-list-avatar fl" style={{backgroundImage: 'url(' + item.user.web_url + ')' }}></div>
 											<div className="comment-list-name fl">{item.user.user_name}</div>
 											<div className="comment-list-time fr">{item.created_at}</div>
 										</div>
