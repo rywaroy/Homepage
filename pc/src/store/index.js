@@ -1,14 +1,15 @@
-import OneStore from './oneStore'
-import LoadingStore from './loadingStore'
-import timeStore from './timeStore'
-import doubanStore from './doubanStore'
-import dyttStore from './dyttStore'
-import weatherStore from './weatherStore'
-import ArticleStore from './articleStore'
-import LearnStore from './learnStore'
-import AlbumStore from './albumStore'
-import BaseStore from './baseStore'
-import HuabanStore from './huabanStore'
+import OneStore from './oneStore';
+import LoadingStore from './loadingStore';
+import timeStore from './timeStore';
+import doubanStore from './doubanStore';
+import dyttStore from './dyttStore';
+import weatherStore from './weatherStore';
+import ArticleStore from './articleStore';
+import LearnStore from './learnStore';
+import AlbumStore from './albumStore';
+import BaseStore from './baseStore';
+import HuabanStore from './huabanStore';
+import ZhihuStore from './zhihuStore';
 
 const store = {
 	one: new OneStore(),
@@ -22,6 +23,7 @@ const store = {
 	album: new AlbumStore(),
 	base: new BaseStore(),
 	huaban: new HuabanStore(),
-}
+	zhihu: new ZhihuStore(),
+};
 
-export default store
+export default store;

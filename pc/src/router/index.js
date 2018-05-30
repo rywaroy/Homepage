@@ -16,6 +16,7 @@ import LearnInfo from './Learn/Info';
 import Album from './Album/Album';
 import Group from './Album/Group';
 import Huaban from './Huaban/Huaban';
+import Zhihu from './Zhihu/Zhihu';
 
 export default class Root extends Component {
 	render() {
@@ -24,6 +25,7 @@ export default class Root extends Component {
 				<Route exact path="/magazine/one" component={One} />
 				<Route exact path="/magazine/one/detail/:type/:id" component={OneDetail}></Route>
 				<Route exact path="/magazine/huaban" component={Huaban} />
+				<Route exact path="/magazine/zhihu" component={Zhihu}></Route>
 				<Route exact path="/movie/time" component={Time} />
 				<Route exact path="/movie/time/info/:id" component={TimeInfo}></Route>
 				<Route exact path="/movie/douban" component={Douban}></Route>
