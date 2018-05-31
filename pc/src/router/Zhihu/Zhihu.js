@@ -13,13 +13,17 @@ export default class Zhihu extends Component {
 		super(props);
 		this.t_img = null;
 		this.isLoad = true;
+		this.state = {
+			opacity: 0,
+		}
 	}
 
 	componentDidMount() {
 		if ( store.zhihu.list.length === 0 ) {
 			this.getList();
 		} else {
-			this.msnryInit()
+			this.msnryInit();
+			this.setState({opacity: 1});
 		}
 	}
 
@@ -31,7 +35,8 @@ export default class Zhihu extends Component {
 				store.zhihu.setList(list);
 				this.allImgLoad(() => {
 					this.msnryInit();
-					store.loading.hide()
+					store.loading.hide();
+					this.setState({opacity: 1});
 				});
 			});
 	}
@@ -62,15 +67,19 @@ export default class Zhihu extends Component {
 		});
 	}
 
+	linkInfo(id) {
+		this.props.history.push(`/magazine/zhihu/info/${id}`);
+	}
+
 	render() {
 		return (
 			<Row>
 				<Col span={2} />
 				<Col span={20}>
-					<div className="grid zhihu">
+					<div className="grid zhihu" style={{ opacity: this.state.opacity}}>
 						{
 							store.zhihu.list.map((item, index) => (
-								<div className="zhihu-item grid-item" key={index}>
+								<div className="zhihu-item grid-item" key={index} onClick={() => this.linkInfo(item.id)}>
 									<img src={utils.getImgUrl(item.images[0])} width="100%" className="zhihu-img" alt="" />
 									<p className="zhihu-info">{item.title}</p>
 								</div>
