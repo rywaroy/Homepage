@@ -48,8 +48,13 @@ export default class Sider extends Component {
 	render() {
 		return (
 			<div style={{width: 200}}>
-				<div className="logo"><img src={require('../../assets/logo.jpg')} width="100%" height="100%"
-				                           alt=""></img></div>
+				<div className="logo">
+					<img src={require('../../assets/logo.jpg')} width="100%" height="100%" alt="" />
+				</div>
+				<div className="menu-link">
+					<a href="https://weibo.com/u/5872048859?refer_flag=1001030101_" className="menu-link-item weibo" target="_blank"></a>
+					<a href="https://github.com/rywaroy" className="menu-link-item github" target="_blank"></a>
+				</div>
 				<Menu
 					mode="inline"
 					theme="dark"

@@ -5,3 +5,36 @@
     border-radius: 50%;
     overflow: hidden;
 }
+
+.menu-link {
+    text-align: center;
+}
+
+.menu-link-item {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-bottom: 10px;
+    transform: all 0.3s;
+}
+
+.menu-link-item.weibo {
+    background: url('../../assets/weibo.png') no-repeat;
+    background-size: 24px 24px;
+    margin-right: 15px;
+}
+
+.menu-link-item.weibo:hover {
+    background: url('../../assets/weibo_active.png') no-repeat;
+    background-size: 24px 24px;
+}
+
+.menu-link-item.github {
+    background: url('../../assets/github.png') no-repeat;
+    background-size: 24px 24px;
+}
+
+.menu-link-item.github:hover {
+    background: url('../../assets/github_active.png') no-repeat;
+    background-size: 24px 24px;
+}
