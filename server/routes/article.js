@@ -7,7 +7,7 @@ router.get('/list',async(ctx) => {
     let page = ctx.query.page || '1'
     let limit = ctx.query.limit || '10'
     let data = await getList(page,limit)
-	let count = await getListCount()
+		let count = await getListCount()
     ctx.success('0000','获取成功',{list:data,total:count})
     // ctx.body = data;
 })

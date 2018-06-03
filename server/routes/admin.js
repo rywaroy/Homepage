@@ -13,10 +13,8 @@ router.post('/login',async(ctx) => {
         let token = await setToken(account,password)
         data[0].token = token
         ctx.success('0000','登录成功',data[0])
-        // ctx.body = Data('0000',null,'登录成功')
     }else{
         ctx.error('0011','账户或密码错误')
-        // ctx.body = Data('0011',null,'账户或密码错误')
     }
 })
 
