@@ -29,7 +29,7 @@ router.get('/list', async ctx => {
 
   for (let item of data) {
     if (item.photos) {
-      item.photos = JSON.parse(item.photos)
+      item.photos = item.photos.split(',');
     } else {
       item.photos = [];
     }
@@ -40,6 +40,28 @@ router.get('/list', async ctx => {
     count: count[0].count,
   })
 })
+
+//获取说说详情
+router.get('/info', async ctx => {
+  let id = ctx.query.id
+  let data = await (new Promise((resolve, reject) => {
+    db.query('select * from think  where id = ' + id, function (err, rows) {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(rows)
+      }
+    })
+  }));
+  if (data[0].photos) {
+    data[0].photos = data[0].photos.split(',');
+  } else {
+    data[0].photos = [];
+  }
+
+  ctx.success('0000', '获取成功', data[0]);
+})
+
 
 //添加说说
 router.post('/info', login.isLogin, async ctx => {
