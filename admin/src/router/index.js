@@ -12,6 +12,9 @@ import Taglist from '@/components/Taglist.vue'
 import Base from '@/components/Base.vue'
 import LearnInfo from '@/components/LearnInfo.vue'
 import LearnList from '@/components/LearnList.vue'
+import Think from '@/components/Think.vue'
+import ThinkInfo from '@/components/ThinkInfo.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -75,7 +78,17 @@ export default new Router({
           path:'learninfo',
           name:'learninfo',
           component:LearnInfo
-        }
+        },
+        {
+          path:'think',
+          name:'think',
+          component:Think
+        },
+        {
+          path:'thinkinfo',
+          name:'thinkinfo',
+          component:ThinkInfo
+        },
       ]
     }
   ]
