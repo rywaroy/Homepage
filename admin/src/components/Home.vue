@@ -12,6 +12,7 @@
                 <!--<el-menu-item index="6" @click="go('impression')">好友印象</el-menu-item>-->
                 <el-menu-item index="4" @click="go('taglist')">文章标签</el-menu-item>
                 <el-menu-item index="5" @click="go('base')">博客信息</el-menu-item>
+                <el-menu-item index="6" @click="go('think')">说说</el-menu-item>
             </el-menu>
         </el-col>
         <div class="el-col-20">
