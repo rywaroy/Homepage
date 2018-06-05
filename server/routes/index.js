@@ -25,47 +25,47 @@ router.use('/api/base', base.routes(), base.allowedMethods());
 router.use('/api/think', think.routes(), think.allowedMethods());
 
 router.get('/admin', async (ctx) => {
-  var htmlFile = await (new Promise(function (resolve, reject) {
-      fs.readFile('../admin/index.html', (err, data) => {
-          if (err) {
-              reject(err);
-          } else {
-              resolve(data);
-          }
-      });
-  }))
-  ctx.type = 'html';
-  ctx.body = htmlFile;
+    var htmlFile = await (new Promise(function (resolve, reject) {
+        fs.readFile('home/homepage/server/admin/index.html', (err, data) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
+    }))
+    ctx.type = 'html';
+    ctx.body = htmlFile;
 });
 
 router.get('/', async (ctx) => {
-      let htmlFile = await (new Promise(function (resolve, reject) {
-          fs.readFile('../pc/index.html', (err, data) => {
-              if (err) {
-                  reject(err);
-              } else {
-                  resolve(data);
-              }
-          });
-      }))
-      ctx.type = 'html';
-      ctx.body = htmlFile;
+    let htmlFile = await (new Promise(function (resolve, reject) {
+        fs.readFile('/home/homepage/server/pc/index.html', (err, data) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
+    }))
+    ctx.type = 'html';
+    ctx.body = htmlFile;
 });
 
 router.get('*', async (ctx) => {
-  if (ctx.response.status == 404) {
-      let htmlFile = await (new Promise(function (resolve, reject) {
-          fs.readFile('../pc/index.html', (err, data) => {
-              if (err) {
-                  reject(err);
-              } else {
-                  resolve(data);
-              }
-          });
-      }))
-      ctx.type = 'html';
-      ctx.body = htmlFile;
-  }
+    if (ctx.response.status == 404) {
+        let htmlFile = await (new Promise(function (resolve, reject) {
+            fs.readFile('home/homepage/server/pc/index.html', (err, data) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(data);
+                }
+            });
+        }))
+        ctx.type = 'html';
+        ctx.body = htmlFile;
+    }
 });
 
 module.exports = router;
