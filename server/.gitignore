@@ -21,3 +21,4 @@ yarn-debug.log*
 yarn-error.log*
 database.js
 qiniu.js
+/static
