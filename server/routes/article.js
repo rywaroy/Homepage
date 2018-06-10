@@ -174,7 +174,6 @@ router.post('/tag/delete',login.isLogin,async(ctx) => {
 	}catch(err){
 		ctx.error('0011','删除失败')
 	}
-	
 })
 function deleteTag(id){
 	return new Promise(function (resolve,reject) {
