@@ -17,7 +17,7 @@ module.exports = async function (ctx, next) {
   if (!ctx.success) {
     // 成功
     ctx.success = getData(ctx);
-  } 
+  }
   if (!ctx.error) {
     // 失败
     ctx.error = getData(ctx);
