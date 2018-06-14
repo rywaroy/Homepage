@@ -4,7 +4,7 @@ useStrict(true)
 export default class ThinkStore {
 	@observable list = [];
 	@observable page = 1;
-	@observable limit = 3;
+	@observable limit = 12;
 	@observable total = 0;
 
 	@action setList(array) {
