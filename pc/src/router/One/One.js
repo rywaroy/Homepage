@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Select } from 'antd';
 import axios from 'axios';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { observer } from 'mobx-react';
 import store from '../../store';
 import './one.css';
@@ -23,7 +23,7 @@ export default class One extends Component {
 			for (let i = 0; i < data.length; i++) {
 				arr.push({
 					id: data[i],
-					date: moment(new Date(now - i * 1000 * 60 * 60 * 24)).format('YYYY-MM-DD'),
+					date: dayjs(new Date(now - i * 1000 * 60 * 60 * 24)).format('YYYY-MM-DD'),
 				});
 			}
 			store.one.setActiveId(arr[0].id);

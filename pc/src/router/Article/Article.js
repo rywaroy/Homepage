@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Pagination } from 'antd';
 import { observer } from 'mobx-react';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import utils from '../../utils';
 import store from '../../store';
 import './article.css';
@@ -54,7 +54,7 @@ export default class Article extends Component {
 								<div className="article-item" key={index} onClick={() => {this.linkInfo(item.id)}}>
 									<div className="article-top f-cb">
 										<div className="article-name fl">{item.title}</div>
-										<div className="article-time fr">{moment(item.time).format('YYYY-MM-DD')}</div>
+										<div className="article-time fr">{dayjs(item.time).format('YYYY-MM-DD')}</div>
 										<div className="article-tag fr" style={{ backgroundColor: item.color }}>{item.tag_name}</div>
 										{
 											item.top > 0 ?

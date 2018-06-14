@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Pagination } from 'antd';
 import { observer } from 'mobx-react';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import utils from '../../utils';
 import store from '../../store';
 import './learn.css';
@@ -53,7 +53,7 @@ export default class Learn extends Component {
 								<div className="learn-item" key={index} onClick={() => { this.linkInfo(item.id); }}>
 									<div className="learn-top f-cb">
 										<div className="learn-name fl">{item.title}</div>
-										<div className="learn-time fr">{moment(item.time).format('YYYY-MM-DD')}</div>
+										<div className="learn-time fr">{dayjs(item.time).format('YYYY-MM-DD')}</div>
 										<div className="learn-tag fr">{item.tag}</div>
 									</div>
 									<div className="learn-content">{item.intro}</div>

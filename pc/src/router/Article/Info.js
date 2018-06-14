@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Input, Button, message } from 'antd';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import utils from '../../utils';
 import './article.css';
 
@@ -87,7 +87,7 @@ export default class Info extends Component {
 								<div className="comment-list-item" key={index}>
 									<div className="comment-list-top f-cb">
 										<div className="comment-list-name fl">{item.name}</div>
-										<div className="comment-list-time fr">{moment(item.time).format('YYYY-MM-DD HH:mm')}</div>
+										<div className="comment-list-time fr">{dayjs(item.time).format('YYYY-MM-DD HH:mm')}</div>
 									</div>
 									<div className="comment-list-content">{item.content}</div>
 								</div>
