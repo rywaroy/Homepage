@@ -10,6 +10,7 @@ import AlbumStore from './albumStore';
 import BaseStore from './baseStore';
 import HuabanStore from './huabanStore';
 import ZhihuStore from './zhihuStore';
+import ThinkStore from './thinkStore';
 
 const store = {
 	one: new OneStore(),
@@ -24,6 +25,7 @@ const store = {
 	base: new BaseStore(),
 	huaban: new HuabanStore(),
 	zhihu: new ZhihuStore(),
+	think: new ThinkStore(),
 };
 
 export default store;
