@@ -18,6 +18,7 @@ import Group from './Album/Group';
 import Huaban from './Huaban/Huaban';
 import Zhihu from './Zhihu/Zhihu';
 import ZhihuInfo from './Zhihu/Info';
+import Think from './Think/Think';
 
 export default class Root extends Component {
 	render() {
@@ -41,6 +42,7 @@ export default class Root extends Component {
 				<Route exact path="/blog/learn/info/:id" component={LearnInfo}></Route>
 				<Route exact path="/blog/album" component={Album}></Route>
 				<Route exact path="/blog/album/group/:id" component={Group}></Route>
+				<Route exact path="/blog/think" component={Think}></Route>
 				{/* <Route exact path="/blog/app" component={App}></Route> */}
 				<Route component={Learn} />
 			</Switch>

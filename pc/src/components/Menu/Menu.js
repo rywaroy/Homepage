@@ -80,6 +80,7 @@ export default class Sider extends Component {
 						<Menu.Item key="learn"><Link to='/blog/learn'>学习</Link></Menu.Item>
 						<Menu.Item key="article"><Link to='/blog/article'>日志</Link></Menu.Item>
 						<Menu.Item key="album"><Link to='/blog/album'>相册</Link></Menu.Item>
+						<Menu.Item key="think"><Link to='/blog/think'>说说</Link></Menu.Item>
 						{/* <Menu.Item key="app"><Link to='/blog/app'>APP下载</Link></Menu.Item> */}
 					</SubMenu>
 				</Menu>
