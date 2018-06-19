@@ -8,7 +8,7 @@ router.get('/list', async ctx => {
   let page = ctx.query.page || '1'
   let limit = ctx.query.limit || '10'
   let data = await (new Promise((resolve, reject) => {
-    db.query('select * from think  where state = 1 limit ' + (page - 1) * limit + ' , ' + limit, function (err, rows) {
+    db.query('select * from think where state = 1 order by time desc limit ' + (page - 1) * limit + ' , ' + limit, function (err, rows) {
       if (err) {
         reject(err)
       } else {
