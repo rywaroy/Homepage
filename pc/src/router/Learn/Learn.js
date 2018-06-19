@@ -14,7 +14,6 @@ export default class Learn extends Component {
 
 	// 获取文章列表
 	getList() {
-		store.loading.show();
 		utils.axios.get('learn/list', {
 			params: {
 				page: store.learn.page,
@@ -24,9 +23,6 @@ export default class Learn extends Component {
 			const data = res.data.data;
 			store.learn.setList(data.list);
 			store.learn.setTotal(data.total);
-			setTimeout(() => {
-				store.loading.hide();
-			}, 1000);
 		});
 	}
 

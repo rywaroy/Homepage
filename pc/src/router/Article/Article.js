@@ -15,7 +15,6 @@ export default class Article extends Component {
 
 	// 获取文章列表
 	getList() {
-		store.loading.show();
 		utils.axios.get('article/list', {
 			params: {
 				page: store.article.page,
@@ -25,9 +24,6 @@ export default class Article extends Component {
 			const data = res.data.data;
 			store.article.setList(data.list);
 			store.article.setTotal(data.total);
-			setTimeout(() => {
-				store.loading.hide();
-			}, 1000);
 		});
 	}
 
