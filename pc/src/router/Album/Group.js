@@ -71,7 +71,7 @@ export default class Group extends Component {
 						{
 							this.state.list.map((item, index) => (
 								<div className="group-item grid-item" key={index}>
-									<img src={item.url} width="100%" className="album-img" alt="" />
+									<img src={`${item.url}?imageView2/2/w/300/q/75|imageslim`} width="100%" className="album-img" alt="" />
 								</div>
 							))
 						}

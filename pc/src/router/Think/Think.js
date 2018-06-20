@@ -63,7 +63,7 @@ export default class Think extends Component {
 											<div className="think-item-photos f-cb">
 												{
 													item.photos.map((photo, i) => (
-														<div className="think-item-photo bg-cover" key={i} style={{backgroundImage: `url(${photo})`}}></div>
+														<div className="think-item-photo bg-cover" key={i} style={{backgroundImage: `url(${photo}?imageView2/1/w/210/h/210/q/75)`}}></div>
 													))
 												}
 											</div>
