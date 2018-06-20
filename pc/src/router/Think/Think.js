@@ -53,9 +53,9 @@ export default class Think extends Component {
 						{
 							store.think.list.map((item, index) => (
 								<div className="think-item grid-item" key={index}>
-									<div className="think-item-top">
+									<div className="think-item-top f-cb">
 										<div className="think-item-avatar fl bg-cover" style={{backgroundImage: `url(${item.avatar})`}}></div>
-										<div className="think-item-name">{item.name}</div>
+										<div className="think-item-name fl">{item.name}</div>
 									</div>
 									<div className="think-item-content">{item.content}</div>
 									{
