@@ -5,7 +5,7 @@
       <div class="group-img" v-for="(item,index) in photos" :key="index" :style="{backgroundImage:'url('+item+')'}">
         <span class="group-img-delete" @click="deletes(index)">删除</span>
       </div>
-      <div class="group-img"><input type="file" @change="Acardpic($event)"></div>
+      <div class="group-img"><input type="file" :value="value" @change="Acardpic($event)"></div>
     </div>
     <div class="publish-btn">
       <el-button @click="publish()" class="fl">发表</el-button>
@@ -65,6 +65,7 @@ export default {
     return {
       content: '',
       photos: [],
+      value: null,
     }
   },
   mounted() {
@@ -110,6 +111,7 @@ export default {
           });
         }
       }
+      this.value = null;
     },
     publish() {
       if (!this.content) {
