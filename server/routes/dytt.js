@@ -1,102 +1,90 @@
 const router = require('koa-router')();
-const request = require('request')
-const cheerio = require("cheerio")
-const eventproxy = require('eventproxy')
-const iconv = require('iconv-lite')
-const ep = new eventproxy()
+const request = require('request');
+const cheerio = require('cheerio');
+const eventproxy = require('eventproxy');
+const iconv = require('iconv-lite');
 
-let options = {
+const ep = new eventproxy();
+
+const options = {
     url: 'http://www.dytt8.net/html/gndy/dyzz/index.html',
     encoding: null,
     headers: {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
-    }
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36',
+    },
 };
 
 router.get('/all', async ctx => {
-    let page = ctx.query.page || 1;
-    let pages = await getPage(page)
-    let data = []
+    const page = ctx.query.page || 1;
+    const pages = await getPage(page);
+    let data = [];
     for (let i = 0; i < pages.length; i++) {
-        let item = await getList(pages[i])
-        data = data.concat(item)
-
+        const item = await getList(pages[i]);
+        data = data.concat(item);
     }
-    ctx.success('0000', '获取成功', data)
-})
+    ctx.success('0000', '获取成功', data);
+});
 
-//获取电影天堂最新资源列表页码、链接
+// 获取电影天堂最新资源列表页码、链接
 function getPage(page) {
-    return new Promise((resolve, reject) => {
-        options.url = 'http://www.dytt8.net/html/gndy/dyzz/index.html'
+    return new Promise((resolve) => {
+        options.url = 'http://www.dytt8.net/html/gndy/dyzz/index.html';
         request(options, function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                let $ = cheerio.load(body, {
-                    decodeEntities: false
+            if (!error && response.statusCode === 200) {
+                const $ = cheerio.load(body, {
+                    decodeEntities: false,
                 });
-                let arr = []
-                $("#header > div > div.bd2 > div.bd3 > div.bd3r > div.co_area2 > div.co_content8 > div > select option").each(function (index, el) {
+                const arr = [];
+                $('#header > div > div.bd2 > div.bd3 > div.bd3r > div.co_area2 > div.co_content8 > div > select option').each(function (index) {
                     if (page > index) {
-                        arr.push($(this).val())
+                        arr.push($(this).val());
                     } else {
-                        return false
+                        return false;
                     }
-                })
-                resolve(arr)
+                });
+                resolve(arr);
             }
-        })
-    })
+        });
+    });
 }
 
-//获取每页列表资源
+// 获取每页列表资源
 function getList(url) {
     return new Promise((resolve, reject) => {
-        options.url = 'http://www.dytt8.net/html/gndy/dyzz/' + url
+        options.url = `http://www.dytt8.net/html/gndy/dyzz/${url}`;
         request(options, async function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                let covertBody = iconv.decode(body, 'gbk');
-                let $ = cheerio.load(covertBody, {
-                    decodeEntities: false
+            if (!error && response.statusCode === 200) {
+                const covertBody = iconv.decode(body, 'gbk');
+                const $ = cheerio.load(covertBody, {
+                    decodeEntities: false,
                 });
-                let arr = []
-                // for(let i = 0; i < $('.co_content8 table').length; i++){
-                //     let obj = {}
-                //     let url
-                //     obj.title = $('.co_content8 table').eq(i).find('tr').eq(1).find('.ulink').text()
-                //     url = $('.co_content8 table').eq(i).find('tr').eq(1).find('.ulink').attr('href')
-                //     obj.content = await getInfo(url)
-                //     obj.time = $('.co_content8 table').eq(i).find('tr').eq(2).find('td').eq(1).find('font').text()
-                //     obj.intro = $('.co_content8 table').eq(i).find('tr').eq(3).find('td').eq(0).text()
-                //     arr.push(obj)
-                // }
+                let arr = [];
                 for (let i = 0; i < $('.co_content8 table').length; i = i + 5) {
 
-                    await (new Promise((resolve, reject) => {
+                    await (new Promise(() => {
                         ep.after(`dytt${i}`, 5, function (dytts) {
-                            arr = arr.concat(dytts)
-                            resolve()
+                            arr = arr.concat(dytts);
+                            resolve();
                         });
                         for (let j = i; j < i + 5; j++) {
-                            let obj = {}
-                            let url
-                            obj.title = $('.co_content8 table').eq(j).find('tr').eq(1).find('.ulink').text()
-                            url = $('.co_content8 table').eq(j).find('tr').eq(1).find('.ulink').attr('href')                           
-                            obj.time = $('.co_content8 table').eq(i).find('tr').eq(2).find('td').eq(1).find('font').text()
-                            obj.intro = $('.co_content8 table').eq(i).find('tr').eq(3).find('td').eq(0).text()
-                            getInfo(url,obj,i)
+                            let obj = {};
+                            let url;
+                            obj.title = $('.co_content8 table').eq(j).find('tr').eq(1).find('.ulink').text();
+                            url = $('.co_content8 table').eq(j).find('tr').eq(1).find('.ulink').attr('href');
+                            obj.time = $('.co_content8 table').eq(i).find('tr').eq(2).find('td').eq(1).find('font').text();
+                            obj.intro = $('.co_content8 table').eq(i).find('tr').eq(3).find('td').eq(0).text();
+                            getInfo(url, obj, i);
                         }
-                    }))
-
-
+                    }));
                 }
-                resolve(arr)
+                resolve(arr);
             }
-        })
-    })
+        });
+    });
 }
 
 
-//获取每个列表的详情页
+// 获取每个列表的详情页
 // function getInfo(url) {
 //     return new Promise((resolve, reject) => {
 //         options.url = 'http://www.dytt8.net' + url
@@ -114,20 +102,18 @@ function getList(url) {
 //         })
 //     })
 // }
-function getInfo(url,obj,i) {
-    options.url = 'http://www.dytt8.net' + url
+function getInfo(url, obj, i) {
+    options.url = `http://www.dytt8.net${url}`;
     request(options, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            let covertBody = iconv.decode(body, 'gbk');
-            let $ = cheerio.load(covertBody, {
-                decodeEntities: false
+        if (!error && response.statusCode === 200) {
+            const covertBody = iconv.decode(body, 'gbk');
+            const $ = cheerio.load(covertBody, {
+                decodeEntities: false,
             });
-            obj.content = $('#Zoom').html()
-            ep.emit(`dytt${i}`,obj)
+            obj.content = $('#Zoom').html();
+            ep.emit(`dytt${i}`, obj);
         }
-    })
+    });
 }
-
-
 
 module.exports = router;
