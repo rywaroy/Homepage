@@ -21,7 +21,7 @@ const putExtra = new qiniu.form_up.PutExtra();
 module.exports = function uploadFile(key) {
 	const localFile = `xxx/${key}`;
 	// 文件上传
-	return new Promise ((resolve, reject) => {
+	return new Promise((resolve, reject) => {
 		formUploader.putFile(uploadToken, key, localFile, putExtra, function (respErr, respBody, respInfo) {
 			if (respErr) {
 				throw respErr;
