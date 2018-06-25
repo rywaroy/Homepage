@@ -53,7 +53,7 @@ router.get('/', async (ctx) => {
 });
 
 router.get('*', async (ctx) => {
-	if (ctx.response.status === 404) {
+	if (ctx.response.status === 404 && ctx.request.path.indexOf('api') > -1) {
 		const htmlFile = await (new Promise(function (resolve, reject) {
 			fs.readFile('/home/homepage/server/pc/index.html', (err, data) => {
 				if (err) {
