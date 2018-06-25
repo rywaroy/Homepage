@@ -17,7 +17,7 @@ router.get('/list', async (ctx) => {
 
 function getList(page, limit) {
 	return new Promise(function (resolve, reject) {
-		db.query('select a.id,a.title,a.watch,a.intro,a.time,a.top,b.title as tag_name , b.color from article as a left join tag as b on a.tagid = b.id where a.state = 1 order by a.top desc limit ' + (page - 1) * limit + ' , ' + limit, function (err, row) {
+		db.query('select a.id,a.title,a.watch,a.intro,a.time,a.top,b.title as tag_name , b.color from article as a left join tag as b on a.tagid = b.id where a.state = 1 order by a.top desc , a.time desc limit ' + (page - 1) * limit + ' , ' + limit, function (err, row) {
 			if (err) {
 				reject(err);
 			} else {
