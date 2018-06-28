@@ -15,15 +15,15 @@ export default class Zhihu extends Component {
 		this.isLoad = true;
 		this.state = {
 			opacity: 0,
-		}
+		};
 	}
 
 	componentDidMount() {
-		if ( store.zhihu.list.length === 0 ) {
+		if (store.zhihu.list.length === 0) {
 			this.getList();
 		} else {
 			this.msnryInit();
-			this.setState({opacity: 1});
+			this.setState({ opacity: 1 });
 		}
 	}
 
@@ -36,7 +36,7 @@ export default class Zhihu extends Component {
 				this.allImgLoad(() => {
 					this.msnryInit();
 					store.loading.hide();
-					this.setState({opacity: 1});
+					this.setState({ opacity: 1 });
 				});
 			});
 	}
@@ -76,7 +76,7 @@ export default class Zhihu extends Component {
 			<Row>
 				<Col span={2} />
 				<Col span={20}>
-					<div className="grid zhihu" style={{ opacity: this.state.opacity}}>
+					<div className="grid zhihu" style={{ opacity: this.state.opacity }}>
 						{
 							store.zhihu.list.map((item, index) => (
 								<div className="zhihu-item grid-item" key={index} onClick={() => this.linkInfo(item.id)}>
