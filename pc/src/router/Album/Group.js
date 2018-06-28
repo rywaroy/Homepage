@@ -9,6 +9,7 @@ export default class Group extends Component {
 		super(props);
 		this.state = {
 			list: [],
+			opacity: 0,
 		};
 		this.t_img = null;
 		this.isLoad = true;
@@ -29,6 +30,7 @@ export default class Group extends Component {
 			}, () => {
 				this.allImgLoad(() => {
 					this.msnryInit();
+					this.setState({ opacity: 1 });
 				});
 			});
 		});
@@ -67,7 +69,7 @@ export default class Group extends Component {
 			<Row>
 				<Col span={2} />
 				<Col span={20}>
-					<div className="grid album">
+					<div className="grid album" style={{ opacity: this.state.opacity }}>
 						{
 							this.state.list.map((item, index) => (
 								<div className="group-item grid-item" key={index}>
