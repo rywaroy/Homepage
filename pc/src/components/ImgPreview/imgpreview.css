@@ -13,4 +13,41 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  max-height: 100%;
+}
+
+.img-preview-left {
+  position: absolute;
+  top: 50%;
+  margin-top: -32px;
+  left: 100px;
+  width: 64px;
+  height: 64px;
+  cursor: pointer;
+  background: url('../../assets/arrow.png');
+  z-index: 5;
+}
+
+.img-preview-right {
+  position: absolute;
+  top: 50%;
+  margin-top: -32px;
+  right: 100px;
+  width: 64px;
+  height: 64px;
+  cursor: pointer;
+  transform: rotate(180deg);
+  background: url('../../assets/arrow.png');
+  z-index: 5;
+}
+
+.img-preview-close {
+  position: absolute;
+  right: 100px;
+  top: 50px;
+  width: 64px;
+  height: 64px;
+  background: url('../../assets/close.png');
+  z-index: 5;
+  cursor: pointer;
 }
