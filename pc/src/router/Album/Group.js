@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'antd';
+import ImgPreview from '../../components/ImgPreview/ImgPreview';
 import Masonry from 'masonry-layout';
 import utils from '../../utils';
 import './album.css';
@@ -10,9 +11,11 @@ export default class Group extends Component {
 		this.state = {
 			list: [],
 			opacity: 0,
+			imgPreview: false,
 		};
 		this.t_img = null;
 		this.isLoad = true;
+		this.index = 0;
 	}
 
 	componentDidMount() {
@@ -64,6 +67,15 @@ export default class Group extends Component {
 		});
 	}
 
+	showImgPreview(index) { // 打开图片预览
+		this.index = index;
+		this.setState({ imgPreview: true });
+	}
+
+	close() { // 关闭
+		this.setState({ imgPreview: false });
+	}
+
 	render() {
 		return (
 			<Row>
@@ -72,10 +84,16 @@ export default class Group extends Component {
 					<div className="grid album" style={{ opacity: this.state.opacity }}>
 						{
 							this.state.list.map((item, index) => (
-								<div className="group-item grid-item" key={index}>
+								<div className="group-item grid-item" key={index} onClick={() => this.showImgPreview(index)}>
 									<img src={`${item.url}?imageView2/2/w/300/q/75|imageslim`} width="100%" className="album-img" alt="" />
 								</div>
 							))
+						}
+						{
+							this.state.imgPreview ?
+								<ImgPreview imgs={this.state.list} index={this.index} close={this.close.bind(this)}></ImgPreview>
+								:
+								null
 						}
 					</div>
 				</Col>
