@@ -78,7 +78,7 @@ export default class Huaban extends Component {
 						{
 							store.huaban.list.map((item, index) => (
 								<div className="huaban-item grid-item" key={index}>
-									<img src={utils.getImgUrl(item.img)} width="100%" className="huaban-img" alt="" />
+									<img src={item.img} width="100%" className="huaban-img" alt="" />
 								</div>
 							))
 						}

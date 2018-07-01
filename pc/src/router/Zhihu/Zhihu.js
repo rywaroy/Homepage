@@ -80,7 +80,7 @@ export default class Zhihu extends Component {
 						{
 							store.zhihu.list.map((item, index) => (
 								<div className="zhihu-item grid-item" key={index} onClick={() => this.linkInfo(item.id)}>
-									<img src={utils.getImgUrl(item.images[0])} width="100%" className="zhihu-img" alt="" />
+									<img src={item.images[0]} width="100%" className="zhihu-img" alt="" />
 									<p className="zhihu-info">{item.title}</p>
 								</div>
 							))

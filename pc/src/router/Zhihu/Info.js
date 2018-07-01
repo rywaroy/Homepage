@@ -54,14 +54,14 @@ export default class Info extends Component {
 					<Col span={2} />
 					<Col span={20}>
 						<div className="single-page-title">{this.state.title}</div>
-						<img src={utils.getImgUrl(this.state.image)} alt="" style={{ marginTop: '20px' }} />
+						<img src={this.state.image} alt="" style={{ marginTop: '20px' }} />
 						<div className="single-page-content" dangerouslySetInnerHTML={{ __html: this.state.content }}></div>
 						<div className="comment-list">
 							{
 								this.state.comment.map((item, index) => (
 									<div className="comment-list-item" key={index}>
 										<div className="comment-list-top f-cb">
-											<div className="comment-list-avatar fl" style={{ backgroundImage: 'url(' + utils.getImgUrl(item.avatar) + ')' }}></div>
+											<div className="comment-list-avatar fl" style={{ backgroundImage: 'url(' + item.avatar + ')' }}></div>
 											<div className="comment-list-name fl">{item.author}</div>
 											<div className="comment-list-time fr">{dayjs(item.time * 1000).format('YYYY-MM-DD hh:mm:ss')}</div>
 										</div>
