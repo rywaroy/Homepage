@@ -11,7 +11,11 @@ import './think.css';
 @observer
 export default class Think extends Component {
 	componentDidMount() {
-		store.think.list.length === 0 && this.getList();
+		if (store.think.list.length === 0) {
+			this.getList();
+		} else {
+			this.msnryInit();
+		}
 	}
 
 	getList() {
