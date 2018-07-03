@@ -29,7 +29,7 @@ export default class ImgPreview extends Component {
 			<div className="img-preview">
 				<div className="img-preview-close" onClick={() => this.props.close()}></div>
 				<div className="img-preview-left" onClick={() => this.prev()}></div>
-				<img src={this.props.imgs[this.state.index].url} alt="" className="img-preview-item" />
+				<img src={this.props.imgs[this.state.index]} alt="" className="img-preview-item" />
 				<div className="img-preview-right" onClick={() => this.next()}></div>
 			</div>
 		);
