@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Row, Col, Icon } from 'antd';
+import ImgPreview from '../../components/ImgPreview/ImgPreview';
 import { observer } from 'mobx-react';
 import Masonry from 'masonry-layout';
 import store from '../../store';
@@ -9,6 +10,15 @@ import utils from '../../utils';
 
 @observer
 export default class Huaban extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			imgPreview: false,
+			index: null,
+		};
+		this.imgs = [];
+	}
+
 	componentDidMount() {
 		if (store.huaban.list.length === 0) {
 			this.getList();
@@ -25,6 +35,9 @@ export default class Huaban extends Component {
 			.then(res => {
 				if (res.data.code === 1) {
 					store.huaban.setList(res.data.data);
+					this.imgs = res.data.data.map(item => (
+						item.img
+					));
 					setTimeout(() => {
 						this.allImgLoad(() => {
 							this.msnryInit();
@@ -64,6 +77,15 @@ export default class Huaban extends Component {
 		});
 	}
 
+	showImgPreview(index) { // 打开图片预览
+		this.index = index;
+		this.setState({ imgPreview: true });
+	}
+
+	close() { // 关闭
+		this.setState({ imgPreview: false });
+	}
+
 	render() {
 		return (
 			<Row>
@@ -77,12 +99,18 @@ export default class Huaban extends Component {
 					<div className="grid huaban" style={{ opacity: store.huaban.opacity }}>
 						{
 							store.huaban.list.map((item, index) => (
-								<div className="huaban-item grid-item" key={index}>
+								<div className="huaban-item grid-item" key={index} onClick={() => this.showImgPreview(index)}>
 									<img src={item.img} width="100%" className="huaban-img" alt="" />
 								</div>
 							))
 						}
 					</div>
+					{
+						this.state.imgPreview ?
+							<ImgPreview imgs={this.imgs} index={this.index} close={this.close.bind(this)}></ImgPreview>
+							:
+							null
+					}
 				</Col>
 				<Col span={2} />
 			</Row>
