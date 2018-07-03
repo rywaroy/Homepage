@@ -16,6 +16,7 @@ export default class Group extends Component {
 		this.t_img = null;
 		this.isLoad = true;
 		this.index = 0;
+		this.imgs = [];
 	}
 
 	componentDidMount() {
@@ -28,6 +29,9 @@ export default class Group extends Component {
 				id: this.props.match.params.id,
 			},
 		}).then(res => {
+			this.imgs = res.data.data.map(item => (
+				item.url
+			));
 			this.setState({
 				list: res.data.data,
 			}, () => {
@@ -91,7 +95,7 @@ export default class Group extends Component {
 						}
 						{
 							this.state.imgPreview ?
-								<ImgPreview imgs={this.state.list} index={this.index} close={this.close.bind(this)}></ImgPreview>
+								<ImgPreview imgs={this.imgs} index={this.index} close={this.close.bind(this)}></ImgPreview>
 								:
 								null
 						}
