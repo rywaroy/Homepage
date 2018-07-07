@@ -114,9 +114,6 @@ export default {
       this.value = null;
     },
     publish() {
-      if (!this.content) {
-        return;
-      }
       let url;
       if (this.$route.query.id) {
         url = '/api/think/edit'
