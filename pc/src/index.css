@@ -7,7 +7,8 @@ body {
   font-size: 12px;
   min-width: 1200px;
 }
-.f-cb{
+
+.f-cb {
   zoom: 1;
 }
 
@@ -18,63 +19,76 @@ body {
   clear: both;
   visibility: hidden
 }
-.fl{
+
+.fl {
   float: left;
 }
-.fr{
+
+.fr {
   float: right;
 }
-.text-ovh{
+
+.text-ovh {
   overflow: hidden;
-  text-overflow:ellipsis;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
-.bg-cover{
+
+.bg-cover {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover
 }
 
-.single-page{
+.single-page {
   padding: 50px 0;
 }
-.single-page img{
+
+.single-page img {
   max-width: 100%;
 }
-.single-page-title{
+
+.single-page-title {
   font-size: 30px;
   line-height: 50px;
   color: #333;
 }
-.single-page-author{
+
+.single-page-author {
   font-size: 14px;
   color: #999;
   line-height: 22px;
   margin-top: 20px;
 }
-.single-page-content{
+
+.single-page-content {
   font-size: 16px;
   line-height: 30px;
   color: #333;
   margin-top: 20px;
 }
-.single-page-content p{
+
+.single-page-content p {
   margin-bottom: 20px;
 }
-.horizontally{
+
+.horizontally {
   margin: 0 auto;
 }
-.comment-list{
+
+.comment-list {
   padding-top: 20px;
   margin-top: 100px;
   border-top: 1px solid #000;
 }
-.comment-list-item{
+
+.comment-list-item {
   margin-bottom: 40px;
 }
-.comment-list-avatar{
+
+.comment-list-avatar {
   width: 30px;
-  height:30px;
+  height: 30px;
   border-radius: 50%;
   overflow: hidden;
   background-size: cover;
@@ -82,27 +96,32 @@ body {
   background-repeat: no-repeat;
   margin-right: 10px;
 }
-.comment-list-name{
+
+.comment-list-name {
   font-size: 15px;
   color: #333;
   line-height: 30px;
 }
-.comment-list-time{
+
+.comment-list-time {
   font-size: 15px;
   color: #999;
   line-height: 30px;
 }
-.comment-list-content{
+
+.comment-list-content {
   font-size: 13px;
   line-height: 24px;
   color: #666;
   margin-top: 10px;
   word-break: break-all;
 }
-.comment-list-bot{
+
+.comment-list-bot {
   margin-top: 5px;
 }
-.comment-list-reply{
+
+.comment-list-reply {
   margin: 20px 10px;
   padding: 10px;
   font-size: 13px;
@@ -110,6 +129,7 @@ body {
   color: #999;
   border: 1px solid #999;
 }
-.home-page-content{
+
+.home-page-content {
   position: relative;
 }
