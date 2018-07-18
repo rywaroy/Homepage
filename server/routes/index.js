@@ -11,6 +11,7 @@ const dytt = require('./dytt');
 const weather = require('./weather');
 const base = require('./base');
 const think = require('./think');
+const plan = require('./plan');
 
 router.use('/api/article', article.routes(), article.allowedMethods());
 router.use('/api/learn', learn.routes(), learn.allowedMethods());
@@ -23,6 +24,7 @@ router.use('/api/dytt', dytt.routes(), dytt.allowedMethods());
 router.use('/api/weather', weather.routes(), weather.allowedMethods());
 router.use('/api/base', base.routes(), base.allowedMethods());
 router.use('/api/think', think.routes(), think.allowedMethods());
+router.use('/api/plan', plan.routes(), plan.allowedMethods());
 
 router.get('/admin', async (ctx) => {
 	const htmlFile = await (new Promise(function (resolve, reject) {
