@@ -78,10 +78,11 @@ router.post('/clock', login.isLogin, async ctx => {
 
 // 查询某日打卡信息
 router.get('/date', async ctx => {
+  const time = ctx.query.time;
   const start = ctx.query.start;
   const end = ctx.query.end;
   const id = ctx.query.id;
-  const query = `select a.time, a.tid, b.title from plan_record as a left join plan as b on a.tid = b.id where ${start ? `time >= '${start}'` : ''} ${end ? `and time <= '${end}'` : ''} ${id ? `and tid = ${id}` : ''}`;
+  const query = `select a.time, a.tid, b.title from plan_record as a left join plan as b on a.tid = b.id where ${time ? `time = ${time}` : `time >= '${start}'`} ${end ? `and time <= '${end}'` : ''} ${id ? `and tid = ${id}` : ''}`;
   const data = await (new Promise((resolve, reject) => {
     db.query(query, (err, rows) => {
       if (err) {
