@@ -110,7 +110,7 @@ export default class MovieInfo extends Component {
 						<div className="comment-list-top f-cb">
 							<div className="comment-list-avatar fl" style={{ backgroundImage: 'url(' + item.headImg + ')' }}></div>
 							<div className="comment-list-name fl">{item.nickname}</div>
-							<div lassName="comment-list-time fr">{dayjs(new Date(item.commentDate * 1000)).format('YYYY-MM-DD hh:mm:ss')}</div>
+							<div className="comment-list-time fr">{dayjs(new Date(item.commentDate * 1000)).format('YYYY-MM-DD hh:mm:ss')}</div>
 						</div>
 						<div className="comment-list-content">{item.content}</div>
 					</div>
