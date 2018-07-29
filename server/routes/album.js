@@ -57,6 +57,20 @@ router.post('/group', login.isLogin, async (ctx) => {
 	ctx.success('0000', '添加成功');
 });
 
+router.post('/group/delete', login.isLogin, async (ctx) => {
+	const id = ctx.request.body.id;
+	await (new Promise((resolve, reject) => {
+		db.query('delete from album_group where id = ?', [id], function (err) {
+			if (err) {
+				reject(err);
+			} else {
+				resolve();
+			}
+		});
+	}));
+	ctx.success('0000', '删除成功');
+});
+
 router.get('/group', async (ctx) => {
 	const id = ctx.query.id;
 	const data = await (new Promise((resolve) => {
