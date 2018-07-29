@@ -28,7 +28,7 @@ router.use('/api/plan', plan.routes(), plan.allowedMethods());
 
 router.get('/admin', async (ctx) => {
 	const htmlFile = await (new Promise(function (resolve, reject) {
-		fs.readFile('home/homepage/server/admin/index.html', (err, data) => {
+		fs.readFile('/home/homepage/server/admin/index.html', (err, data) => {
 			if (err) {
 				reject(err);
 			} else {
