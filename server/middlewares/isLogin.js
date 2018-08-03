@@ -2,16 +2,17 @@ const db = require('../database');
 
 
 exports.isLogin = async function (ctx, next) {
-	let token = ctx.request.body.token;
+	const token = ctx.request.body.token || ctx.query.token;
 	if (!token) {
-		token = ctx.query.token;
-	}
-	const data = await checkToken(token);
-
-	if (data.length === 1) {
-		await next();
+		ctx.error('0014', '暂无权限');
 	} else {
-		ctx.error('0014', '登录失效');
+		const data = await checkToken(token);
+
+		if (data.length === 1) {
+			await next();
+		} else {
+			ctx.error('0014', '登录失效');
+		}
 	}
 };
 
