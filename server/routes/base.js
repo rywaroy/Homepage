@@ -25,6 +25,7 @@ router.get('/content', async (ctx) => {
 			resolve(row);
 		});
 	}));
+	console.log(ctx.ip);
 	const ip = ctx.request.header['x-forward-for'];
 	const rs = await getIpInfo(ip);
 	const rd = JSON.parse(rs).data;
