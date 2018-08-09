@@ -25,7 +25,6 @@ router.get('/content', async (ctx) => {
 			resolve(row);
 		});
 	}));
-	console.log(ctx.ip);
 	const ip = ctx.request.header['x-forward-for'];
 	const rs = await getIpInfo(ip);
 	const rd = JSON.parse(rs).data;
@@ -53,3 +52,17 @@ function getIpInfo(ip) {
 		});
 	});
 }
+
+router.get('/visit', async ctx => {
+	const date = ctx.query.date;
+	const data = await (new Promise((resolve, reject) => {
+		db.query(`select count(*) from visit ${date ? `where time = '${date}'` : ''}`, (err, rows) => {
+			if (err) {
+				reject();
+			} else {
+				resolve(rows);
+			}
+		});
+	}));
+	ctx.success('0000', '获取成功', { count: data[0]['count(*)'] });
+});
