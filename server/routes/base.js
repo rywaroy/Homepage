@@ -32,11 +32,11 @@ router.get('/content', async (ctx) => {
 	let device = '';
 	const address = rd.country + rd.region + rd.city + rd.isp;
 	const deviceAgent = ctx.request.headers['user-agent'].toLowerCase();
-	if (deviceAgent.indexOf('ipad')) {
+	if (deviceAgent.indexOf('ipad') > -1) {
 		device = 'ipad';
-	} else if (deviceAgent.indexOf('iphone')) {
+	} else if (deviceAgent.indexOf('iphone') > -1) {
 		device = 'iphone';
-	} else if (deviceAgent.indexOf('android')) {
+	} else if (deviceAgent.indexOf('android') > -1) {
 		device = 'android';
 	} else {
 		device = 'pc';
@@ -76,14 +76,5 @@ router.get('/visit', async ctx => {
 			}
 		});
 	}));
-	// const dateCount = await (new Promise((resolve, reject) => {
-	// 	db.query(`select count(*) from visit where time = '${date}'`, (err, rows) => {
-	// 		if (err) {
-	// 			reject();
-	// 		} else {
-	// 			resolve(rows);
-	// 		}
-	// 	});
-	// }));
 	ctx.success('0000', '获取成功', count[0]);
 });
