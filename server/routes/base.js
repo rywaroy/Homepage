@@ -28,9 +28,17 @@ router.get('/content', async (ctx) => {
 	const ip = ctx.request.header['x-forward-for'];
 	const rs = await getIpInfo(ip);
 	const rd = JSON.parse(rs).data;
+	let device = '';
 	const address = rd.country + rd.region + rd.city + rd.isp;
+	const deviceAgent = ctx.request.headers['user-agent'].toLowerCase();
+	const agentID = deviceAgent.match(/(iphone|ipod|ipad|android)/);
+	if (agentID) {
+		device = 'mobile';
+	} else {
+		device = 'pc';
+	}
 	await (new Promise((resolve, reject) => {
-		db.query('insert into visit (ip, time, address) values(?,?,?)', [ip, new Date(), address], (err, rows) => {
+		db.query('insert into visit (ip, time, address, device) values(?,?,?,?)', [ip, new Date(), address, device], (err, rows) => {
 			if (rows.insertId) {
 				resolve();
 			} else {
