@@ -31,9 +31,12 @@ router.get('/content', async (ctx) => {
 	let device = '';
 	const address = rd.country + rd.region + rd.city + rd.isp;
 	const deviceAgent = ctx.request.headers['user-agent'].toLowerCase();
-	const agentID = deviceAgent.match(/(iphone|ipod|ipad|android)/);
-	if (agentID) {
-		device = 'mobile';
+	if (deviceAgent.indexOf('ipad')) {
+		device = 'ipad';
+	} else if (deviceAgent.indexOf('iphone')) {
+		device = 'iphone';
+	} else if (deviceAgent.indexOf('android')) {
+		device = 'android';
 	} else {
 		device = 'pc';
 	}
@@ -63,8 +66,8 @@ function getIpInfo(ip) {
 
 router.get('/visit', async ctx => {
 	const date = ctx.query.date;
-	const data = await (new Promise((resolve, reject) => {
-		db.query(`select count(*) from visit ${date ? `where time = '${date}'` : ''}`, (err, rows) => {
+	const count = await (new Promise((resolve, reject) => {
+		db.query('select count(*) from visit', (err, rows) => {
 			if (err) {
 				reject();
 			} else {
@@ -72,5 +75,17 @@ router.get('/visit', async ctx => {
 			}
 		});
 	}));
-	ctx.success('0000', '获取成功', { count: data[0]['count(*)'] });
+	const dateCount = await (new Promise((resolve, reject) => {
+		db.query(`select count(*) from visit where time = '${date}'`, (err, rows) => {
+			if (err) {
+				reject();
+			} else {
+				resolve(rows);
+			}
+		});
+	}));
+	ctx.success('0000', '获取成功', {
+		count: count[0]['count(*)'],
+		dateCount: dateCount[0]['count(*)'],
+	});
 });
