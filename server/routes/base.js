@@ -2,6 +2,7 @@ const router = require('koa-router')();
 const db = require('../database');
 const login = require('../middlewares/isLogin');
 const request = require('request');
+const time = require('js-time.js');
 
 module.exports = router;
 
@@ -65,9 +66,9 @@ function getIpInfo(ip) {
 }
 
 router.get('/visit', async ctx => {
-	const date = ctx.query.date;
+	const date = time(new Date()).format('YYYY-MM-DD');
 	const count = await (new Promise((resolve, reject) => {
-		db.query('select count(*) from visit', (err, rows) => {
+		db.query(`select count(*) as total, sum(IF(time = '${date}', 1, 0)) as date, sum(IF(device = 'ipad', 1, 0)) as ipad, sum(IF(device = 'iphone', 1, 0)) as iphone, sum(IF(device = 'android', 1, 0)) as android, sum(IF(device = 'pc', 1, 0)) as pc from visit`, (err, rows) => {
 			if (err) {
 				reject();
 			} else {
@@ -75,17 +76,14 @@ router.get('/visit', async ctx => {
 			}
 		});
 	}));
-	const dateCount = await (new Promise((resolve, reject) => {
-		db.query(`select count(*) from visit where time = '${date}'`, (err, rows) => {
-			if (err) {
-				reject();
-			} else {
-				resolve(rows);
-			}
-		});
-	}));
-	ctx.success('0000', '获取成功', {
-		count: count[0]['count(*)'],
-		dateCount: dateCount[0]['count(*)'],
-	});
+	// const dateCount = await (new Promise((resolve, reject) => {
+	// 	db.query(`select count(*) from visit where time = '${date}'`, (err, rows) => {
+	// 		if (err) {
+	// 			reject();
+	// 		} else {
+	// 			resolve(rows);
+	// 		}
+	// 	});
+	// }));
+	ctx.success('0000', '获取成功', count[0]);
 });
