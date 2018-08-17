@@ -51,8 +51,10 @@ router.get('/content', async (ctx) => {
 				}
 			});
 		}));
+		ctx.success('0000', '获取成功', data[0]);
+	} else {
+		ctx.success('0000', '获取成功', data[0]);
 	}
-	ctx.success('0000', '获取成功', data[0]);
 });
 
 function getIpInfo(ip) {
