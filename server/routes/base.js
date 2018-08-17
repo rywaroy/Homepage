@@ -27,29 +27,31 @@ router.get('/content', async (ctx) => {
 		});
 	}));
 	const ip = ctx.request.header['x-forward-for'];
-	const rs = await getIpInfo(ip);
-	const rd = JSON.parse(rs).data;
-	let device = '';
-	const address = rd.country + rd.region + rd.city + rd.isp;
-	const deviceAgent = ctx.request.headers['user-agent'].toLowerCase();
-	if (deviceAgent.indexOf('ipad') > -1) {
-		device = 'ipad';
-	} else if (deviceAgent.indexOf('iphone') > -1) {
-		device = 'iphone';
-	} else if (deviceAgent.indexOf('android') > -1) {
-		device = 'android';
-	} else {
-		device = 'pc';
+	if (ip !== '111.231.99.115') {
+		const rs = await getIpInfo(ip);
+		const rd = JSON.parse(rs).data;
+		let device = '';
+		const address = rd.country + rd.region + rd.city + rd.isp;
+		const deviceAgent = ctx.request.headers['user-agent'].toLowerCase();
+		if (deviceAgent.indexOf('ipad') > -1) {
+			device = 'ipad';
+		} else if (deviceAgent.indexOf('iphone') > -1) {
+			device = 'iphone';
+		} else if (deviceAgent.indexOf('android') > -1) {
+			device = 'android';
+		} else {
+			device = 'pc';
+		}
+		await (new Promise((resolve, reject) => {
+			db.query('insert into visit (ip, time, address, device) values(?,?,?,?)', [ip, new Date(), address, device], (err, rows) => {
+				if (rows.insertId) {
+					resolve();
+				} else {
+					reject(err);
+				}
+			});
+		}));
 	}
-	await (new Promise((resolve, reject) => {
-		db.query('insert into visit (ip, time, address, device) values(?,?,?,?)', [ip, new Date(), address, device], (err, rows) => {
-			if (rows.insertId) {
-				resolve();
-			} else {
-				reject(err);
-			}
-		});
-	}));
 	ctx.success('0000', '获取成功', data[0]);
 });
 
