@@ -69,7 +69,7 @@ function getIpInfo(ip) {
 	});
 }
 
-router.get('/visit', async ctx => {
+router.get('/visit', login.isLogin, async ctx => {
 	const date = time(new Date()).format('YYYY-MM-DD');
 	const count = await (new Promise((resolve, reject) => {
 		db.query(`select count(*) as total, sum(IF(time = '${date}', 1, 0)) as date, sum(IF(device = 'ipad', 1, 0)) as ipad, sum(IF(device = 'iphone', 1, 0)) as iphone, sum(IF(device = 'android', 1, 0)) as android, sum(IF(device = 'pc', 1, 0)) as pc from visit`, (err, rows) => {
