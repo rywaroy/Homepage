@@ -19,6 +19,7 @@
   "dependencies": {
     "ee-first": "^1.1.1",
     "eventproxy": "^1.0.0",
+    "js-time.js": "^1.1.6",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-convert": "^1.2.0",
