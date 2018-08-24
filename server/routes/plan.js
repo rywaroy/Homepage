@@ -101,7 +101,7 @@ router.get('/date', async ctx => {
 router.get('/plan', async ctx => {
   const id = ctx.query.id;
   const data = await (new Promise((resolve, reject) => {
-    db.query('select * from plan_record where tid = ?', [id], (err, rows) => {
+    db.query(`select * from plan_record ${id ? `where tid = '${id}'` : ''}`, (err, rows) => {
       if (err) {
         reject(err);
       } else {
