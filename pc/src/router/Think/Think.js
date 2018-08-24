@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { observer } from 'mobx-react';
 import { Row, Col, Pagination } from 'antd';
-import dayjs from 'dayjs';
+import time from 'js-time.js';
 import Masonry from 'masonry-layout';
 import utils from '../../utils';
 import store from '../../store';
@@ -74,7 +74,7 @@ export default class Think extends Component {
 											:
 											null
 									}
-									<div className="think-item-time">{dayjs(item.time).format('YYYY-MM-DD hh:mm')}</div>
+									<div className="think-item-time">{time(item.time).format('YYYY-MM-DD hh:mm')}</div>
 								</div>
 							))
 						}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Row, Col, Icon } from 'antd';
-import dayjs from 'dayjs';
+import time from 'js-time.js';
 import utils from '../../utils';
 import './news-at.css';
 
@@ -63,7 +63,7 @@ export default class Info extends Component {
 										<div className="comment-list-top f-cb">
 											<div className="comment-list-avatar fl" style={{ backgroundImage: 'url(' + item.avatar + ')' }}></div>
 											<div className="comment-list-name fl">{item.author}</div>
-											<div className="comment-list-time fr">{dayjs(item.time * 1000).format('YYYY-MM-DD hh:mm:ss')}</div>
+											<div className="comment-list-time fr">{time(item.time * 1000).format('YYYY-MM-DD hh:mm:ss')}</div>
 										</div>
 										<div className="comment-list-content">{item.content}</div>
 										<div className="comment-list-bot f-cb">
