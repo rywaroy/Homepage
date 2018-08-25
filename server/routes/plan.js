@@ -1,6 +1,7 @@
 const router = require('koa-router')();
 const db = require('../database');
 const login = require('../middlewares/isLogin');
+const Time = require('js-time.js');
 
 // 获取计划列表
 router.get('/list', async ctx => {
@@ -112,6 +113,46 @@ router.get('/plan', async ctx => {
   ctx.success('0000', '获取成功', {
 		list: data,
 	});
+});
+
+// 打卡分析
+router.get('/analysis', async ctx => {
+  const day = Time().dayNum('2018-7-19');
+  const plan = await (new Promise((resolve, reject) => {
+    db.query('select id, title from plan where state = 1', (err, rows) => {
+      if (err) {
+				reject(err);
+			} else {
+				resolve(rows);
+			}
+    });
+  }));
+  let search = '';
+  for (let i = 0; i < plan.length; i++) {
+    if (i === plan.length - 1) {
+      search += `sum(IF(tid = ${plan[i].id}, 1, 0)) as '${plan[i].id}'`;
+    } else {
+      search += `sum(IF(tid = ${plan[i].id}, 1, 0)) as '${plan[i].id}',`;
+    }
+  }
+  const list = await (new Promise((resolve, reject) => {
+    db.query(`select ${search} from plan_record`, (err, rows) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(rows);
+      }
+    });
+  }));
+  const data = [];
+  for (const key in list[0]) {
+    const item = {};
+    item.success = list[0][key];
+    item.fail = day - list[0][key];
+    item.tid = Number(key);
+    data.push(item);
+  }
+  ctx.success('0000', '获取成功', data);
 });
 
 module.exports = router;
