@@ -3,12 +3,12 @@ import 'antd/dist/antd.css';
 import './App.css';
 import Routers from './router'
 import {Layout} from 'antd';
-import Menu from './components/Menu/Menu'
+import Menu from './components/Menu/Menu';
 import {BrowserRouter as Router} from 'react-router-dom';
-import Loading from './components/Loading/Loading'
-import store from './store'
-import utils from './utils'
-import {observer} from 'mobx-react'
+import Loading from './components/Loading/Loading';
+import store from './store';
+import utils from './utils';
+import {observer} from 'mobx-react';
 
 const {Header, Footer, Sider, Content} = Layout;
 
@@ -16,15 +16,15 @@ const {Header, Footer, Sider, Content} = Layout;
 class App extends Component {
 
 	componentDidMount() {
-		this.getBlogContent()
+		// this.getBlogContent();
 	}
 
 	//获取博客信息
 	getBlogContent() {
 		utils.axios.get('base/content')
 			.then(res => {
-				store.base.setContent(res.data.data)
-			})
+				store.base.setContent(res.data.data);
+			});
 	}
 
 	render() {
