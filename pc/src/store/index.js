@@ -11,6 +11,7 @@ import BaseStore from './baseStore';
 import HuabanStore from './huabanStore';
 import ZhihuStore from './zhihuStore';
 import ThinkStore from './thinkStore';
+import PlanStore from './planStore';
 
 const store = {
 	one: new OneStore(),
@@ -26,6 +27,7 @@ const store = {
 	huaban: new HuabanStore(),
 	zhihu: new ZhihuStore(),
 	think: new ThinkStore(),
+	plan: new PlanStore(),
 };
 
 export default store;
