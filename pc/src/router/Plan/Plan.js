@@ -36,7 +36,7 @@ export default class Plan extends Component {
 			});
 	}
 
-	getOption = (data) => ({
+	getOptionPie = (data) => ({
     title: {
       text: data.title,
       x:'center',
@@ -70,7 +70,25 @@ export default class Plan extends Component {
 				},
       },
     ]
-  });
+	});
+	
+	getOptionLine = (data) => ({
+		xAxis: {
+				type: 'category',
+				data: ['sdfsjkdfjskdjfk', '1Tue', '1Wed', '1Thu', '1Fri', '1Sat', '1Sun','2Mon', '2Tue', '2Wed', '2Thu', '2Fri', '2Sat', '2Sun','3Mon', '3Tue', '3Wed', '3Thu', '3Fri', '3Sat', '3Sun','4Mon', '4Tue', '4Wed', '4Thu', '4Fri', '4Sat', '4Sun']
+		},
+		yAxis: {
+				type: 'value'
+		},
+		tooltip: {
+      trigger: 'item',
+      formatter: "{b} : {c}",
+    },
+		series: [{
+				data: [820, 932, 901, 934, 1290, 1330, 1320,820, 932, 901, 934, 1290, 1330, 1320,820, 932, 901, 934, 1290, 1330, 1320,820, 932, 901, 934, 1290, 1330, 1320],
+				type: 'line'
+		}]
+	})
 
 	render() {
 		return (
@@ -80,10 +98,17 @@ export default class Plan extends Component {
 					<div className="plan__content">
 						{
 							store.plan.list.map(item => (
-								<div className="plan__pie" key={item.tid}>
-									<ReactEchartsCore 
-										option={this.getOption(item)}
-										style={{height: 300}}/>
+								<div className="plan__chart f-cb" key={item.tid}>
+									<div className="plan__pie">
+										<ReactEchartsCore 
+											option={this.getOptionPie(item)}
+											style={{height: 300, width: 400}}/>
+									</div>
+									<div className="plan__line">
+										<ReactEchartsCore 
+											option={this.getOptionLine(item)}
+											style={{height: 300, width: 1000}}/>
+									</div>
 								</div>
 							))
 						}

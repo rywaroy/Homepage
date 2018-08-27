@@ -2,7 +2,17 @@
   padding: 40px 0;
 }
 
+.plan__chart {
+  margin-bottom: 40px;
+}
+
 .plan__pie {
   width: 400px;
-  margin-bottom: 40px;
+  float: left;
+  margin-right: 20px;
+}
+
+.plan__line {
+  width: 1000px;
+  float: left;
 }

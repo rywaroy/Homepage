@@ -6,6 +6,8 @@
     "antd": "^2.13.10",
     "axios": "^0.17.1",
     "dayjs": "^1.6.9",
+    "echarts": "^4.1.0",
+    "echarts-for-react": "^2.0.14",
     "js-time.js": "^1.1.6",
     "jsonp": "^0.2.1",
     "mobx": "^3.3.2",
