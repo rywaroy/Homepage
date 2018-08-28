@@ -24,7 +24,7 @@ router.post('/list', login.isLogin, async ctx => {
   const title = ctx.request.body.title;
   try {
     await (new Promise((resolve, reject) => {
-      db.query('insert into plan (title) values(?)', [title], (err, rows) => {
+      db.query('insert into plan (title, start) values(?,?)', [title, Time().format('YYYY-MM-DD')], (err, rows) => {
         if (rows.insertId) {
 					resolve();
 				} else {
