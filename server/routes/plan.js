@@ -117,9 +117,9 @@ router.get('/plan', async ctx => {
 
 // 打卡分析
 router.get('/analysis', async ctx => {
-  const day = Time().dayNum('2018-7-19');
+  const obj = {};
   const plan = await (new Promise((resolve, reject) => {
-    db.query('select id, title from plan where state = 1', (err, rows) => {
+    db.query('select id, title, start from plan where state = 1', (err, rows) => {
       if (err) {
 				reject(err);
 			} else {
@@ -127,16 +127,21 @@ router.get('/analysis', async ctx => {
 			}
     });
   }));
-  let search = '';
   for (let i = 0; i < plan.length; i++) {
-    if (i === plan.length - 1) {
-      search += `sum(IF(tid = ${plan[i].id}, 1, 0)) as '${plan[i].id}'`;
-    } else {
-      search += `sum(IF(tid = ${plan[i].id}, 1, 0)) as '${plan[i].id}',`;
-    }
+    const id = plan[i].id;
+    obj[id] = {};
+    obj[id].title = plan[i].title;
+    obj[id].total = Time().dayNum(plan[i].start);
+    obj[id].success = 0;
+    obj[id].data = {};
+    const date = `${new Date(plan[i].start).getFullYear()}-${new Date(plan[i].start).getMonth() + 1}`;
+    obj[id].data[date] = {};
+    obj[id].data[date].date = date;
+    obj[id].data[date].days = 15;
+    obj[id].data[date].card = 0;
   }
   const list = await (new Promise((resolve, reject) => {
-    db.query(`select ${search} from plan_record`, (err, rows) => {
+    db.query('select * from plan_record', (err, rows) => {
       if (err) {
         reject(err);
       } else {
@@ -144,14 +149,41 @@ router.get('/analysis', async ctx => {
       }
     });
   }));
-  const data = [];
-  for (const key in list[0]) {
-    const item = {};
-    item.success = list[0][key];
-    item.fail = day - list[0][key];
-    item.tid = Number(key);
-    data.push(item);
+  for (let i = 0; i < list.length; i++) {
+    const item = list[i];
+    const tid = item.tid;
+    const year = new Date(item.time).getFullYear();
+    const month = new Date(item.time).getMonth() + 1;
+    const data = obj[tid];
+    data.success++;
+    if (data.data[`${year}-${month}`]) {
+      data.data[`${year}-${month}`].card++;
+    } else {
+      data.data[`${year}-${month}`] = {};
+      data.data[`${year}-${month}`].date = `${year}-${month}`;
+      data.data[`${year}-${month}`].days = 30;
+      data.data[`${year}-${month}`].card = 1;
+    }
   }
+  const data = [];
+  for (const i in obj) {
+    const dateArray = [];
+    const daysArray = [];
+    const cardArray = [];
+    for (const j in obj[i].data) {
+      const dataItem = obj[i].data[j];
+      dateArray.push(dataItem.date);
+      daysArray.push(dataItem.days);
+      cardArray.push(dataItem.card);
+    }
+    obj[i].fail = obj[i].total - obj[i].success;
+    obj[i].date = dateArray;
+    obj[i].days = daysArray;
+    obj[i].card = cardArray;
+    delete obj[i].data;
+    data.push(obj[i]);
+  }
+
   ctx.success('0000', '获取成功', data);
 });
 
