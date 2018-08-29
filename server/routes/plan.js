@@ -130,15 +130,17 @@ router.get('/analysis', async ctx => {
   for (let i = 0; i < plan.length; i++) {
     const id = plan[i].id;
     obj[id] = {};
+    obj[id].id = id;
     obj[id].title = plan[i].title;
     obj[id].total = Time().dayNum(plan[i].start);
-    obj[id].success = 0;
+    obj[id].successTotal = 0;
+    obj[id].start = plan[i].start;
     obj[id].data = {};
     const date = `${new Date(plan[i].start).getFullYear()}-${new Date(plan[i].start).getMonth() + 1}`;
     obj[id].data[date] = {};
     obj[id].data[date].date = date;
-    obj[id].data[date].days = 15;
-    obj[id].data[date].card = 0;
+    obj[id].data[date].fail = Time(plan[i].start).monthDays() - Time(plan[i].start).date();
+    obj[id].data[date].success = 1;
   }
   const list = await (new Promise((resolve, reject) => {
     db.query('select * from plan_record', (err, rows) => {
@@ -155,31 +157,32 @@ router.get('/analysis', async ctx => {
     const year = new Date(item.time).getFullYear();
     const month = new Date(item.time).getMonth() + 1;
     const data = obj[tid];
-    data.success++;
+    data.successTotal++;
     if (data.data[`${year}-${month}`]) {
-      data.data[`${year}-${month}`].card++;
+      data.data[`${year}-${month}`].success++;
+      data.data[`${year}-${month}`].fail--;
     } else {
       data.data[`${year}-${month}`] = {};
       data.data[`${year}-${month}`].date = `${year}-${month}`;
-      data.data[`${year}-${month}`].days = 30;
-      data.data[`${year}-${month}`].card = 1;
+      data.data[`${year}-${month}`].fail = Time(item.start).monthDays() - 1;
+      data.data[`${year}-${month}`].success = 1;
     }
   }
   const data = [];
   for (const i in obj) {
     const dateArray = [];
-    const daysArray = [];
-    const cardArray = [];
+    const failArray = [];
+    const successArray = [];
     for (const j in obj[i].data) {
       const dataItem = obj[i].data[j];
       dateArray.push(dataItem.date);
-      daysArray.push(dataItem.days);
-      cardArray.push(dataItem.card);
+      failArray.push(dataItem.fail);
+      successArray.push(dataItem.success);
     }
-    obj[i].fail = obj[i].total - obj[i].success;
+    obj[i].failTotal = obj[i].total - obj[i].successTotal;
     obj[i].date = dateArray;
-    obj[i].days = daysArray;
-    obj[i].card = cardArray;
+    obj[i].fail = failArray;
+    obj[i].success = successArray;
     delete obj[i].data;
     data.push(obj[i]);
   }
