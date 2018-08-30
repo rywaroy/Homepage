@@ -136,11 +136,11 @@ router.get('/analysis', async ctx => {
     obj[id].successTotal = 0;
     obj[id].start = plan[i].start;
     obj[id].data = {};
-    const date = `${new Date(plan[i].start).getFullYear()}-${new Date(plan[i].start).getMonth() + 1}`;
+    const date = `${new Date(plan[i].start).getFullYear()}年${new Date(plan[i].start).getMonth() + 1}月`;
     obj[id].data[date] = {};
     obj[id].data[date].date = date;
-    obj[id].data[date].fail = Time(plan[i].start).monthDays() - Time(plan[i].start).date();
-    obj[id].data[date].success = 1;
+    obj[id].data[date].fail = Time(plan[i].start).monthDays() - Time(plan[i].start).date() + 1;
+    obj[id].data[date].success = 0;
   }
   const list = await (new Promise((resolve, reject) => {
     db.query('select * from plan_record', (err, rows) => {
@@ -158,14 +158,15 @@ router.get('/analysis', async ctx => {
     const month = new Date(item.time).getMonth() + 1;
     const data = obj[tid];
     data.successTotal++;
-    if (data.data[`${year}-${month}`]) {
-      data.data[`${year}-${month}`].success++;
-      data.data[`${year}-${month}`].fail--;
+    const name = `${year}年${month}月`;
+    if (data.data[name]) {
+      data.data[name].success++;
+      data.data[name].fail--;
     } else {
-      data.data[`${year}-${month}`] = {};
-      data.data[`${year}-${month}`].date = `${year}-${month}`;
-      data.data[`${year}-${month}`].fail = Time(item.start).monthDays() - 1;
-      data.data[`${year}-${month}`].success = 1;
+      data.data[name] = {};
+      data.data[name].date = `${year}年${month}月`;
+      data.data[name].fail = Time(item.start).monthDays() - 1;
+      data.data[name].success = 1;
     }
   }
   const data = [];

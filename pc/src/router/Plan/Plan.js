@@ -11,36 +11,18 @@ import './plan.css';
 export default class Plan extends Component {
 
 	componentDidMount() {
-		store.plan.list.length === 0 && this.getList();
-	}
-
-	getList() {
-		utils.axios.get('plan/list')
-			.then(res => {
-				this.getAnalysis(res.data.data.list);
-			});
+		store.plan.list.length === 0 && this.getAnalysis();
 	}
 
 	getAnalysis(list) {
 		utils.axios.get('plan/analysis')
 			.then(res => {
 				const data = res.data.data;
-				for (let i = 0; i < data.length; i++) {
-					for (let j = 0; j < list.length; j++) {
-						if (data[i].tid === list[j].id) {
-							data[i].title = list[j].title;
-						}
-					}
-				}
 				store.plan.setList(data);
 			});
 	}
 
 	getOptionPie = (data) => ({
-    title: {
-      text: data.title,
-      x:'center',
-    },
     tooltip: {
       trigger: 'item',
       formatter: "{a} <br/>{b} : {c} ({d}%)",
@@ -57,8 +39,8 @@ export default class Plan extends Component {
 				radius : '55%',
 				center: ['50%', '60%'],
 				data: [
-					{ value: data.success, name:'已打卡' },
-					{value: data.fail, name:'未打卡'},
+					{ value: data.successTotal, name:'已打卡' },
+					{value: data.failTotal, name:'未打卡'},
 				],
 				color: ['#1FB2F1', '#C91130'],
 				itemStyle: {
@@ -73,22 +55,41 @@ export default class Plan extends Component {
 	});
 	
 	getOptionLine = (data) => ({
+		title: {
+      text: data.title,
+      x:'left',
+    },
+		legend: {
+			data: ['本月打卡数','本月未打卡数'],
+		},
 		xAxis: {
-				type: 'category',
-				data: ['sdfsjkdfjskdjfk', '1Tue', '1Wed', '1Thu', '1Fri', '1Sat', '1Sun','2Mon', '2Tue', '2Wed', '2Thu', '2Fri', '2Sat', '2Sun','3Mon', '3Tue', '3Wed', '3Thu', '3Fri', '3Sat', '3Sun','4Mon', '4Tue', '4Wed', '4Thu', '4Fri', '4Sat', '4Sun']
+			type: 'category',
+			data: JSON.parse(JSON.stringify(data.date)),
 		},
 		yAxis: {
-				type: 'value'
+			type: 'value',
 		},
 		tooltip: {
-      trigger: 'item',
-      formatter: "{b} : {c}",
+      trigger: 'axis',
+			axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+				type : 'shadow', // 默认为直线，可选为：'line' | 'shadow'
+			},
     },
-		series: [{
-				data: [820, 932, 901, 934, 1290, 1330, 1320,820, 932, 901, 934, 1290, 1330, 1320,820, 932, 901, 934, 1290, 1330, 1320,820, 932, 901, 934, 1290, 1330, 1320],
-				type: 'line'
-		}]
-	})
+		series: [
+			{
+				name: '本月打卡数',
+				data: JSON.parse(JSON.stringify(data.success)),
+				type: 'bar',
+				color: ['#C91130', '#C91130'],
+			},
+			{
+				name: '本月未打卡数',
+				data: JSON.parse(JSON.stringify(data.fail)),
+				type: 'bar',
+				color: ['#1FB2F1', '#C91130'],
+			},
+		],
+	});
 
 	render() {
 		return (
@@ -98,7 +99,7 @@ export default class Plan extends Component {
 					<div className="plan__content">
 						{
 							store.plan.list.map(item => (
-								<div className="plan__chart f-cb" key={item.tid}>
+								<div className="plan__chart f-cb" key={item.id}>
 									<div className="plan__pie">
 										<ReactEchartsCore 
 											option={this.getOptionPie(item)}
