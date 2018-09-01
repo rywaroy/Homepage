@@ -8,13 +8,9 @@ export default class Detail extends Component {
 		this.state = {
 			type: this.props.match.params.type,
 			id: this.props.match.params.id,
-			title: '',
-			author: '',
 			content: '',
-			asker: '',
-			askContent: '',
-			answerer: '',
-			replyList: [],
+			// title: '',
+			// author: '',
 		};
 	}
 
@@ -23,93 +19,106 @@ export default class Detail extends Component {
 		let type = '';
 		if (this.state.type === '1') {
 			type = 'essay';
-			this.getStoryInfo('essay');
+			// this.getStoryInfo('essay');
 		}
 		if (this.state.type === '2') {
 			type = 'serialcontent';
-			this.getSerialInfo('serialcontent');
+			// this.getSerialInfo('serialcontent');
 		}
 		if (this.state.type === '3') {
 			type = 'question';
-			this.getQuestionInfo('question');
+			// this.getQuestionInfo('question');
 		}
 		if (this.state.type === '4') {
 			type = 'music';
-			this.getMusicInfo('music');
+			// this.getMusicInfo('music');
 		}
 		if (this.state.type === '5') {
 			type = 'movie';
-			this.getMovieInfo('movie');
+			// this.getMovieInfo('movie');
 		}
+		this.getInfo(type);
 		this.getComment(type === 'serialcontent' ? 'serial' : type);
 	}
 
-	// 文章获取详情
-	getStoryInfo(type) {
+	// 获取详情
+
+	getInfo(type) {
 		utils.axios.get(`/one/info?id=${this.state.id}&type=${type}`)
 			.then(res => {
 				const data = res.data.data;
 				this.setState({
-					title: data.title,
-					author: data.author_list[0].user_name,
 					content: data.html_content,
 				});
 			});
 	}
+
+	// 文章获取详情
+	// getStoryInfo(type) {
+	// 	utils.axios.get(`/one/info?id=${this.state.id}&type=${type}`)
+	// 		.then(res => {
+	// 			const data = res.data.data;
+	// 			this.setState({
+	// 				title: data.title,
+	// 				author: data.author_list[0].user_name,
+	// 				content: data.html_content,
+	// 			});
+	// 		});
+	// }
 
 	// 获取连载详情
-	getSerialInfo(type) {
-		utils.axios.get(`/one/info?id=${this.state.id}&type=${type}`)
-			.then(res => {
-				const data = res.data.data;
-				this.setState({
-					title: data.title,
-					author: data.author_list[0].user_name,
-					content: data.html_content,
-				});
-			});
-	}
+	// getSerialInfo(type) {
+	// 	utils.axios.get(`/one/info?id=${this.state.id}&type=${type}`)
+	// 		.then(res => {
+	// 			const data = res.data.data;
+	// 			this.setState({
+	// 				title: data.title,
+	// 				author: data.author_list[0].user_name,
+	// 				content: data.html_content,
+	// 			});
+	// 		});
+	// }
 
 	// 获取问答详情
-	getQuestionInfo(type) {
-		utils.axios.get(`/one/info?id=${this.state.id}&type=${type}`)
-			.then(res => {
-				const data = res.data.data;
-				this.setState({
-					title: data.title,
-					content: data.html_content,
-					// asker: data.asker.user_name,
-					// askContent: data.question_content,
-					// answerer: data.answerer.user_name,
-				});
-			});
-	}
+	// getQuestionInfo(type) {
+	// 	utils.axios.get(`/one/info?id=${this.state.id}&type=${type}`)
+	// 		.then(res => {
+	// 			const data = res.data.data;
+	// 			this.setState({
+	// 				title: data.title,
+	// 				content: data.html_content,
+	// 				// asker: data.asker.user_name,
+	// 				// askContent: data.question_content,
+	// 				// answerer: data.answerer.user_name,
+	// 			});
+	// 		});
+	// }
 
 	// 获取音乐详情
-	getMusicInfo(type) {
-		utils.axios.get(`/one/info?id=${this.state.id}&type=${type}`)
-			.then(res => {
-				const data = res.data.data;
-				this.setState({
-					title: data.title,
-					author: data.author_list[0].user_name,
-					content: data.html_content,
-				});
-			});
-	}
+	// getMusicInfo(type) {
+	// 	utils.axios.get(`/one/info?id=${this.state.id}&type=${type}`)
+	// 		.then(res => {
+	// 			const data = res.data.data;
+	// 			this.setState({
+	// 				title: data.title,
+	// 				author: data.author_list[0].user_name,
+	// 				content: data.html_content,
+	// 			});
+	// 		});
+	// }
 
 	// 获取影视详情
-	getMovieInfo(type) {
-		utils.axios.get(`/one/info?id=${this.state.id}&type=${type}`)
-			.then(res => {
-				const data = res.data.data;
-				this.setState({
-					title: data.title,
-					author: data.author_list[0].user_name,
-					content: data.html_content,
-				});
-			});
-	}
+	// getMovieInfo(type) {
+	// 	utils.axios.get(`/one/info?id=${this.state.id}&type=${type}`)
+	// 		.then(res => {
+	// 			const data = res.data.data;
+	// 			this.setState({
+	// 				title: data.title,
+	// 				author: data.author_list[0].user_name,
+	// 				content: data.html_content,
+	// 			});
+	// 		});
+	// }
 
 	// 获取评论
 	getComment(type) {
