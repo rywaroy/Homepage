@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Select } from 'antd';
-import axios from 'axios';
+import utils from '../../utils';
 import time from 'js-time.js';
 import { observer } from 'mobx-react';
 import store from '../../store';
@@ -11,35 +11,43 @@ const Option = Select.Option;
 @observer
 export default class One extends Component {
 	componentDidMount() {
-		store.one.list.length === 0 && this.getData();
+		store.one.list.length === 0 && this.getInfo();
 	}
 
 	// 获取one一个今日和往期的id
-	getData() {
-		axios.get('http://v3.wufazhuce.com:8000/api/onelist/idlist/?channel=wdj&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android').then(res => {
-			const data = res.data.data;
-			const arr = [];
-			const now = new Date().getTime();
-			for (let i = 0; i < data.length; i++) {
-				arr.push({
-					id: data[i],
-					date: time(new Date(now - i * 1000 * 60 * 60 * 24)).format('YYYY-MM-DD'),
-				});
-			}
-			store.one.setActiveId(arr[0].id);
-			store.one.setdefaultDate(arr[0].date);
-			store.one.setShowDateSelect(true);
-			store.one.setSata(arr);
-			this.getInfo(arr[0].id);
-		});
-	}
+	// getData() {
+	// 	axios.get('http://v3.wufazhuce.com:8000/api/onelist/idlist/?channel=wdj&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android').then(res => {
+	// 		const data = res.data.data;
+	// 		const arr = [];
+	// 		const now = new Date().getTime();
+	// 		for (let i = 0; i < data.length; i++) {
+	// 			arr.push({
+	// 				id: data[i],
+	// 				date: time(new Date(now - i * 1000 * 60 * 60 * 24)).format('YYYY-MM-DD'),
+	// 			});
+	// 		}
+	// 		store.one.setActiveId(arr[0].id);
+	// 		store.one.setdefaultDate(arr[0].date);
+	// 		store.one.setShowDateSelect(true);
+	// 		store.one.setSata(arr);
+	// 		this.getInfo(arr[0].id);
+	// 	});
+	// }
 
 	// 获取首页列表信息
-	getInfo(id) {
-		axios.get(`http://v3.wufazhuce.com:8000/api/onelist/${id}/0?cchannel=wdj&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android`)
+	// getInfo(id) {
+	// 	axios.get(`http://v3.wufazhuce.com:8000/api/onelist/${id}/0?cchannel=wdj&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android`)
+	// 		.then(res => {
+	// 			const data = res.data.data.content_list;
+	// 			store.one.setActiveId(id);
+	// 			store.one.setList(data);
+	// 		});
+	// }
+
+	getInfo(date) {
+		utils.axios.get(`/one/list?date=2018-09-01`)
 			.then(res => {
 				const data = res.data.data.content_list;
-				store.one.setActiveId(id);
 				store.one.setList(data);
 			});
 	}
