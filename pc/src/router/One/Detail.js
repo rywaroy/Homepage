@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Row, Col, Icon } from 'antd';
+import utils from '../../utils';
 
 export default class Detail extends Component {
 	constructor(props) {
@@ -15,118 +15,105 @@ export default class Detail extends Component {
 			askContent: '',
 			answerer: '',
 			replyList: [],
-			typeText: '',
 		};
 	}
 
 
-	componentWillMount() {
+	componentDidMount() {
+		let type = '';
 		if (this.state.type === '1') {
-			this.setState({
-				typeText: 'essay',
-			});
-			this.getStoryInfo();
+			type = 'essay';
+			this.getStoryInfo('essay');
 		}
 		if (this.state.type === '2') {
-			this.setState({
-				typeText: 'serialcontent',
-			});
-			this.getSerialInfo();
+			type = 'serialcontent';
+			this.getSerialInfo('serialcontent');
 		}
 		if (this.state.type === '3') {
-			this.setState({
-				typeText: 'question',
-			});
-			this.getQuestionInfo();
+			type = 'question';
+			this.getQuestionInfo('question');
 		}
 		if (this.state.type === '4') {
-			this.setState({
-				typeText: 'music',
-			});
-			this.getMusicInfo();
+			type = 'music';
+			this.getMusicInfo('music');
 		}
 		if (this.state.type === '5') {
-			this.setState({
-				typeText: 'movie',
-			});
-			this.getMovieInfo();
+			type = 'movie';
+			this.getMovieInfo('movie');
 		}
-	}
-
-	componentDidMount() {
-		this.getComment();
+		this.getComment(type === 'serialcontent' ? 'serial' : type);
 	}
 
 	// 文章获取详情
-	getStoryInfo() {
-		axios.get(`http://v3.wufazhuce.com:8000/api/essay/${this.state.id}?channel=wdj&source=channel_reading&source_id=9264&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android`)
+	getStoryInfo(type) {
+		utils.axios.get(`/one/info?id=${this.state.id}&type=${type}`)
 			.then(res => {
 				const data = res.data.data;
 				this.setState({
-					title: data.hp_title,
-					author: data.author[0].user_name,
-					content: data.hp_content,
+					title: data.title,
+					author: data.author_list[0].user_name,
+					content: data.html_content,
 				});
 			});
 	}
 
 	// 获取连载详情
-	getSerialInfo() {
-		axios.get(`http://v3.wufazhuce.com:8000/api/serialcontent/${this.state.id}?channel=wdj&source=channel_reading&source_id=9264&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android`)
+	getSerialInfo(type) {
+		utils.axios.get(`/one/info?id=${this.state.id}&type=${type}`)
 			.then(res => {
 				const data = res.data.data;
 				this.setState({
 					title: data.title,
-					author: data.author.user_name,
-					content: data.content,
+					author: data.author_list[0].user_name,
+					content: data.html_content,
 				});
 			});
 	}
 
 	// 获取问答详情
-	getQuestionInfo() {
-		axios.get(`http://v3.wufazhuce.com:8000/api/question/${this.state.id}?channel=wdj&source=channel_reading&source_id=9254&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android`)
+	getQuestionInfo(type) {
+		utils.axios.get(`/one/info?id=${this.state.id}&type=${type}`)
 			.then(res => {
 				const data = res.data.data;
 				this.setState({
-					title: data.question_title,
-					content: data.answer_content,
-					asker: data.asker.user_name,
-					askContent: data.question_content,
-					answerer: data.answerer.user_name,
+					title: data.title,
+					content: data.html_content,
+					// asker: data.asker.user_name,
+					// askContent: data.question_content,
+					// answerer: data.answerer.user_name,
 				});
 			});
 	}
 
 	// 获取音乐详情
-	getMusicInfo() {
-		axios.get(`http://v3.wufazhuce.com:8000/api/music/detail/${this.state.id}?channel=wdj&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android`)
+	getMusicInfo(type) {
+		utils.axios.get(`/one/info?id=${this.state.id}&type=${type}`)
 			.then(res => {
 				const data = res.data.data;
 				this.setState({
-					title: data.story_title,
+					title: data.title,
 					author: data.author_list[0].user_name,
-					content: data.story,
+					content: data.html_content,
 				});
 			});
 	}
 
 	// 获取影视详情
-	getMovieInfo() {
-		axios.get(`http://v3.wufazhuce.com:8000/api/movie/${this.state.id}/story/1/0?channel=wdj&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android`)
+	getMovieInfo(type) {
+		utils.axios.get(`/one/info?id=${this.state.id}&type=${type}`)
 			.then(res => {
-				const data = res.data.data.data[0];
+				const data = res.data.data;
 				this.setState({
 					title: data.title,
 					author: data.author_list[0].user_name,
-					content: data.content,
+					content: data.html_content,
 				});
 			});
 	}
 
 	// 获取评论
-	getComment() {
-		axios.get(`http://v3.wufazhuce.com:8000/api/comment/praiseandtime/${this.state.typeText}/${this.state.id}/0?channel=wdj&version=4.0.2&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android`)
+	getComment(type) {
+		utils.axios.get(`/one/comment?id=${this.state.id}&type=${type}`)
 			.then(res => {
 				this.setState({
 					replyList: res.data.data.data,
