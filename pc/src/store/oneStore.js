@@ -1,8 +1,10 @@
-import {observable, action, useStrict} from 'mobx'
+import {observable, action, useStrict} from 'mobx';
+import time from 'js-time.js';
 
 useStrict(true)
 export default class OneStore {
 	@observable list = [];
+	@observable date = time().format('YYYY-MM-DD');
 	@observable activeId = null;
 	@observable defaultDate = null;
 	@observable showDateSelect = false;
