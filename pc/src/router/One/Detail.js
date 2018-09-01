@@ -127,7 +127,7 @@ export default class Detail extends Component {
 				<Row>
 					<Col span={2}></Col>
 					<Col span={20}>
-						<div className="single-page-title">{this.state.title}</div>
+						{/* <div className="single-page-title">{this.state.title}</div>
 						{
 							this.state.type === '3'
 								?
@@ -138,7 +138,7 @@ export default class Detail extends Component {
 								</div>
 								:
 								<div className="single-page-author">文/{this.state.author}</div>
-						}
+						} */}
 
 						<div className="single-page-content" dangerouslySetInnerHTML={{ __html: this.state.content }}></div>
 						<div className="comment-list">
