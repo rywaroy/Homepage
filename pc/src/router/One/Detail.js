@@ -42,7 +42,6 @@ export default class Detail extends Component {
 	}
 
 	// 获取详情
-
 	getInfo(type) {
 		utils.axios.get(`/one/info?id=${this.state.id}&type=${type}`)
 			.then(res => {

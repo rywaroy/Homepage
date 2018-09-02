@@ -44,8 +44,8 @@ export default class One extends Component {
 	// 		});
 	// }
 
-	getInfo(date) {
-		utils.axios.get(`/one/list?date=2018-09-01`)
+	getInfo() {
+		utils.axios.get(`/one/list?date=${store.one.date}`)
 			.then(res => {
 				const data = res.data.data.content_list;
 				store.one.setList(data);
