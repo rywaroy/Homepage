@@ -80,13 +80,13 @@ export default class Plan extends Component {
 				name: '本月打卡数',
 				data: JSON.parse(JSON.stringify(data.success)),
 				type: 'bar',
-				color: ['#C91130', '#C91130'],
+				color: ['#1FB2F1'],
 			},
 			{
 				name: '本月未打卡数',
 				data: JSON.parse(JSON.stringify(data.fail)),
 				type: 'bar',
-				color: ['#1FB2F1', '#C91130'],
+				color: ['#C91130'],
 			},
 		],
 	});
