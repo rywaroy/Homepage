@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Select } from 'antd';
+import { Row, Col, Select, DatePicker } from 'antd';
 import utils from '../../utils';
 import time from 'js-time.js';
 import { observer } from 'mobx-react';
@@ -63,6 +63,17 @@ export default class One extends Component {
 			}
 			this.getInfo(value);
 		}
+	}
+
+	onTimeChange(date, dateString) {
+		if (dateString !== store.one.data) {
+			store.one.setDate(dateString);
+			this.getInfo();
+		}
+	}
+
+	getDisabledDate(current) {
+		return current && current > time().valueOf()
 	}
 
 	// 跳转详情
@@ -168,7 +179,10 @@ export default class One extends Component {
 							<a href="http://www.wandoujia.com/apps/one.hh.oneclient" target="_blank" className="from">来源</a>
 							<div className="last fr f-cb">
 								<div className="fl">往期内容：</div>
-								{this.renderDateSelect()}
+								<DatePicker
+									onChange={this.onTimeChange.bind(this)}
+									disabledDate={this.getDisabledDate}
+									format={'YYYY-MM-DD'} />
 							</div>
 						</div>
 						<div>
