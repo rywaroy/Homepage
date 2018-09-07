@@ -5,14 +5,13 @@ useStrict(true)
 export default class OneStore {
 	@observable list = [];
 	@observable date = time().format('YYYY-MM-DD');
-	
-	@observable data = []
+	@observable data = [];
 
 	@action setList(array) {
-		this.list = array
+		this.list = array;
 	}
 
 	@action setDate(date) {
-		this.date = date
+		this.date = date;
 	}
 }
