@@ -9,6 +9,7 @@ export default class Detail extends Component {
 			type: this.props.match.params.type,
 			id: this.props.match.params.id,
 			content: '',
+			replyList: [],
 			// title: '',
 			// author: '',
 		};
