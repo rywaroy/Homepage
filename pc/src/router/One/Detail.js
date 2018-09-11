@@ -10,8 +10,8 @@ export default class Detail extends Component {
 			id: this.props.match.params.id,
 			content: '',
 			replyList: [],
-			// title: '',
-			// author: '',
+			title: '',
+			author: '',
 		};
 	}
 
@@ -47,8 +47,14 @@ export default class Detail extends Component {
 		utils.axios.get(`/one/info?id=${this.state.id}&type=${type}`)
 			.then(res => {
 				const data = res.data.data;
+				let content = '';
+				data.html_content.replace(/<div class="one-content-box">[\s\S]*?<\/div>/, data => {
+					content = data;
+				});
 				this.setState({
-					content: data.html_content,
+					content,
+					author: data.author_list[0].user_name,
+					title: data.title,
 				});
 			});
 	}
@@ -136,19 +142,8 @@ export default class Detail extends Component {
 				<Row>
 					<Col span={2}></Col>
 					<Col span={20}>
-						{/* <div className="single-page-title">{this.state.title}</div>
-						{
-							this.state.type === '3'
-								?
-								<div>
-									<div className="single-page-author">{this.state.asker}问：</div>
-									<div className="single-page-content" style={{marginBottom: '80px'}}>{this.state.askContent}</div>
-									<div className="single-page-author">{this.state.answerer}答：</div>
-								</div>
-								:
-								<div className="single-page-author">文/{this.state.author}</div>
-						} */}
-
+						<div className="single-page-title">{this.state.title}</div>
+						<div className="single-page-author">文/{this.state.author}</div>
 						<div className="single-page-content" dangerouslySetInnerHTML={{ __html: this.state.content }}></div>
 						<div className="comment-list">
 							{
