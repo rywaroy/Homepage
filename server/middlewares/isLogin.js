@@ -1,29 +1,20 @@
-const db = require('../database');
+const Admin = require('../model/admin');
 
 
 exports.isLogin = async function (ctx, next) {
 	const token = ctx.request.body.token || ctx.query.token;
 	if (!token) {
-		ctx.error('0014', '暂无权限');
+		ctx.error(403, '暂无权限');
 	} else {
-		const data = await checkToken(token);
-
-		if (data.length === 1) {
+		const data = await Admin.findOne({
+			where: {
+				token,
+			},
+		});
+		if (data) {
 			await next();
 		} else {
-			ctx.error('0014', '登录失效');
+			ctx.error(401, '登录失效');
 		}
 	}
 };
-
-function checkToken(token) {
-	return new Promise(function (resolve, reject) {
-		db.query('select * from admin where token = "' + token + '"', function (err, row) {
-			if (err) {
-				reject(err);
-			} else {
-				resolve(row);
-			}
-		});
-	});
-}
