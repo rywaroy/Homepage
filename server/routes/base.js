@@ -1,31 +1,24 @@
 const router = require('koa-router')();
-const db = require('../database');
 const login = require('../middlewares/isLogin');
 const request = require('request');
 const time = require('js-time.js');
-
-module.exports = router;
+const Visit = require('../model/visit');
+const Base = require('../model/base');
 
 router.post('/content', login.isLogin, async (ctx) => {
 	const word = ctx.request.body.word;
-	await (new Promise((resolve, reject) => {
-		db.query('update base set word = ? where id = 1', [word], (err) => {
-			if (err) {
-				reject(err);
-			} else {
-				resolve();
-			}
-		});
-	}));
-	ctx.success('0000', '操作成功');
+	await Base.update({
+		word,
+	}, {
+		where: {
+			id: 1,
+		},
+	});
+	ctx.success(200, '操作成功');
 });
 
 router.get('/content', async (ctx) => {
-	const data = await (new Promise((resolve) => {
-		db.query('select * from base', (err, row) => {
-			resolve(row);
-		});
-	}));
+	const data = await Base.findAll();
 	const ip = ctx.request.header['x-forward-for'];
 	if (ip !== '111.231.99.115') {
 		const rs = await getIpInfo(ip);
@@ -42,18 +35,15 @@ router.get('/content', async (ctx) => {
 		} else {
 			device = 'pc';
 		}
-		await (new Promise((resolve, reject) => {
-			db.query('insert into visit (ip, time, address, device) values(?,?,?,?)', [ip, new Date(), address, device], (err, rows) => {
-				if (rows.insertId) {
-					resolve();
-				} else {
-					reject(err);
-				}
-			});
-		}));
-		ctx.success('0000', '获取成功', data[0]);
+		await Visit.create({
+			ip,
+			time: new Date(),
+			address,
+			device,
+		});
+		ctx.success(200, '获取成功', data[0]);
 	} else {
-		ctx.success('0000', '获取成功', data[0]);
+		ctx.success(200, '获取成功', data[0]);
 	}
 });
 
@@ -71,14 +61,17 @@ function getIpInfo(ip) {
 
 router.get('/visit', login.isLogin, async ctx => {
 	const date = time(new Date()).format('YYYY-MM-DD');
-	const count = await (new Promise((resolve, reject) => {
-		db.query(`select count(*) as total, sum(IF(time = '${date}', 1, 0)) as date, sum(IF(device = 'ipad', 1, 0)) as ipad, sum(IF(device = 'iphone', 1, 0)) as iphone, sum(IF(device = 'android', 1, 0)) as android, sum(IF(device = 'pc', 1, 0)) as pc from visit`, (err, rows) => {
-			if (err) {
-				reject();
-			} else {
-				resolve(rows);
-			}
-		});
-	}));
-	ctx.success('0000', '获取成功', count[0]);
+	const count = await Visit.findOne({
+		attributes: [
+			['count(*)', 'total'],
+			[`sum(IF(time = '${date}', 1, 0))`, 'date'],
+			['sum(IF(device = "ipad", 1, 0))', 'ipad'],
+			['sum(IF(device = "iphone", 1, 0))', 'iphone'],
+			['sum(IF(device = "android", 1, 0))', 'android'],
+			['sum(IF(device = "pc", 1, 0))', 'pc'],
+		],
+	});
+	ctx.success(200, '获取成功', count);
 });
+
+module.exports = router;
