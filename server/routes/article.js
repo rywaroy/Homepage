@@ -1,103 +1,71 @@
 const router = require('koa-router')();
-const db = require('../database');
-const login = require('../middlewares/isLogin');
 const xss = require('xss');
+const login = require('../middlewares/isLogin');
+const Article = require('../model/article');
+const Tag = require('../model/tag');
+const Comment = require('../model/comment');
+
+Article.belongsTo(Tag, {
+	foreignKey: 'tagid',
+});
 
 // 获取文章列表
 router.get('/list', async (ctx) => {
-	const page = ctx.query.page || '1';
-	const limit = ctx.query.limit || '10';
-	const data = await getList(page, limit);
-	const count = await getListCount();
-	ctx.success('0000', '获取成功', {
-		list: data,
-		total: count,
+	const page = Number(ctx.query.page) || 1;
+	const limit = Number(ctx.query.limit) || 10;
+	const data = await Article.findAndCount({
+		attributes: ['id', 'title', 'time', 'content', 'intro', 'top', 'watch'],
+		limit,
+		offset: (page - 1) * limit,
+		order: [['top', 'DESC']],
+		include: [{
+			model: Tag,
+			as: 'tag',
+			attributes: ['title', 'color'],
+		}],
+	});
+	ctx.success(200, '获取成功', {
+		list: data.rows,
+		total: data.count,
 	});
 });
-
-function getList(page, limit) {
-	return new Promise(function (resolve, reject) {
-		db.query('select a.id,a.title,a.watch,a.intro,a.time,a.top,b.title as tag_name , b.color from article as a left join tag as b on a.tagid = b.id where a.state = 1 order by a.top desc , a.time desc limit ' + (page - 1) * limit + ' , ' + limit, function (err, row) {
-			if (err) {
-				reject(err);
-			} else {
-				resolve(row);
-			}
-		});
-	});
-}
-
-function getListCount() {
-	return new Promise(function (resolve, reject) {
-		db.query('select count(*) from article where state = 1', function (err, row) {
-			if (err) {
-				reject(err);
-			} else {
-				resolve(row[0]['count(*)']);
-			}
-		});
-	});
-}
 
 // 获取文章详情
 router.get('/info', async (ctx) => {
 	const id = ctx.query.id;
-	try {
-		const data = await getInfo(id);
-		await addWatch(id, data.watch);
-		ctx.success('0000', '获取成功', data);
-	} catch (err) {
-		ctx.throw(err);
+	if (!id) {
+		ctx.error(400, '请输入文章id');
+		return;
 	}
+	const data = await Article.findById(id);
+	if (data) {
+		await Article.update({
+			watch: ++data.watch,
+		}, {
+			where: {
+				id,
+			},
+		});
+	}
+	ctx.success(200, '获取成功', data);
 });
-
-function getInfo(id) {
-	return new Promise(function (resolve, reject) {
-		db.query('select * from article where id = ' + id, function (err, row) {
-			if (err) {
-				reject(err);
-			} else {
-				resolve(row[0]);
-			}
-		});
-	});
-}
-
-function addWatch(id, num) {
-	return new Promise(function (resolve, reject) {
-		num++;
-		db.query('update article set watch = ? where id = ?', [num, id], function (err) {
-			if (err) {
-				reject(err);
-			} else {
-				resolve();
-			}
-		});
-	});
-}
 
 // 删除文章
 router.post('/delete', login.isLogin, async (ctx) => {
 	const id = ctx.request.body.id;
-	try {
-		await deleteArticle(id);
-		ctx.success('0000', '删除成功');
-	} catch (err) {
-		ctx.error('0011', '删除失败');
+	if (!id) {
+		ctx.error(400, '请输入文章id');
+		return;
 	}
-});
-
-function deleteArticle(id) {
-	return new Promise(function (resolve, reject) {
-		db.query('update article set state = 0 where id = ?', [id], function (err) {
-			if (err) {
-				reject(err);
-			} else {
-				resolve();
-			}
-		});
+	await Article.update({
+		state: 0,
+	}, {
+		where: {
+			id,
+		},
 	});
-}
+	ctx.success(200, '删除成功');
+});
 
 // 添加文章
 router.post('/add', login.isLogin, async (ctx) => {
@@ -105,116 +73,78 @@ router.post('/add', login.isLogin, async (ctx) => {
 	const intro = ctx.request.body.intro;
 	const content = ctx.request.body.content;
 	const time = new Date();
-	const tagId = ctx.request.body.tagId;
-	try {
-		await addArticle(title, intro, content, time, tagId);
-		ctx.success('0000', '添加成功');
-	} catch (err) {
-		ctx.error('0011', '添加失败');
-	}
-});
-
-function addArticle(title, intro, content, time, tagId) {
-	return new Promise(function (resolve, reject) {
-		db.query('insert into article (title,intro,content,time,tagid) values(?,?,?,?,?)', [title, intro, content, time, tagId], function (err, rows) {
-			if (rows.insertId) {
-				resolve();
-			} else {
-				reject(err);
-			}
-		});
+	const tagid = ctx.request.body.tagId;
+	await Article.create({
+		title,
+		intro,
+		content,
+		time,
+		tagid,
 	});
-}
+	ctx.success(200, '添加成功');
+});
 
 // 获取文章标签
 router.get('/tag', async (ctx) => {
-	const list = await getTag();
-	ctx.success('0000', '获取成功', list);
-});
-
-function getTag() {
-	return new Promise(function (resolve, reject) {
-		db.query('select * from tag where state = 1', function (err, rows) {
-			if (err) {
-				reject(err);
-			} else {
-				resolve(rows);
-			}
-		});
+	const list = await Tag.findAll({
+		where: {
+			state: 1,
+		},
 	});
-}
+	ctx.success(200, '获取成功', list);
+});
 
 // 添加文章标签
 router.post('/tag', async (ctx) => {
 	const title = ctx.request.body.title;
 	const color = ctx.request.body.color;
 
-	try {
-		await addTag(title, color);
-		ctx.success('0000', '添加成功');
-	} catch (err) {
-		ctx.error('0011', '添加失败');
+	if (!title || !color) {
+		ctx.error(400, '请输入标题或颜色');
+		return;
 	}
-});
 
-function addTag(title, color) {
-	return new Promise(function (resolve, reject) {
-		db.query('insert into tag (title,color) values(?,?)', [title, color], function (err, rows) {
-			if (rows.insertId) {
-				resolve();
-			} else {
-				reject(err);
-			}
-		});
+	await Tag.create({
+		title,
+		color,
 	});
-}
+	ctx.success(200, '添加成功');
+});
 
 // 删除文章标签
 router.post('/tag/delete', login.isLogin, async (ctx) => {
 	const id = ctx.request.body.id;
-	try {
-		await deleteTag(id);
-		ctx.success('0000', '删除成功');
-	} catch (err) {
-		ctx.error('0011', '删除失败');
+	if (!id) {
+		ctx.error(400, '请输入标签id');
+		return;
 	}
-});
-
-function deleteTag(id) {
-	return new Promise(function (resolve, reject) {
-		db.query('update tag set state = 0 where id = ?', [id], function (err) {
-			if (err) {
-				reject(err);
-			} else {
-				resolve();
-			}
-		});
+	await Tag.update({
+		state: 0,
+	}, {
+		where: {
+			id,
+		},
 	});
-}
+	ctx.success(200, '删除成功');
+});
 
 // 设置文章置顶
 router.post('/top', login.isLogin, async (ctx) => {
 	const id = ctx.request.body.id;
 	const top = ctx.request.body.top;
-	try {
-		await setTop(top, id);
-		ctx.success('0000', '设置成功');
-	} catch (err) {
-		ctx.error('0011', '设置失败');
+	if (!id) {
+		ctx.error(400, '请输入标签id');
+		return;
 	}
-});
-
-function setTop(top, id) {
-	return new Promise(function (resolve, reject) {
-		db.query('update article set top = ? where id = ?', [top, id], function (err) {
-			if (err) {
-				reject(err);
-			} else {
-				resolve();
-			}
-		});
+	await Article.update({
+		top,
+	}, {
+		where: {
+			id,
+		},
 	});
-}
+	ctx.success(200, '设置成功');
+});
 
 // 更新文章
 router.post('/update', login.isLogin, async (ctx) => {
@@ -222,28 +152,19 @@ router.post('/update', login.isLogin, async (ctx) => {
 	const title = ctx.request.body.title;
 	const intro = ctx.request.body.intro;
 	const content = ctx.request.body.content;
-	const tagId = ctx.request.body.tagId;
-	try {
-		await updateArticle(title, intro, content, tagId, id);
-		ctx.success('0000', '更新成功');
-	} catch (err) {
-		ctx.error('0011', '更新失败', {
-			msg: err,
-		});
-	}
-});
-
-function updateArticle(title, intro, content, tagId, id) {
-	return new Promise(function (resolve, reject) {
-		db.query('update article set title = ?,intro = ?,content = ?,tagid = ? where id = ?', [title, intro, content, tagId, id], function (err) {
-			if (err) {
-				reject(err);
-			} else {
-				resolve();
-			}
-		});
+	const tagid = ctx.request.body.tagId;
+	await Article.update({
+		title,
+		intro,
+		content,
+		tagid,
+	}, {
+		where: {
+			id,
+		},
 	});
-}
+	ctx.success(200, '更新成功');
+});
 
 // 添加文章评论
 router.post('/comment', async (ctx) => {
@@ -251,17 +172,18 @@ router.post('/comment', async (ctx) => {
 	const name = xss(ctx.request.body.name) || '匿名';
 	const content = xss(ctx.request.body.content);
 	const time = new Date();
-	const ip = ctx.request.ip.substring(0, 6) + '**';
+	const ip = ctx.request.header['x-forward-for'].substring(0, 6) + '**';
 	if (DataLength(name) > 12 || DataLength(content) > 1000) {
-		ctx.error('0011', '字数超过限制');
-	} else {
-		try {
-			await addComment(`${name} (${ip})`, content, id, time);
-			ctx.success('0000', '添加成功');
-		} catch (err) {
-			ctx.error('0011', '添加失败');
-		}
+		ctx.error(400, '字数超过限制');
+		return;
 	}
+	await Comment.create({
+		name: `${name} ${ip}`,
+		content,
+		time,
+		aid: id,
+	});
+	ctx.success(200, '添加成功');
 });
 
 function DataLength(fData) {
@@ -276,39 +198,15 @@ function DataLength(fData) {
 	return intLength;
 }
 
-function addComment(name, content, aid, time) {
-	return new Promise(function (resolve, reject) {
-		db.query('insert into comment (name,content,aid,time) values(?,?,?,?)', [name, content, aid, time], function (err, rows) {
-			if (rows.insertId) {
-				resolve();
-			} else {
-				reject(err);
-			}
-		});
-	});
-}
-
 // 获取文章评论
 router.get('/comment', async (ctx) => {
 	const id = ctx.query.id;
-	try {
-		const rows = await getCommentList(id);
-		ctx.success('0000', '获取成功', rows);
-	} catch (err) {
-		ctx.error('0011', '获取失败');
-	}
-});
-
-function getCommentList(id) {
-	return new Promise(function (resolve, reject) {
-		db.query('select * from comment where aid = ' + id, function (err, rows) {
-			if (err) {
-				reject(err);
-			} else {
-				resolve(rows);
-			}
-		});
+	const data = await Comment.findAll({
+		where: {
+			aid: id,
+		},
 	});
-}
+	ctx.success(200, '获取成功', data);
+});
 
 module.exports = router;
