@@ -17,6 +17,9 @@ router.get('/list', async (ctx) => {
 		attributes: ['id', 'title', 'time', 'content', 'intro', 'top', 'watch'],
 		limit,
 		offset: (page - 1) * limit,
+		where: {
+			state: 1,
+		},
 		order: [['top', 'DESC']],
 		include: [{
 			model: Tag,
