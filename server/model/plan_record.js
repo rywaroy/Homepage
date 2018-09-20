@@ -6,7 +6,7 @@ const PlanRecord = sequelize.define('plan_record', {
     type: Sequelize.INTEGER,
   },
   time: {
-    type: Sequelize.DATE,
+    type: Sequelize.DATEONLY,
   },
 });
 
