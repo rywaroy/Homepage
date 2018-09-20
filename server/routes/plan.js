@@ -1,20 +1,27 @@
+
 const router = require('koa-router')();
 const db = require('../database');
 const login = require('../middlewares/isLogin');
 const Time = require('js-time.js');
+const Plan = require('../model/plan');
+const PlanRecord = require('../model/plan_record');
+const Sequelize = require('sequelize');
+
+const Op = Sequelize.Op;
+
+PlanRecord.belongsTo(Plan, {
+	foreignKey: 'tid',
+});
 
 // 获取计划列表
 router.get('/list', async ctx => {
-  const data = await (new Promise((resolve, reject) => {
-    db.query('select id, title from plan where state = 1', (err, rows) => {
-      if (err) {
-				reject(err);
-			} else {
-				resolve(rows);
-			}
-    });
-  }));
-  ctx.success('0000', '获取成功', {
+  const data = await Plan.findAll({
+    attributes: ['id', 'title'],
+    where: {
+      state: 1,
+    },
+  });
+  ctx.success(200, '获取成功', {
 		list: data,
 	});
 });
@@ -22,60 +29,37 @@ router.get('/list', async ctx => {
 // 新增计划
 router.post('/list', login.isLogin, async ctx => {
   const title = ctx.request.body.title;
-  try {
-    await (new Promise((resolve, reject) => {
-      db.query('insert into plan (title, start) values(?,?)', [title, Time().format('YYYY-MM-DD')], (err, rows) => {
-        if (rows.insertId) {
-					resolve();
-				} else {
-					reject(err);
-				}
-      });
-    }));
-    ctx.success('0000', '添加成功');
-  } catch (err) {
-    ctx.error('0011', '添加失败');
-  }
+  await Plan.create({
+    title,
+    start: Time().format('YYYY-MM-DD'),
+  });
+  ctx.success(200, '添加成功');
 });
 
 // 删除计划
 router.post('/list/delete', login.isLogin, async ctx => {
   const id = ctx.request.body.id;
-  try {
-    await (new Promise((resolve, reject) => {
-      db.query('update plan set state = 0 where id = ?', [id], err => {
-        if (err) {
-					reject(err);
-				} else {
-					resolve();
-				}
-      });
-    }));
-    ctx.success('0000', '删除成功');
-  } catch (err) {
-    ctx.error('0011', '删除失败');
-  }
+  await Plan.update({
+    state: 0,
+  }, {
+    where: {
+      id,
+    },
+  });
+  ctx.success(200, '删除成功');
 });
 
 // 打卡
 router.post('/clock', login.isLogin, async ctx => {
   const time = ctx.request.body.time;
   const id = ctx.request.body.id;
-  try {
-    await (new Promise((resolve, reject) => {
-      db.query('insert into plan_record (tid, time) values(?,?)', [id, time], (err, rows) => {
-        if (rows.insertId) {
-					resolve();
-				} else {
-					reject(err);
-				}
-      });
-    }));
-    ctx.success('0000', '打卡成功');
-  } catch (err) {
-    ctx.error('0011', '打卡失败');
-  }
+  await PlanRecord.create({
+    tid: id,
+    time,
+  });
+  ctx.success(200, '打卡成功');
 });
+
 
 // 查询某日打卡信息
 router.get('/date', async ctx => {
@@ -83,17 +67,21 @@ router.get('/date', async ctx => {
   const start = ctx.query.start;
   const end = ctx.query.end;
   const id = ctx.query.id;
-  const query = `select a.time, a.tid, b.title from plan_record as a left join plan as b on a.tid = b.id where ${time ? `time = '${time}'` : `time >= '${start}'`} ${end ? `and time <= '${end}'` : ''} ${id ? `and tid = ${id}` : ''}`;
-  const data = await (new Promise((resolve, reject) => {
-    db.query(query, (err, rows) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(rows);
-      }
-    });
-  }));
-  ctx.success('0000', '获取成功', {
+  const where = {};
+  if (time) where.time = time;
+  if (start) where.time = { [Op.gte]: start };
+  if (end) where.time = { [Op.lte]: end };
+  if (id) where.tid = id;
+
+  const data = await PlanRecord.findAll({
+    attributes: ['time', 'tid'],
+    where,
+    include: [{
+			model: Plan,
+			attributes: ['title'],
+		}],
+  });
+  ctx.success(200, '获取成功', {
 		list: data,
 	});
 });
@@ -101,16 +89,12 @@ router.get('/date', async ctx => {
 // 查询某计划打卡记录
 router.get('/plan', async ctx => {
   const id = ctx.query.id;
-  const data = await (new Promise((resolve, reject) => {
-    db.query(`select * from plan_record ${id ? `where tid = '${id}'` : ''}`, (err, rows) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(rows);
-      }
-    });
-  }));
-  ctx.success('0000', '获取成功', {
+  const where = {};
+  if (id) where.tid = id;
+  const data = await PlanRecord.findAll({
+    where,
+  });
+  ctx.success(200, '获取成功', {
 		list: data,
 	});
 });
@@ -118,15 +102,12 @@ router.get('/plan', async ctx => {
 // 打卡分析
 router.get('/analysis', async ctx => {
   const obj = {};
-  const plan = await (new Promise((resolve, reject) => {
-    db.query('select id, title, start from plan where state = 1', (err, rows) => {
-      if (err) {
-				reject(err);
-			} else {
-				resolve(rows);
-			}
-    });
-  }));
+  const plan = await Plan.findAll({
+    attributes: ['id', 'title', 'start'],
+    where: {
+      state: 1,
+    },
+  });
   for (let i = 0; i < plan.length; i++) {
     const id = plan[i].id;
     obj[id] = {};
@@ -142,21 +123,16 @@ router.get('/analysis', async ctx => {
     obj[id].data[date].fail = Time(plan[i].start).monthDays() - Time(plan[i].start).date() + 1;
     obj[id].data[date].success = 0;
   }
-  const list = await (new Promise((resolve, reject) => {
-    db.query('select * from plan_record', (err, rows) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(rows);
-      }
-    });
-  }));
+  const list = await PlanRecord.findAll();
   for (let i = 0; i < list.length; i++) {
     const item = list[i];
     const tid = item.tid;
     const year = new Date(item.time).getFullYear();
     const month = new Date(item.time).getMonth() + 1;
     const data = obj[tid];
+    if (data === undefined) {
+      continue;
+    }
     data.successTotal++;
     const name = `${year}年${month}月`;
     if (data.data[name]) {
@@ -188,7 +164,7 @@ router.get('/analysis', async ctx => {
     data.push(obj[i]);
   }
 
-  ctx.success('0000', '获取成功', data);
+  ctx.success(200, '获取成功', data);
 });
 
 module.exports = router;
