@@ -1,6 +1,5 @@
 
 const router = require('koa-router')();
-const db = require('../database');
 const login = require('../middlewares/isLogin');
 const Time = require('js-time.js');
 const Plan = require('../model/plan');
