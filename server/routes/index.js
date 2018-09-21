@@ -4,7 +4,7 @@ const article = require('./article');
 const learn = require('./learn');
 const admin = require('./admin');
 const album = require('./album');
-const file = require('./file');
+// const file = require('./file');
 const time = require('./time');
 const douban = require('./douban');
 const dytt = require('./dytt');
@@ -14,19 +14,19 @@ const think = require('./think');
 const plan = require('./plan');
 const one = require('./one');
 
-router.use('/api/article', article.routes(), article.allowedMethods());
-router.use('/api/learn', learn.routes(), learn.allowedMethods());
-router.use('/api/admin', admin.routes(), admin.allowedMethods());
-router.use('/api/album', album.routes(), album.allowedMethods());
-router.use('/api/file', file.routes(), file.allowedMethods());
-router.use('/api/time', time.routes(), time.allowedMethods()); // time时光网接口
-router.use('/api/douban', douban.routes(), douban.allowedMethods());
-router.use('/api/dytt', dytt.routes(), dytt.allowedMethods());
-router.use('/api/weather', weather.routes(), weather.allowedMethods());
-router.use('/api/base', base.routes(), base.allowedMethods());
-router.use('/api/think', think.routes(), think.allowedMethods());
-router.use('/api/plan', plan.routes(), plan.allowedMethods());
-router.use('/api/one', one.routes(), one.allowedMethods());
+router.use('/api/article', article.routes());
+router.use('/api/learn', learn.routes());
+router.use('/api/admin', admin.routes());
+router.use('/api/album', album.routes());
+// router.use('/api/file', file.routes());
+router.use('/api/time', time.routes()); // time时光网接口
+router.use('/api/douban', douban.routes());
+router.use('/api/dytt', dytt.routes());
+router.use('/api/weather', weather.routes());
+router.use('/api/base', base.routes());
+router.use('/api/think', think.routes());
+router.use('/api/plan', plan.routes());
+router.use('/api/one', one.routes());
 
 router.get('/admin', async (ctx) => {
 	const htmlFile = await (new Promise(function (resolve, reject) {
