@@ -6,7 +6,9 @@ const cors = require('koa-cors');
 const router = require('./routes/index');
 const convert = require('koa-convert');
 const json = require('koa-json');
-const bodyparser = require('koa-bodyparser')();
+const bodyparser = require('koa-bodyparser')({
+  formLimit: '5mb',
+});
 const staticServer = require('koa-static');
 const onerror = require('koa-onerror');
 
