@@ -51,7 +51,7 @@ export default class Article extends Component {
 									<div className="article-top f-cb">
 										<div className="article-name fl">{item.title}</div>
 										<div className="article-time fr">{time(item.time).format('YYYY-MM-DD')}</div>
-										<div className="article-tag fr" style={{ backgroundColor: item.color }}>{item.tag_name}</div>
+										<div className="article-tag fr" style={{ backgroundColor: item.tag.color }}>{item.tag.title}</div>
 										{
 											item.top > 0 ?
 												<div className="article-tag fr" style={{ backgroundColor: '#FFD700' }}>置顶</div>
