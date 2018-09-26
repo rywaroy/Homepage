@@ -5,8 +5,8 @@ const Admin = require('../model/admin');
 
 // 获取说说列表
 router.get('/list', async ctx => {
-  const page = ctx.query.page || 1;
-  const limit = ctx.query.limit || 10;
+  const page = Number(ctx.query.page) || 1;
+  const limit = Number(ctx.query.limit) || 10;
   const data = await Think.findAndCount({
     where: {
       state: 1,
