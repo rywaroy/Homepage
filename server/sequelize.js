@@ -10,18 +10,10 @@ const sequelize = new Sequelize('blog', 'zzh', '123456', {
     idle: 10000,
   },
   define: {
+    charset: 'utf8',
     timestamps: false, // 默认为 true
     freezeTableName: true,
   },
 });
-
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
 
 module.exports = sequelize;
