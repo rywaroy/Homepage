@@ -10,7 +10,7 @@ router.get('/list', async ctx => {
 			resolve(JSON.parse(body));
 		});
   }));
-	ctx.success('0000', '获取成功', data.data);
+	ctx.success(200, '获取成功', data.data);
 });
 
 // 连载详情
@@ -22,7 +22,7 @@ router.get('/info', async ctx => {
 			resolve(JSON.parse(body));
 		});
   }));
-	ctx.success('0000', '获取成功', data.data);
+	ctx.success(200, '获取成功', data.data);
 });
 
 // 评论
@@ -34,7 +34,7 @@ router.get('/comment', async ctx => {
 			resolve(JSON.parse(body));
 		});
 	}));
-	ctx.success('0000', '获取成功', data.data);
+	ctx.success(200, '获取成功', data.data);
 });
 
 module.exports = router;

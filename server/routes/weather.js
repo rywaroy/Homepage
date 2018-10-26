@@ -20,7 +20,7 @@ router.get('/all', async ctx => {
 			}
 		});
 	}));
-	ctx.success('0000', '获取成功', data);
+	ctx.success(200, '获取成功', data);
 });
 
 module.exports = router;

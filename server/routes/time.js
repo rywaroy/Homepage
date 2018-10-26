@@ -15,7 +15,7 @@ router.get('/sell', async (ctx) => {
 			resolve(JSON.parse(body));
 		});
 	}));
-	ctx.success('0000', '获取成功', data);
+	ctx.success(200, '获取成功', data);
 });
 
 router.get('/hot', async (ctx) => {
@@ -25,7 +25,7 @@ router.get('/hot', async (ctx) => {
 			resolve(JSON.parse(body));
 		});
 	}));
-	ctx.success('0000', '获取成功', data);
+	ctx.success(200, '获取成功', data);
 });
 
 router.get('/soon', async (ctx) => {
@@ -35,7 +35,7 @@ router.get('/soon', async (ctx) => {
 			resolve(JSON.parse(body));
 		});
 	}));
-	ctx.success('0000', '获取成功', data);
+	ctx.success(200, '获取成功', data);
 });
 
 router.get('/info', async (ctx) => {
@@ -72,7 +72,7 @@ router.get('/info', async (ctx) => {
 	});
 	const data = await (Promise.all([info, performer, comment, tidbits, photo]));
 
-	ctx.success('0000', '获取成功', {
+	ctx.success(200, '获取成功', {
 		info: data[0],
 		performer: data[1],
 		comment: data[2],

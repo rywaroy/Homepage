@@ -18,7 +18,7 @@ router.get('/list', async ctx => {
 			resolve(JSON.parse(body));
 		});
 	}));
-	ctx.success('0000', '获取成功', data);
+	ctx.success(200, '获取成功', data);
 });
 
 router.get('/info', async (ctx) => {
@@ -30,7 +30,7 @@ router.get('/info', async (ctx) => {
 			resolve(JSON.parse(body));
 		});
 	}));
-	ctx.success('0000', '获取成功', data);
+	ctx.success(200, '获取成功', data);
 });
 
 router.get('/image', async (ctx) => {
@@ -46,7 +46,7 @@ router.get('/image', async (ctx) => {
 			resolve(JSON.parse(body));
 		});
 	}));
-	ctx.success('0000', '获取成功', data);
+	ctx.success(200, '获取成功', data);
 });
 
 router.get('/comment', async (ctx) => {
@@ -61,7 +61,7 @@ router.get('/comment', async (ctx) => {
 			resolve(JSON.parse(body));
 		});
 	}));
-	ctx.success('0000', '获取成功', data);
+	ctx.success(200, '获取成功', data);
 });
 
 

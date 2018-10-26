@@ -22,7 +22,7 @@ const upload = multer({
 router.post('/photos', upload.single('photos'), async (ctx, next) => {
   try {
     await uploadQiniu(ctx.req.file.filename);
-    ctx.success('0000', '上传成功', {
+    ctx.success(200, '上传成功', {
       filename: `http://p7kx9r1er.bkt.clouddn.com/${ctx.req.file.filename}`,
     });
   } catch (err) {
