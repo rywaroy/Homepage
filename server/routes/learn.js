@@ -57,6 +57,7 @@ router.post('/add', login.isLogin, async (ctx) => {
 	const md = ctx.request.body.md;
 	const time = new Date();
 	const tag = ctx.request.body.tag;
+	const type = ctx.request.body.type;
 	await Learn.create({
 		title,
 		intro,
@@ -64,6 +65,7 @@ router.post('/add', login.isLogin, async (ctx) => {
 		time,
 		md,
 		tag,
+		type,
 	});
 	ctx.success(200, '添加成功');
 });
@@ -76,12 +78,16 @@ router.post('/update', login.isLogin, async (ctx) => {
 	const html = ctx.request.body.html;
 	const md = ctx.request.body.md;
 	const tag = ctx.request.body.tag;
+	const update = new Date();
+	const type = ctx.request.body.type;
 	await Learn.update({
 		title,
 		intro,
 		html,
 		md,
 		tag,
+		update,
+		type,
 	}, {
 		where: {
 			id,

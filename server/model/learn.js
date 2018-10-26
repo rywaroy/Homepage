@@ -8,6 +8,9 @@ const Learn = sequelize.define('learn', {
   time: {
     type: Sequelize.DATE,
   },
+  update: {
+    type: Sequelize.DATE,
+  },
   intro: {
     type: Sequelize.TEXT,
   },
@@ -21,8 +24,12 @@ const Learn = sequelize.define('learn', {
   html: {
     type: Sequelize.TEXT,
   },
-  Tag: {
+  tag: {
     type: Sequelize.TEXT,
+  },
+  type: {
+    type: Sequelize.INTEGER,
+    defaultValue: 1,
   },
 });
 
