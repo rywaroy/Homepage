@@ -36,7 +36,7 @@ Axios.interceptors.request.use(
 // 返回状态判断(添加响应拦截器)
 Axios.interceptors.response.use(
 	res => {
-		if (res.data.status !== '0000') {
+		if (res.data.status !== 200) {
 			message.error(res.data.msg);
 			return Promise.reject(res.data.Msg);
 		}
