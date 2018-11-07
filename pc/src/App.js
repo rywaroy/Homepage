@@ -16,7 +16,7 @@ const {Header, Footer, Sider, Content} = Layout;
 class App extends Component {
 
 	componentDidMount() {
-		// this.getBlogContent();
+		this.getBlogContent();
 	}
 
 	//获取博客信息
