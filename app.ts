@@ -15,5 +15,6 @@ app.use(convert(bodyparser({
 app.use(staticServer(`${__dirname}/static`));
 app.use(convert(bodyparser));
 app.use(convert(json()));
+app.use(require('./middlewares/returnData'));
 
 app.listen(3001);
