@@ -1,0 +1,34 @@
+{
+  "devDependencies": {
+    "tslib": "^1.9.3"
+  },
+  "dependencies": {
+    "koa": "^2.6.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-convert": "^1.2.0",
+    "koa-cors": "^0.0.16",
+    "koa-json": "^2.0.2",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "sequelize": "^4.41.2",
+    "xss": "^1.0.3"
+  },
+  "name": "Homepage",
+  "description": "> node.js + koa2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rywaroy/Homepage.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rywaroy/Homepage/issues"
+  },
+  "homepage": "https://github.com/rywaroy/Homepage#readme"
+}
