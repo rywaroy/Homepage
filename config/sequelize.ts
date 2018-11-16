@@ -1,6 +1,6 @@
-const Sequelize = require('sequelize');
+import * as Sequelize from 'sequelize';
 
-const sequelize = new Sequelize('blog', 'zzh', '123456', {
+const sequelize: any = new Sequelize('blog', 'zzh', '123456', {
   host: 'localhost',
   dialect: 'mysql',
   pool: {
@@ -16,4 +16,4 @@ const sequelize = new Sequelize('blog', 'zzh', '123456', {
   },
 });
 
-module.exports = sequelize;
+export default sequelize;

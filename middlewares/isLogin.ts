@@ -1,7 +1,7 @@
 const Admin = require('../model/admin');
 import IContext from '../interface/context';
 
-exports.isLogin = async function (ctx: IContext, next: () => void) {
+const isLogin = async function (ctx: IContext, next: () => void) {
 	const token = ctx.request.header.authorization;
 	if (!token) {
 		ctx.error(403, '暂无权限');
@@ -18,3 +18,5 @@ exports.isLogin = async function (ctx: IContext, next: () => void) {
 		}
 	}
 };
+
+export default isLogin;
