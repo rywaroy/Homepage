@@ -1,5 +1,5 @@
 
-import article from './artilce';
+import article from './article';
 import { Context } from 'koa';
 import * as fs from 'fs';
 import * as Router from 'koa-router';
