@@ -1,11 +1,10 @@
-// import * as Koa from 'koa';
+import * as Koa from 'koa';
 import router from './router';
-const Koa = require('koa');
-const cors = require('koa-cors');
+import * as cors from 'koa-cors';
+import * as bodyparser from 'koa-bodyparser';
+import * as staticServer from 'koa-static';
+import * as json from 'koa-json';
 const convert = require('koa-convert');
-const bodyparser = require('koa-bodyparser');
-const staticServer = require('koa-static');
-const json = require('koa-json');
 
 const app = new Koa();
 
@@ -16,6 +15,7 @@ app.use(bodyparser({
 app.use(staticServer(`${__dirname}/static`));
 app.use(convert(json()));
 app.use(require('./middlewares/returnData'));
-app.use(router.routes(), router.allowedMethods());
+app.use(router.routes());
+app.use(router.allowedMethods());
 
 app.listen(3001);
