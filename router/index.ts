@@ -1,12 +1,14 @@
 
-import article from './article';
 import { Context } from 'koa';
 import * as fs from 'fs';
 import * as Router from 'koa-router';
+import article from './article';
+import admin from './admin';
 
 const router: Router = new Router();
 
-router.use('/api/article', article.routes());
+router.use('/api/article', article.routes(), article.allowedMethods());
+router.use('/api/admin', admin.routes(), admin.allowedMethods());
 
 router.get('/admin', async (ctx: Context) => {
 	const htmlFile = await (new Promise(function (resolve, reject) {
