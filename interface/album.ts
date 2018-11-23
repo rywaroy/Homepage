@@ -4,3 +4,8 @@ export interface IAlbum {
   time: string
   state: number
 }
+
+export interface IGroup {
+  album_id: number
+  url: string
+}
