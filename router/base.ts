@@ -27,9 +27,9 @@ router.get('/content', async (ctx: IContext) => {
 	if (ip !== '111.231.99.115') {
 		const rs: any = await getIpInfo(ip);
 		const rd: any = JSON.parse(rs).data;
-		let device = '';
-		const address = rd.country + rd.region + rd.city + rd.isp;
-		const deviceAgent = ctx.request.headers['user-agent'].toLowerCase();
+		let device: string = '';
+		const address: string = rd.country + rd.region + rd.city + rd.isp;
+		const deviceAgent: string = ctx.request.headers['user-agent'].toLowerCase();
 		if (deviceAgent.indexOf('ipad') > -1) {
 			device = 'ipad';
 		} else if (deviceAgent.indexOf('iphone') > -1) {
@@ -64,7 +64,7 @@ function getIpInfo(ip: string) {
 }
 
 router.get('/visit', isLogin, async (ctx: IContext) => {
-	const date = dayjs(new Date()).format('YYYY-MM-DD');
+	const date: string = dayjs(new Date()).format('YYYY-MM-DD');
 	const count = await Visit.findOne({
 		attributes: [
 			['count(*)', 'total'],
