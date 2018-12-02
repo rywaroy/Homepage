@@ -155,8 +155,8 @@ router.post('/top', isLogin, async (ctx: IContext) => {
 });
 
 // 更新文章
-router.patch('/', isLogin, async (ctx: IContext) => {
-	const id: number = ctx.request.body.id;
+router.patch('/:id', isLogin, async (ctx: IContext) => {
+	const id: number = ctx.params.id;
 	const title: string = ctx.request.body.title;
 	const intro: string = ctx.request.body.intro;
 	const content: string = ctx.request.body.content;
