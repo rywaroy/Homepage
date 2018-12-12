@@ -70,3 +70,11 @@
 17. 删除文章 POST `/api/learn/delete` -> DELETE `/api/learn/:id`
 18. 添加文章 POST `/api/learn/add` -> POST `/api/learn`
 19. 更新文章 POST `/api/learn/update` -> PATCH `/api/learn/:id`
+20. 获取打卡列表 GET `/api/plan/list` -> GET `/api/plan`
+21. 添加打卡记录 POST `/api/plan/list` -> POST `/api/plan`
+22. 删除打卡记录 POST `/api/plan/list/delete` -> DELETE `/api/plan/:id`
+23. 获取说说列表 GET `/api/think/list` -> GET `/api/think`
+24. 获取说说详情 GET `/api/think/info` -> GET `/api/think/:id`
+25. 添加说说 POST `/api/think/info` -> POST `/api/think`
+26. 删除说说 POST `/api/think/delete` -> DELETE `/api/think/:id`
+26. 修改说说 POST `/api/think/delete` -> POST `/api/think/:id`
