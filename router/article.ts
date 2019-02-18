@@ -231,7 +231,7 @@ router.post('/:id/like', async (ctx: IContext) => {
 			},
 		});
 	}
-	ctx.success(200, '点赞成功成功', data);
+	ctx.success(200, '点赞成功成功');
 });
 
 export default router;
