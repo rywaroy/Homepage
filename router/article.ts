@@ -19,7 +19,7 @@ router.get('/', async (ctx: IContext) => {
 	const page: number = Number(ctx.query.page) || 1;
 	const limit: number = Number(ctx.query.limit) || 10;
 	const data: IArticleList = await Article.findAndCount({
-		attributes: ['id', 'title', 'time', 'content', 'intro', 'top', 'watch', 'likes'],
+		attributes: ['id', 'title', 'time', 'intro', 'top', 'watch', 'likes'],
 		limit,
 		offset: (page - 1) * limit,
 		where: {
