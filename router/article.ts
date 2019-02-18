@@ -19,7 +19,7 @@ router.get('/', async (ctx: IContext) => {
 	const page: number = Number(ctx.query.page) || 1;
 	const limit: number = Number(ctx.query.limit) || 10;
 	const data: IArticleList = await Article.findAndCount({
-		attributes: ['id', 'title', 'time', 'content', 'intro', 'top', 'watch'],
+		attributes: ['id', 'title', 'time', 'content', 'intro', 'top', 'watch', 'likes'],
 		limit,
 		offset: (page - 1) * limit,
 		where: {
@@ -215,6 +215,23 @@ router.get('/:id/comment', async (ctx: IContext) => {
 		},
 	});
 	ctx.success(200, '获取成功', data);
+});
+
+// 点赞
+router.post('/:id/like', async (ctx: IContext) => {
+	const id: number = ctx.params.id;
+
+	const data: IArticle = await Article.findById(id);
+	if (data) {
+		await Article.update({
+			likes: ++data.likes,
+		}, {
+			where: {
+				id,
+			},
+		});
+	}
+	ctx.success(200, '点赞成功成功', data);
 });
 
 export default router;

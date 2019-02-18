@@ -30,6 +30,10 @@ const Article = sequelize.define('article', {
     type: Sequelize.INTEGER,
     defaultValue: 0,
   },
+  likes: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+  }
 });
 
 export default Article;

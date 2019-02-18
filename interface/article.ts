@@ -15,6 +15,7 @@ export interface IArticle {
   state: number
   tagid: number
   tag: TTag
+  likes: number
 }
 
 export interface TTag {
