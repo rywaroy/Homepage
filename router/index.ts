@@ -27,7 +27,7 @@ router.use('/api/think', think.routes(), think.allowedMethods());
 
 router.get('/admin', async (ctx: Context) => {
 	const htmlFile = await (new Promise(function (resolve, reject) {
-		fs.readFile('/home/homepage/server/admin/index.html', (err: any, data: any) => {
+		fs.readFile('/home/homepage2/server/admin/index.html', (err: any, data: any) => {
 			if (err) {
 				reject(err);
 			} else {
@@ -44,7 +44,7 @@ router.get('/', async (ctx: Context, next: () => Promise<any>) => {
 		next();
 	} else {
 		const htmlFile = await (new Promise(function (resolve, reject) {
-			fs.readFile('/home/homepage/server/pc/index.html', (err: any, data: any) => {
+			fs.readFile('/home/homepage2/server/pc/index.html', (err: any, data: any) => {
 				if (err) {
 					reject(err);
 				} else {
@@ -60,7 +60,7 @@ router.get('/', async (ctx: Context, next: () => Promise<any>) => {
 router.get('*', async (ctx: Context, next: () => Promise<any>) => {
 	if (ctx.response.status === 404 && ctx.request.path.indexOf('api') === -1) {
 		const htmlFile = await (new Promise(function (resolve, reject) {
-			fs.readFile('/home/homepage/server/pc/index.html', (err: any, data: any) => {
+			fs.readFile('/home/homepage2/server/pc/index.html', (err: any, data: any) => {
 				if (err) {
 					reject(err);
 				} else {
