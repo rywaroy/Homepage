@@ -55,7 +55,7 @@
 2. 获取文章详情 GET `/api/article/info?id=:id` -> GET `/api/article/:id`
 3. 删除文章 POST `/api/article/delete?id=:id` -> DELETE `/api/article/:id`
 4. 添加文章 POST `/api/article/add` -> POST `/api/article`
-5. 删除文章标签 POST `/api/article/tag/delete` -> DELETE `/api/article/tag`
+5. 删除文章标签 POST `/api/article/tag/delete` -> DELETE `/api/article/tag/:id`
 6. 更新文章 POST `/api/article/update` -> PATCH `/api/article/:id`
 7. 添加文章评论 POST `/api/article/comment` -> POST `/api/article/:id/comment`
 8. 获取文章评论 GET `/api/article/comment` -> GET `/api/article/:id/comment`
@@ -66,10 +66,10 @@
 13. 获取相册图片 GET `/api/album/group` -> GET `/api/album/:id/group`
 14. 删除相册图片 POST `/api/album/group/delete` -> DELETE `/api/album/group/:id`
 15. 获取学习笔记列表 GET `/api/learn/list` -> GET `/api/learn`
-16. 获取文章详情 GET `/api/learn/info` -> GET `/api/learn/:id`
-17. 删除文章 POST `/api/learn/delete` -> DELETE `/api/learn/:id`
-18. 添加文章 POST `/api/learn/add` -> POST `/api/learn`
-19. 更新文章 POST `/api/learn/update` -> PATCH `/api/learn/:id`
+16. 获取学习笔记详情 GET `/api/learn/info` -> GET `/api/learn/:id`
+17. 删除学习笔记 POST `/api/learn/delete` -> DELETE `/api/learn/:id`
+18. 添加学习笔记 POST `/api/learn/add` -> POST `/api/learn`
+19. 更新学习笔记 POST `/api/learn/update` -> PATCH `/api/learn/:id`
 20. 获取打卡列表 GET `/api/plan/list` -> GET `/api/plan`
 21. 添加打卡记录 POST `/api/plan/list` -> POST `/api/plan`
 22. 删除打卡记录 POST `/api/plan/list/delete` -> DELETE `/api/plan/:id`
