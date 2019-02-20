@@ -11,6 +11,7 @@ import learn from './learn';
 import one from './one';
 import plan from './plan';
 import think from './think';
+import time from './time';
 
 
 const router: Router = new Router();
@@ -24,6 +25,7 @@ router.use('/api/learn', learn.routes(), learn.allowedMethods());
 router.use('/api/one', one.routes(), one.allowedMethods());
 router.use('/api/plan', plan.routes(), plan.allowedMethods());
 router.use('/api/think', think.routes(), think.allowedMethods());
+router.use('/api/time', time.routes(), time.allowedMethods());
 
 router.get('/admin', async (ctx: Context) => {
 	const htmlFile = await (new Promise(function (resolve, reject) {
