@@ -33,6 +33,9 @@ const Article = sequelize.define('article', {
   likes: {
     type: Sequelize.INTEGER,
     defaultValue: 0,
+  },
+  img: {
+    type: Sequelize.TEXT,
   }
 });
 

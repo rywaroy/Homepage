@@ -16,6 +16,7 @@ export interface IArticle {
   tagid: number
   tag: TTag
   likes: number
+  img: string
 }
 
 export interface TTag {
