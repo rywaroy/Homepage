@@ -45,8 +45,10 @@ router.get('/', async (ctx: Context, next: () => Promise<any>) => {
 	if (ctx.request.path.indexOf('api') > -1) {
 		next();
 	} else {
+		const deviceAgent = ctx.headers['user-agent'].toLowerCase();
+    const agentID = deviceAgent.match(/(iphone|ipod|ipad|android)/);
 		const htmlFile = await (new Promise(function (resolve, reject) {
-			fs.readFile('/home/homepage2/server/pc/index.html', (err: any, data: any) => {
+			fs.readFile(`/home/homepage2/server/${agentID ? 'mobile': 'pc'}/index.html`, (err: any, data: any) => {
 				if (err) {
 					reject(err);
 				} else {
@@ -61,8 +63,10 @@ router.get('/', async (ctx: Context, next: () => Promise<any>) => {
 
 router.get('*', async (ctx: Context, next: () => Promise<any>) => {
 	if (ctx.response.status === 404 && ctx.request.path.indexOf('api') === -1) {
+		const deviceAgent = ctx.headers['user-agent'].toLowerCase();
+    const agentID = deviceAgent.match(/(iphone|ipod|ipad|android)/);
 		const htmlFile = await (new Promise(function (resolve, reject) {
-			fs.readFile('/home/homepage2/server/pc/index.html', (err: any, data: any) => {
+			fs.readFile(`/home/homepage2/server/${agentID ? 'mobile': 'pc'}/index.html`, (err: any, data: any) => {
 				if (err) {
 					reject(err);
 				} else {
