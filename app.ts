@@ -8,7 +8,9 @@ const convert = require('koa-convert');
 
 const app = new Koa();
 
-app.use(cors());
+app.use(cors({
+  methods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+}));
 app.use(bodyparser({
   formLimit: '5mb',
 }));

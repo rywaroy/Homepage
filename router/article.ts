@@ -10,6 +10,50 @@ import { IArticle, IArticleList, TTag, IComment } from '../interface/article';
 
 const router: Router = new Router();
 
+// 获取文章标签
+router.get('/tag', async (ctx: IContext) => {
+	const list: TTag[] = await Tag.findAll({
+		where: {
+			state: 1,
+		},
+	});
+	ctx.success(200, '获取成功', list);
+});
+
+// 添加文章标签
+router.post('/tag', async (ctx: IContext) => {
+	const title: string = ctx.request.body.title;
+	const color: string = ctx.request.body.color;
+
+	if (!title || !color) {
+		ctx.error(400, '请输入标题或颜色');
+		return;
+	}
+
+	await Tag.create({
+		title,
+		color,
+	});
+	ctx.success(200, '添加成功');
+});
+
+// 删除文章标签
+router.delete('/tag', isLogin, async (ctx: IContext) => {
+	const id: number = ctx.request.body.id;
+	if (!id) {
+		ctx.error(400, '请输入标签id');
+		return;
+	}
+	await Tag.update({
+		state: 0,
+	}, {
+		where: {
+			id,
+		},
+	});
+	ctx.success(200, '删除成功');
+});
+
 Article.belongsTo(Tag, {
 	foreignKey: 'tagid',
 });
@@ -90,50 +134,6 @@ router.post('/', isLogin, async (ctx: IContext) => {
 		tagid,
 	});
 	ctx.success(200, '添加成功');
-});
-
-// 获取文章标签
-router.get('/tag', async (ctx: IContext) => {
-	const list: TTag[] = await Tag.findAll({
-		where: {
-			state: 1,
-		},
-	});
-	ctx.success(200, '获取成功', list);
-});
-
-// 添加文章标签
-router.post('/tag', async (ctx: IContext) => {
-	const title: string = ctx.request.body.title;
-	const color: string = ctx.request.body.color;
-
-	if (!title || !color) {
-		ctx.error(400, '请输入标题或颜色');
-		return;
-	}
-
-	await Tag.create({
-		title,
-		color,
-	});
-	ctx.success(200, '添加成功');
-});
-
-// 删除文章标签
-router.delete('/tag', isLogin, async (ctx: IContext) => {
-	const id: number = ctx.request.body.id;
-	if (!id) {
-		ctx.error(400, '请输入标签id');
-		return;
-	}
-	await Tag.update({
-		state: 0,
-	}, {
-		where: {
-			id,
-		},
-	});
-	ctx.success(200, '删除成功');
 });
 
 // 设置文章置顶

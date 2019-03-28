@@ -1,8 +1,18 @@
 {
   "devDependencies": {
+    "@types/koa-bodyparser": "^5.0.2",
+    "@types/koa-cors": "0.0.0",
+    "@types/koa-json": "^2.0.18",
+    "@types/koa-router": "^7.0.34",
+    "@types/koa-static": "^4.0.0",
+    "@types/request": "^2.48.1",
+    "@types/sequelize": "^4.27.31",
+    "@types/uuid": "^3.4.4",
     "tslib": "^1.9.3"
   },
   "dependencies": {
+    "@koa/cors": "^2.2.3",
+    "dayjs": "^1.7.7",
     "koa": "^2.6.2",
     "koa-bodyparser": "^4.2.1",
     "koa-convert": "^1.2.0",
@@ -10,7 +20,11 @@
     "koa-json": "^2.0.2",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
+    "mysql2": "^1.6.4",
+    "request": "^2.88.0",
     "sequelize": "^4.41.2",
+    "typescript": "^3.1.6",
+    "uuid": "^3.3.2",
     "xss": "^1.0.3"
   },
   "name": "Homepage",
@@ -18,7 +32,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && node ./dist/app.js"
   },
   "repository": {
     "type": "git",

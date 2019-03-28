@@ -56,7 +56,7 @@ router.get('/', async (ctx: Context, next: () => Promise<any>) => {
 				}
 			});
 		}));
-		ctx.type = 'html';
+		ctx.type = 'text/html;charset=utf-8';
 		ctx.body = htmlFile;
 	}
 });
@@ -74,7 +74,7 @@ router.get('*', async (ctx: Context, next: () => Promise<any>) => {
 				}
 			});
 		}));
-		ctx.type = 'html';
+		ctx.type = 'text/html;charset=utf-8';
 		ctx.body = htmlFile;
 	} else {
 		next();
