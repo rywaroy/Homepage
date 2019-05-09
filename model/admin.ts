@@ -29,10 +29,10 @@ const Admin = sequelize.define('admin', {
 	last_location: {
 		type: Sequelize.STRING,
 	},
-	created_at: {
+	createdAt: {
 		type: Sequelize.DATE,
 	},
-	updated_at: {
+	updatedAt: {
 		type: Sequelize.DATE,
 	},
 });

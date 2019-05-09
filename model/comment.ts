@@ -14,10 +14,10 @@ const Comment = sequelize.define('comment', {
   time: {
     type: Sequelize.DATE,
   },
-  created_at: {
+  createdAt: {
 		type: Sequelize.DATE,
 	},
-	updated_at: {
+	updatedAt: {
 		type: Sequelize.DATE,
 	},
 });

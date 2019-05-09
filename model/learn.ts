@@ -28,10 +28,10 @@ const Learn = sequelize.define('learn', {
     type: Sequelize.INTEGER,
     defaultValue: 1,
   },
-  created_at: {
+  createdAt: {
 		type: Sequelize.DATE,
 	},
-	updated_at: {
+	updatedAt: {
 		type: Sequelize.DATE,
 	},
 });
