@@ -12,6 +12,12 @@ const Tag = sequelize.define('tag', {
     type: Sequelize.INTEGER,
     defaultValue: 1,
   },
+  createdAt: {
+		type: Sequelize.DATE,
+	},
+	updatedAt: {
+		type: Sequelize.DATE,
+	},
 });
 
 export default Tag;

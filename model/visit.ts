@@ -14,6 +14,12 @@ const Visit = sequelize.define('visit', {
 	device: {
 		type: Sequelize.STRING,
 	},
+	createdAt: {
+		type: Sequelize.DATE,
+	},
+	updatedAt: {
+		type: Sequelize.DATE,
+	},
 });
 
 export default Visit;

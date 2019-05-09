@@ -29,6 +29,12 @@ const Admin = sequelize.define('admin', {
 	last_location: {
 		type: Sequelize.STRING,
 	},
+	createdAt: {
+		type: Sequelize.DATE,
+	},
+	updatedAt: {
+		type: Sequelize.DATE,
+	},
 });
 
 export default Admin;

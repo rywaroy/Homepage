@@ -21,6 +21,12 @@ const Think = sequelize.define('think', {
     type: Sequelize.INTEGER,
     defaultValue: 1,
   },
+  createdAt: {
+		type: Sequelize.DATE,
+	},
+	updatedAt: {
+		type: Sequelize.DATE,
+	},
 });
 
 export default Think;

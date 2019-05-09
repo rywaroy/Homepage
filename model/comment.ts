@@ -14,6 +14,12 @@ const Comment = sequelize.define('comment', {
   time: {
     type: Sequelize.DATE,
   },
+  createdAt: {
+		type: Sequelize.DATE,
+	},
+	updatedAt: {
+		type: Sequelize.DATE,
+	},
 });
 
 export default Comment;

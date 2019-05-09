@@ -12,6 +12,12 @@ const Plan = sequelize.define('plan', {
     type: Sequelize.INTEGER,
     defaultValue: 1,
   },
+  createdAt: {
+		type: Sequelize.DATE,
+	},
+	updatedAt: {
+		type: Sequelize.DATE,
+	},
 });
 
 export default Plan;
