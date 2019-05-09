@@ -8,6 +8,12 @@ const PlanRecord = sequelize.define('plan_record', {
   time: {
     type: Sequelize.DATEONLY,
   },
+  created_at: {
+		type: Sequelize.DATE,
+	},
+	updated_at: {
+		type: Sequelize.DATE,
+	},
 });
 
 export default PlanRecord;

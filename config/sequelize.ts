@@ -11,7 +11,7 @@ const sequelize: any = new Sequelize('blog', 'zzh', '123456', {
   },
   define: {
     charset: 'utf8',
-    timestamps: false, // 默认为 true
+    // timestamps: false, // 默认为 true
     freezeTableName: true,
   },
 });

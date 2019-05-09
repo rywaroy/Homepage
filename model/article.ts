@@ -36,7 +36,13 @@ const Article = sequelize.define('article', {
   },
   img: {
     type: Sequelize.TEXT,
-  }
+  },
+  created_at: {
+		type: Sequelize.DATE,
+	},
+	updated_at: {
+		type: Sequelize.DATE,
+	},
 });
 
 export default Article;

@@ -15,6 +15,12 @@ const Album = sequelize.define('album', {
     type: Sequelize.INTEGER,
     defaultValue: 1,
   },
+  created_at: {
+		type: Sequelize.DATE,
+	},
+	updated_at: {
+		type: Sequelize.DATE,
+	},
 });
 
 export default Album;

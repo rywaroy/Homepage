@@ -8,6 +8,12 @@ const AlbumGroup = sequelize.define('album_group', {
   url: {
     type: Sequelize.STRING,
   },
+  created_at: {
+		type: Sequelize.DATE,
+	},
+	updated_at: {
+		type: Sequelize.DATE,
+	},
 });
 
 export default AlbumGroup;
