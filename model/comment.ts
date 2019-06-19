@@ -11,9 +11,6 @@ const Comment = sequelize.define('comment', {
   aid: {
     type: Sequelize.INTEGER,
   },
-  time: {
-    type: Sequelize.DATE,
-  },
   createdAt: {
 		type: Sequelize.DATE,
 	},

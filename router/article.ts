@@ -177,7 +177,6 @@ router.post('/:id/comment', async (ctx: IContext) => {
 	const id: number = ctx.params.id;
 	const name: string = xss(ctx.request.body.name) || '匿名';
 	const content: string = xss(ctx.request.body.content);
-	const time: object = new Date();
 	const ip: string = ctx.request.header['x-forward-for'].substring(0, 10) + '**';
 	if (DataLength(name) > 12 || DataLength(content) > 1000) {
 		ctx.error(400, '字数超过限制');
@@ -186,7 +185,6 @@ router.post('/:id/comment', async (ctx: IContext) => {
 	await Comment.create({
 		name: `${name} ${ip}`,
 		content,
-		time,
 		aid: id,
 	});
 	ctx.success(200, '添加成功');

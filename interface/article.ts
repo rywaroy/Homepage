@@ -28,5 +28,4 @@ export interface IComment {
   name: string
   content: string
   aid: number
-  time: string
 }
