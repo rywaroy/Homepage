@@ -11,7 +11,7 @@ router.get('/', async (ctx: IContext) => {
 	const page: number = Number(ctx.query.page) || 1;
 	const limit: number = Number(ctx.query.limit) || 10;
 	const data: ICount = await Learn.findAndCount({
-		attributes: ['id', 'title', 'time', 'intro', 'tag'],
+		attributes: ['id', 'title', 'updatedAt', 'intro', 'tag'],
 		where: {
 			state: 1,
 		},
@@ -59,14 +59,12 @@ router.post('/', isLogin, async (ctx) => {
 	const intro: string = ctx.request.body.intro;
 	const html: string = ctx.request.body.html;
 	const md: string = ctx.request.body.md;
-	const time: object = new Date();
 	const tag: string = ctx.request.body.tag;
 	const type: number = ctx.request.body.type;
 	await Learn.create({
 		title,
 		intro,
 		html,
-		time,
 		md,
 		tag,
 		type,
