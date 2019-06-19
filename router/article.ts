@@ -63,7 +63,7 @@ router.get('/', async (ctx: IContext) => {
 	const page: number = Number(ctx.query.page) || 1;
 	const limit: number = Number(ctx.query.limit) || 10;
 	const data: IArticleList = await Article.findAndCount({
-		attributes: ['id', 'title', 'time', 'intro', 'top', 'watch', 'likes', 'img'],
+		attributes: ['id', 'title', 'intro', 'top', 'watch', 'likes', 'img'],
 		limit,
 		offset: (page - 1) * limit,
 		where: {
@@ -124,13 +124,11 @@ router.post('/', isLogin, async (ctx: IContext) => {
 	const title: string = ctx.request.body.title;
 	const intro: string = ctx.request.body.intro;
 	const content: string = ctx.request.body.content;
-	const time: object = new Date();
 	const tagid: number = ctx.request.body.tagId;
 	await Article.create({
 		title,
 		intro,
 		content,
-		time,
 		tagid,
 	});
 	ctx.success(200, '添加成功');
