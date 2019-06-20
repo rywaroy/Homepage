@@ -55,14 +55,12 @@ router.get('/:id', async ctx => {
 router.post('/', isLogin, async ctx => {
   const content: string = ctx.request.body.content;
   const photos: string = ctx.request.body.photos;
-  const time: object = new Date();
 
   const user: IAdmin = await Admin.findById(1);
 
   await Think.create({
     avatar: user.avatar,
     name: user.name,
-    time,
     content,
     photos,
   });

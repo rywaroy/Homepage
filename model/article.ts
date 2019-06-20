@@ -6,9 +6,6 @@ const Article = sequelize.define('article', {
   title: {
     type: Sequelize.TEXT,
   },
-  time: {
-    type: Sequelize.DATE,
-  },
   content: {
     type: Sequelize.TEXT,
   },

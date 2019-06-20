@@ -7,7 +7,6 @@ export interface IArticleList {
 export interface IArticle {
   id: number
   title: string
-  time: string
   content: string
   intro: string
   top: number
@@ -29,5 +28,4 @@ export interface IComment {
   name: string
   content: string
   aid: number
-  time: string
 }

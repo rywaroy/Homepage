@@ -63,7 +63,7 @@ router.get('/', async (ctx: IContext) => {
 	const page: number = Number(ctx.query.page) || 1;
 	const limit: number = Number(ctx.query.limit) || 10;
 	const data: IArticleList = await Article.findAndCount({
-		attributes: ['id', 'title', 'time', 'intro', 'top', 'watch', 'likes', 'img'],
+		attributes: ['id', 'title', 'updatedAt', 'intro', 'top', 'watch', 'likes', 'img'],
 		limit,
 		offset: (page - 1) * limit,
 		where: {
@@ -124,13 +124,11 @@ router.post('/', isLogin, async (ctx: IContext) => {
 	const title: string = ctx.request.body.title;
 	const intro: string = ctx.request.body.intro;
 	const content: string = ctx.request.body.content;
-	const time: object = new Date();
 	const tagid: number = ctx.request.body.tagId;
 	await Article.create({
 		title,
 		intro,
 		content,
-		time,
 		tagid,
 	});
 	ctx.success(200, '添加成功');
@@ -179,7 +177,6 @@ router.post('/:id/comment', async (ctx: IContext) => {
 	const id: number = ctx.params.id;
 	const name: string = xss(ctx.request.body.name) || '匿名';
 	const content: string = xss(ctx.request.body.content);
-	const time: object = new Date();
 	const ip: string = ctx.request.header['x-forward-for'].substring(0, 10) + '**';
 	if (DataLength(name) > 12 || DataLength(content) > 1000) {
 		ctx.error(400, '字数超过限制');
@@ -188,7 +185,6 @@ router.post('/:id/comment', async (ctx: IContext) => {
 	await Comment.create({
 		name: `${name} ${ip}`,
 		content,
-		time,
 		aid: id,
 	});
 	ctx.success(200, '添加成功');

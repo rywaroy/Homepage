@@ -1,7 +1,6 @@
 export interface IList {
   id: number
   title: string
-  time: string
   intro: string
   tag: string
 }
