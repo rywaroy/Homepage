@@ -10,11 +10,9 @@ const router: Router = new Router();
 router.post('/', isLogin, async (ctx: IContext) => {
 	const url: string = ctx.request.body.url;
 	const title: string = ctx.request.body.title;
-	const time: object = new Date();
 	await Album.create({
 		title,
 		img: url,
-		time,
 	});
 	ctx.success(200, '添加成功');
 });

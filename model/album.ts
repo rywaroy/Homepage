@@ -8,9 +8,6 @@ const Album = sequelize.define('album', {
   img: {
     type: Sequelize.STRING,
   },
-  time: {
-    type: Sequelize.DATE,
-  },
   state: {
     type: Sequelize.INTEGER,
     defaultValue: 1,
