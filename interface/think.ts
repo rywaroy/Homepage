@@ -1,6 +1,5 @@
 export interface IThink {
   avatar: string
-  time: string
   name: string
   content: string
   photos: any

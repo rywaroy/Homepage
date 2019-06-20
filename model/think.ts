@@ -5,9 +5,6 @@ const Think = sequelize.define('think', {
   avatar: {
     type: Sequelize.TEXT,
   },
-  time: {
-    type: Sequelize.DATE,
-  },
   name: {
     type: Sequelize.STRING,
   },
