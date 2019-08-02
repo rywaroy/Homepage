@@ -1,6 +1,7 @@
 
 import { Context } from 'koa';
 import * as fs from 'fs';
+import * as path from 'path';
 import * as Router from 'koa-router';
 import article from './article';
 import admin from './admin';
@@ -15,7 +16,6 @@ import time from './time';
 
 
 const router: Router = new Router();
-
 router.use('/api/article', article.routes(), article.allowedMethods());
 router.use('/api/admin', admin.routes(), admin.allowedMethods());
 router.use('/api/album', album.routes(), album.allowedMethods());
@@ -29,7 +29,7 @@ router.use('/api/time', time.routes(), time.allowedMethods());
 
 router.get('/admin', async (ctx: Context) => {
 	const htmlFile = await (new Promise(function (resolve, reject) {
-		fs.readFile('/home/homepage2/server/admin/index.html', (err: any, data: any) => {
+		fs.readFile(path.join(__dirname, '../', './admin/index.html'), (err: any, data: any) => {
 			if (err) {
 				reject(err);
 			} else {
@@ -37,7 +37,7 @@ router.get('/admin', async (ctx: Context) => {
 			}
 		});
 	}));
-	ctx.type = 'html';
+	ctx.type = 'text/html;charset=utf-8';
 	ctx.body = htmlFile;
 });
 
@@ -48,7 +48,7 @@ router.get('/', async (ctx: Context, next: () => Promise<any>) => {
 		const deviceAgent = ctx.headers['user-agent'].toLowerCase();
     const agentID = deviceAgent.match(/(iphone|ipod|ipad|android)/);
 		const htmlFile = await (new Promise(function (resolve, reject) {
-			fs.readFile(`/home/homepage2/server/${agentID ? 'mobile': 'pc'}/index.html`, (err: any, data: any) => {
+			fs.readFile(path.join(__dirname, '../', `./${agentID ? 'mobile': 'pc'}/index.html`), (err: any, data: any) => {
 				if (err) {
 					reject(err);
 				} else {
@@ -66,7 +66,7 @@ router.get('*', async (ctx: Context, next: () => Promise<any>) => {
 		const deviceAgent = ctx.headers['user-agent'].toLowerCase();
     const agentID = deviceAgent.match(/(iphone|ipod|ipad|android)/);
 		const htmlFile = await (new Promise(function (resolve, reject) {
-			fs.readFile(`/home/homepage2/server/${agentID ? 'mobile': 'pc'}/index.html`, (err: any, data: any) => {
+			fs.readFile(path.join(__dirname, '../', `./${agentID ? 'mobile': 'pc'}/index.html`), (err: any, data: any) => {
 				if (err) {
 					reject(err);
 				} else {
