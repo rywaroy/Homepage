@@ -18,8 +18,11 @@ const Learn = sequelize.define('learn', {
   html: {
     type: Sequelize.TEXT,
   },
-  tag: {
+  sign: {
     type: Sequelize.TEXT,
+  },
+  tagid: {
+    type: Sequelize.INTEGER,
   },
   type: {
     type: Sequelize.INTEGER,
