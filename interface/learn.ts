@@ -2,7 +2,8 @@ export interface IList {
   id: number
   title: string
   intro: string
-  tag: string
+  sgin: string
+  updatedAt: string
 }
 
 export interface ICount {
