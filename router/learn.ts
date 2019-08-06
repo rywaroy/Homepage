@@ -3,21 +3,31 @@ import isLogin from '../middlewares/isLogin';
 import Learn from '../model/learn';
 import { ICount, IInfo } from '../interface/learn';
 import IContext from '../interface/context';
+import Tag from'../model/tag';
 
 const router: Router = new Router();
+
+Learn.belongsTo(Tag, {
+	foreignKey: 'tagid',
+});
 
 // 获取文章列表
 router.get('/', async (ctx: IContext) => {
 	const page: number = Number(ctx.query.page) || 1;
 	const limit: number = Number(ctx.query.limit) || 10;
 	const data: ICount = await Learn.findAndCount({
-		attributes: ['id', 'title', 'updatedAt', 'intro', 'tag'],
+		attributes: ['id', 'title', 'updatedAt', 'intro', 'sign'],
 		where: {
 			state: 1,
 		},
 		limit,
 		offset: (page - 1) * limit,
 		order: [['id', 'DESC']],
+		include: [{
+			model: Tag,
+			as: 'tag',
+			attributes: ['title', 'color'],
+		}],
 	});
 	ctx.success(200, '获取成功', {
 		list: data.rows,
