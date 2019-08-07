@@ -91,17 +91,17 @@ router.patch('/:id', isLogin, async (ctx) => {
 	const intro: string = ctx.request.body.intro;
 	const html: string = ctx.request.body.html;
 	const md: string = ctx.request.body.md;
-	const tag: string = ctx.request.body.tag;
-	const update: object = new Date();
+	const tagid: number = ctx.request.body.tagid;
+	const sign: string = ctx.request.body.sign; 
 	const type: number = ctx.request.body.type;
 	await Learn.update({
 		title,
 		intro,
 		html,
 		md,
-		tag,
-		update,
+		tagid,
 		type,
+		sign,
 	}, {
 		where: {
 			id,
