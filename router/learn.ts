@@ -69,15 +69,17 @@ router.post('/', isLogin, async (ctx) => {
 	const intro: string = ctx.request.body.intro;
 	const html: string = ctx.request.body.html;
 	const md: string = ctx.request.body.md;
-	const tag: string = ctx.request.body.tag;
+	const tagid: number = ctx.request.body.tagid;
+	const sign: string = ctx.request.body.sign;
 	const type: number = ctx.request.body.type;
 	await Learn.create({
 		title,
 		intro,
 		html,
 		md,
-		tag,
+		tagid,
 		type,
+		sign,
 	});
 	ctx.success(200, '添加成功');
 });
