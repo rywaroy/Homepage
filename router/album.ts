@@ -8,8 +8,13 @@ import { IAlbum, IGroup } from '../interface/album';
 const router: Router = new Router();
 
 router.post('/', isLogin, async (ctx: IContext) => {
-	const url: string = ctx.request.body.url;
-	const title: string = ctx.request.body.title;
+	const {
+		url,
+		title,
+	}: {
+		url: string,
+		title: string,
+	} = ctx.request.body;
 	await Album.create({
 		title,
 		img: url,
@@ -18,7 +23,7 @@ router.post('/', isLogin, async (ctx: IContext) => {
 });
 
 router.delete('/:id', isLogin, async (ctx: IContext) => {
-	const id = ctx.params.id;
+	const id: number = ctx.params.id;
 	await Album.update({
 		state: 0,
 	}, {
