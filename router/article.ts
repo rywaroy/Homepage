@@ -22,9 +22,13 @@ router.get('/tag', async (ctx: IContext) => {
 
 // 添加文章标签
 router.post('/tag', async (ctx: IContext) => {
-	const title: string = ctx.request.body.title;
-	const color: string = ctx.request.body.color;
-
+	const {
+		title,
+		color,
+	}: {
+		title: string,
+		color: string,
+	} = ctx.request.body;
 	if (!title || !color) {
 		ctx.error(400, '请输入标题或颜色');
 		return;
@@ -121,10 +125,17 @@ router.delete('/:id', isLogin, async (ctx: IContext) => {
 
 // 添加文章
 router.post('/', isLogin, async (ctx: IContext) => {
-	const title: string = ctx.request.body.title;
-	const intro: string = ctx.request.body.intro;
-	const content: string = ctx.request.body.content;
-	const tagid: number = ctx.request.body.tagId;
+	const {
+		title,
+		intro,
+		content,
+		tagid
+	}: {
+		title: string,
+		intro: string,
+		content: string,
+		tagid: number
+	} = ctx.request.body;
 	await Article.create({
 		title,
 		intro,
@@ -136,8 +147,13 @@ router.post('/', isLogin, async (ctx: IContext) => {
 
 // 设置文章置顶
 router.post('/top', isLogin, async (ctx: IContext) => {
-	const id = ctx.request.body.id;
-	const top = ctx.request.body.top;
+	const {
+		id,
+		top,
+	}: {
+		id: number,
+		top: number,
+	} = ctx.request.body;
 	if (!id) {
 		ctx.error(400, '请输入标签id');
 		return;
@@ -155,10 +171,17 @@ router.post('/top', isLogin, async (ctx: IContext) => {
 // 更新文章
 router.patch('/:id', isLogin, async (ctx: IContext) => {
 	const id: number = ctx.params.id;
-	const title: string = ctx.request.body.title;
-	const intro: string = ctx.request.body.intro;
-	const content: string = ctx.request.body.content;
-	const tagid: number = ctx.request.body.tagId;
+	const {
+		title,
+		intro,
+		content,
+		tagid,
+	}: {
+		title: string,
+		intro: string,
+		content: string,
+		tagid: number,
+	} = ctx.request.body;
 	await Article.update({
 		title,
 		intro,
@@ -216,7 +239,6 @@ router.get('/:id/comment', async (ctx: IContext) => {
 // 点赞
 router.post('/:id/like', async (ctx: IContext) => {
 	const id: number = ctx.params.id;
-
 	const data: IArticle = await Article.findById(id);
 	if (data) {
 		await Article.update({
