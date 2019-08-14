@@ -16,9 +16,15 @@ const options: IOptions = {
 	},
 };
 router.get('/list', async (ctx: IContext) => {
-	const page: number = ctx.query.page || 1;
-	const limit: number = ctx.query.limit || 10;
-	const city: string = ctx.query.city || '杭州';
+	const {
+		page = 1,
+		limit = 10,
+		city = '杭州',
+	}: {
+		page: number,
+		limit: number,
+		city: string,
+	} = ctx.query;
 	const start: number = (page - 1) * limit;
 	options.url = `https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b&city=${city}&start=${start}&count=${limit}&client=&udid=`;
 	const data: any = await (new Promise((resolve) => {
@@ -42,9 +48,15 @@ router.get('/info', async (ctx: IContext) => {
 });
 
 router.get('/image', async (ctx) => {
-	const id: number = ctx.query.id;
-	const page: number = ctx.query.page;
-	const limit: number = ctx.query.limit;
+	const {
+		id,
+		page,
+		limit,
+	}: {
+		id: number,
+		page: number,
+		limit: number,
+	} = ctx.query;
 	const start: number = (page - 1) * limit;
 	const count: number = page * limit;
 	const data: any = await (new Promise((resolve) => {
@@ -58,9 +70,15 @@ router.get('/image', async (ctx) => {
 });
 
 router.get('/comment', async (ctx) => {
-	const id: number = ctx.query.id;
-	const page: number = ctx.query.page;
-	const limit: number = ctx.query.limit;
+	const {
+		id,
+		page,
+		limit,
+	}: {
+		id: number,
+		page: number,
+		limit: number,
+	} = ctx.query;
 	const start: number = (page - 1) * limit;
 	const data: any = await (new Promise((resolve) => {
 		options.url = `http://api.douban.com/v2/movie/subject/${id}/comments?apikey=0b2bdeda43b5688921839c8ecb20399b&start=${start}&count=${limit}&client=&udid=`;
