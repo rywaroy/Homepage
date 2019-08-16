@@ -65,13 +65,23 @@ router.delete('/:id', isLogin, async (ctx: IContext) => {
 
 // 添加文章
 router.post('/', isLogin, async (ctx) => {
-	const title: string = ctx.request.body.title;
-	const intro: string = ctx.request.body.intro;
-	const html: string = ctx.request.body.html;
-	const md: string = ctx.request.body.md;
-	const tagid: number = ctx.request.body.tagid;
-	const sign: string = ctx.request.body.sign;
-	const type: number = ctx.request.body.type;
+	const {
+		title,
+		intro,
+		html,
+		md,
+		tagid,
+		sign,
+		type,
+	}: {
+		title: string,
+		intro: string,
+		html: string,
+		md: string,
+		tagid: number,
+		sign: string,
+		type: number,
+	} = ctx.request.body;
 	await Learn.create({
 		title,
 		intro,
@@ -87,13 +97,23 @@ router.post('/', isLogin, async (ctx) => {
 // 更新文章
 router.patch('/:id', isLogin, async (ctx) => {
 	const id: number = ctx.params.id;
-	const title: string = ctx.request.body.title;
-	const intro: string = ctx.request.body.intro;
-	const html: string = ctx.request.body.html;
-	const md: string = ctx.request.body.md;
-	const tagid: number = ctx.request.body.tagid;
-	const sign: string = ctx.request.body.sign; 
-	const type: number = ctx.request.body.type;
+	const {
+		title,
+		intro,
+		html,
+		md,
+		tagid,
+		sign,
+		type,
+	}: {
+		title: string,
+		intro: string,
+		html: string,
+		md: string,
+		tagid: number,
+		sign: string,
+		type: number,
+	} = ctx.request.body;
 	await Learn.update({
 		title,
 		intro,
