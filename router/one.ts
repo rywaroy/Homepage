@@ -17,8 +17,13 @@ router.get('/list', async (ctx: IContext) => {
 
 // 连载详情
 router.get('/info', async (ctx: IContext) => {
-  const id: number = ctx.query.id;
-  const type: number = ctx.query.type;
+	const {
+		id,
+		type,
+	}: {
+		id: number,
+		type: number,
+	} = ctx.query;
   const data: any = await (new Promise((resolve) => {
 		request(`http://v3.wufazhuce.com:8000/api/${type}/htmlcontent/${id}`, function (error, response, body) {
 			resolve(JSON.parse(body));
@@ -29,8 +34,13 @@ router.get('/info', async (ctx: IContext) => {
 
 // 评论
 router.get('/comment', async (ctx: IContext) => {
-  const id: number = ctx.query.id;
-  const type: number = ctx.query.type;
+  const {
+		id,
+		type,
+	}: {
+		id: number,
+		type: number,
+	} = ctx.query;
   const data: any = await (new Promise((resolve) => {
 		request(`http://v3.wufazhuce.com:8000/api/comment/praiseandtime/${type}/${id}/0`, function (error, response, body) {
 			resolve(JSON.parse(body));

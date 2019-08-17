@@ -1,4 +1,3 @@
-
 import * as Router from 'koa-router';
 import * as uuid from 'uuid';
 import * as request from 'request';
@@ -9,8 +8,13 @@ import { IAdmin } from '../interface/admin';
 const router: Router = new Router();
 
 router.post('/login', async (ctx: IContext) => {
-	const account: string = ctx.request.body.account;
-	const password: string = ctx.request.body.password;
+	const {
+		account,
+		password
+	}: {
+		account: string,
+		password: string
+	} = ctx.request.body;
 	if (!account || !password) {
 		ctx.error(400, '请输入账号或密码');
 		return;

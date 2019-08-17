@@ -53,8 +53,13 @@ router.get('/:id', async ctx => {
 
 // 添加说说
 router.post('/', isLogin, async ctx => {
-  const content: string = ctx.request.body.content;
-  const photos: string = ctx.request.body.photos;
+  const {
+    content,
+    photos,
+  }: {
+    content: string,
+    photos: string,
+  } = ctx.request.body;
 
   const user: IAdmin = await Admin.findById(1);
 
@@ -84,8 +89,13 @@ router.delete('/:id', isLogin, async ctx => {
 // 修改说说
 router.post('/:id', isLogin, async ctx => {
   const id: number = ctx.params.id;
-  const content: string = ctx.request.body.content;
-  const photos: string = ctx.request.body.photos;
+  const {
+    content,
+    photos,
+  }: {
+    content: string,
+    photos: string,
+  } = ctx.request.body;
   await Think.update({
     content,
     photos,
