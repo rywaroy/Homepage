@@ -17,7 +17,7 @@ const options: IOptions = {
 };
 
 router.get('/sell', async (ctx: IContext) => {
-	const data = await (new Promise((resolve) => {
+	const data: any = await (new Promise((resolve) => {
 		options.url = 'https://api-m.mtime.cn/PageSubArea/HotPlayMovies.api?locationId=974'
 		request(options, function (error, response, body) {
 			resolve(JSON.parse(body));
@@ -27,7 +27,7 @@ router.get('/sell', async (ctx: IContext) => {
 });
 
 router.get('/hot', async (ctx: IContext) => {
-	const data = await (new Promise((resolve) => {
+	const data: any = await (new Promise((resolve) => {
 		options.url = 'https://api-m.mtime.cn/Showtime/LocationMovies.api?locationId=974'
 		request(options, function (error, response, body) {
 			resolve(JSON.parse(body));
@@ -38,7 +38,7 @@ router.get('/hot', async (ctx: IContext) => {
 
 router.get('/soon', async (ctx: IContext) => {
 	options.url = 'https://api-m.mtime.cn/Movie/MovieComingNew.api?locationId=974'
-	const data = await (new Promise((resolve) => {
+	const data: any = await (new Promise((resolve) => {
 		request(options, function (error, response, body) {
 			resolve(JSON.parse(body));
 		});
