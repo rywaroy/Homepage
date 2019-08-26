@@ -25,10 +25,7 @@ router.get('/content', async (ctx: IContext) => {
 	const data: IBase[] = await Base.findAll();
 	const ip: string = ctx.request.header['x-forward-for'];
 	if (ip !== '111.231.99.115') {
-		const rs: any = await getIpInfo(ip);
-		const rd: any = JSON.parse(rs).data;
 		let device: string = '';
-		const address: string = rd.country + rd.region + rd.city + rd.isp;
 		const deviceAgent: string = ctx.request.headers['user-agent'].toLowerCase();
 		if (deviceAgent.indexOf('ipad') > -1) {
 			device = 'ipad';
@@ -39,13 +36,26 @@ router.get('/content', async (ctx: IContext) => {
 		} else {
 			device = 'pc';
 		}
-		await Visit.create({
-			ip,
-			time: new Date(),
-			address,
-			device,
-		});
-		ctx.success(200, '获取成功', data[0]);
+		try {
+			const rs: any = await getIpInfo(ip);
+			const rd: any = JSON.parse(rs).data;
+			const address: string = rd.country + rd.region + rd.city + rd.isp;
+			await Visit.create({
+				ip,
+				time: new Date(),
+				address,
+				device,
+			});
+			ctx.success(200, '获取成功', data[0]);
+		} catch {
+			await Visit.create({
+				ip,
+				time: new Date(),
+				address: '',
+				device,
+			});
+			ctx.success(200, '获取成功', data[0]);
+		}
 	} else {
 		ctx.success(200, '获取成功', data[0]);
 	}
