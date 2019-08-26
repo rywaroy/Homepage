@@ -30,24 +30,44 @@ router.post('/login', async (ctx: IContext) => {
 		ctx.error(400, '账号或密码错误');
 		return;
 	}
-	const rs: any = await getIpInfo(ctx.request.header['x-forward-for']);
-	const rd: any = JSON.parse(rs).data;
-	const location: string = rd.country + rd.region + rd.city;
 	const time: object = new Date();
 	const token: string = uuid.v4();
-	await Admin.update({
-		token,
-		last_location: data.location,
-		last_time: data.time,
-		location,
-		time,
-	}, {
-		where: {
-			id: data.id,
-		},
-	});
-	data.token = token;
-	ctx.success(200, '登录成功', data);
+	try {
+		const rs: any = await getIpInfo(ctx.request.header['x-forward-for']);
+		const rd: any = JSON.parse(rs).data;
+		const location: string = rd.country + rd.region + rd.city;
+		await Admin.update({
+			token,
+			last_location: data.location,
+			last_time: data.time,
+			location,
+			time,
+		}, {
+			where: {
+				id: data.id,
+			},
+		});
+		data.token = token;
+		ctx.success(200, '登录成功', data);
+	} catch {
+		await Admin.update({
+			token,
+			last_location: data.location,
+			last_time: data.time,
+			location: '未知',
+			time: '未知',
+		}, {
+			where: {
+				id: data.id,
+			},
+		});
+		data.token = token;
+		ctx.success(200, '登录成功', data);
+	}
+	
+	
+	
+	
 });
 
 function getIpInfo(ip: number) {
