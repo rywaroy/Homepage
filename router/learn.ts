@@ -16,7 +16,7 @@ router.get('/', async (ctx: IContext) => {
 	const page: number = Number(ctx.query.page) || 1;
 	const limit: number = Number(ctx.query.limit) || 10;
 	const data: ICount = await Learn.findAndCount({
-		attributes: ['id', 'title', 'updatedAt', 'intro', 'sign'],
+		attributes: ['id', 'title', 'updatedAt', 'intro', 'sign', 'createdAt'],
 		where: {
 			state: 1,
 		},
